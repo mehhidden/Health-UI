@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+    <head>
+        <title>قالب مدیریتی مدیران</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="قالب مدیریت ایرانی مدیران ">
+        <meta name="keywords" content="قالب مدیریت, قالب داشبورد, قالب ادمین, قالب مدیران, قالب مدیریت راستچین , قالب ایرانی مدیریت, پوسته مدیریت, قالب ادمین داشبورد سایت, قالب مدیریتی, مدیران, قالب مدیریت مدیران, پنل مدیریت, پنل مدیریت مدرن, قالب ادمین متریال, قالب مدیریت بوت استرپ, قالب ادمین بوتسترپ, قالب ادمین سایت, پوسته مدیریتی ایرانی, قالب مدیرتی مدیران ایرانی, بهترین قالب مدیریت, قالب مدیریت ریسپانسیو, قالب مدیریت ارزان, قالب admin">
+        <link rel="shortcut icon" href="assets/images/favicon.png">
+
+        <!-- BEGIN CSS -->
+        <link href="assets/plugins/bootstrap/bootstrap5/css/bootstrap.rtl.min.css" rel="stylesheet">
+        <link href="assets/plugins/simple-line-icons/css/simple-line-icons.min.css" rel="stylesheet">
+        <link href="assets/plugins/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+        <link href="assets/plugins/paper-ripple/dist/paper-ripple.min.css" rel="stylesheet">
+        <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet">
+        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="assets/css/colors.css" rel="stylesheet">
+        <!-- END CSS -->
+        
+        
+    </head>
+    <body class="fix-header active-ripple theme-darkpurple dark modal-wrapper">
+        <!-- BEGIN LOEADING -->
+        <div id="loader">
+            <div class="spinner"></div>
+        </div><!-- /.loader -->
+        <!-- END LOEADING -->
+        
+        <!-- BEGIN WRAPPER -->
+        <div class="fixed-modal-bg"></div>
+        <a href="#" class="btn btn-primary btn-icon btn-round btn-lg" id="toggle-dark-mode">
+            <i class="icon-bulb"></i>
+        </a>
+        <a href="dashboard.html" class="btn btn-primary btn-icon btn-round btn-lg btn-back">
+            <i class="icon-arrow-right-circle"></i>
+        </a>
+        <div class="modal-page shadow">
+            <div class="container-fluid">                
+                <div class="row">
+                    
+                    <div class="col-md-12">
+                        <p class="text-center m-t-30 m-b-40">
+                            <i class="icon-user-following border img-circle font-xxxlg p-20"></i>
+                        </p>
+                        <h2 class="text-center m-b-20">ثبت نام </h2>
+                        <hr>
+
+                        <form id="advanced-form" method="post" action="#">
+                            <div class="form-group">
+                                <label class="sr-only control-label" for="firstname">نام</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="icon-note"></i>
+                                    </span>
+                                    <input type="text" class="form-control round" id="firstname" name="firstname" placeholder="نام">
+                                </div><!-- /.input-group-->
+                            </div><!-- /.form-group -->
+                            <div class="form-group">
+                                <label class="sr-only control-label" for="lastname">نام خانوادگی</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="icon-note"></i>
+                                    </span>
+                                    <input type="text" class="form-control round" id="lastname" name="lastname" placeholder="نام خانوادگی">
+                                </div><!-- /.input-group-->
+                            </div><!-- /.form-group -->
+                            <div class="form-group">
+                                <label class="sr-only control-label" for="username">نام کاربری</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="icon-user"></i>
+                                    </span>
+                                    <input type="text" class="form-control round" id="username" name="username" placeholder="نام کاربری">
+                                </div><!-- /.input-group-->
+                            </div><!-- /.form-group -->
+                            <div class="form-group">
+                                <label class="sr-only control-label" for="email">رایانامه</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="icon-envelope"></i>
+                                    </span>
+                                    <input type="text" class="form-control ltr text-left" id="email" name="email" placeholder="مثال:info@site.com">
+                                </div><!-- /.input-group-->
+                            </div><!-- /.form-group -->
+                            <div class="form-group">
+                                <label class="sr-only control-label" for="password">رمز عبور</label>
+                                <div class="input-group has-btn-toggle-pass">
+                                    <span class="input-group-addon">
+                                        <i class="icon-key"></i>
+                                    </span>
+                                    <input type="password" class="form-control ltr text-left" id="password" name="password" placeholder="رمز عبور">
+                                    <span class="btn-toggle-pass">
+                                        <i class="icon-eye"></i>
+                                    </span>
+                                </div><!-- /.input-group-->
+                            </div><!-- /.form-group -->
+                            <div class="form-group">
+                                <label class="sr-only control-label" for="confirmPassword">تکرار رمز عبور</label>
+                                <div class="input-group has-btn-toggle-pass">
+                                    <span class="input-group-addon">
+                                        <i class="icon-key"></i>
+                                    </span>
+                                    <input type="password" class="form-control ltr text-left" id="confirmPassword" name="confirm_password" placeholder="تکرار رمز عبور">
+                                    <span class="btn-toggle-pass">
+                                        <i class="icon-eye"></i>
+                                    </span>
+                                </div><!-- /.input-group-->
+                            </div><!-- /.form-group -->
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="agree" name="agree" value="agree">
+                                            <a href="#">قوانین و مقررات</a>
+                                            سایت را می پذیرم
+                                        </label>
+                                    </div><!-- /.checkbox -->
+                                </div><!-- /.input-group-->
+                            </div><!-- /.form-group -->
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-block" name="signup" value="Sign up">
+                                    <i class="icon-check"></i>       
+                                    ثبت نام
+                                </button>
+                            </div><!-- /.form-group -->
+                        </form>
+
+                        <hr class="m-b-30">
+                        <a href="forget.html" class="btn btn-default btn-block m-b-10">
+                            <i class="icon-refresh font-lg"></i> 
+                            بازیابی رمز  عبور
+                        </a>
+                        <a href="login.html" class="btn btn-default btn-block">
+                            <i class="icon-user-follow font-lg"></i>
+                            ثبت نام کرده اید؟ وارد شوید!   
+                        </a>
+                    </div><!-- /.col-md-12 -->                    
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div><!-- /.modal-page -->
+        <!-- END WRAPPER -->
+
+        <script type="module" src="/js/shared/shared.js"></script>
+        
+        <!-- BEGIN JS -->
+        <script src="assets/plugins/jquery/dist/jquery-3.6.1.min.js"></script>
+        <script src="assets/plugins/jquery-migrate/jquery-migrate-1.2.1.min.js"></script>
+        <script src="assets/plugins/bootstrap/bootstrap5/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/plugins/paper-ripple/dist/PaperRipple.min.js"></script>
+        <script src="assets/plugins/sweetalert2//dist/sweetalert2.min.js"></script>
+        <script src="assets/plugins/iCheck/icheck.min.js"></script>
+        <script src="assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="assets/plugins/jquery-validation/src/localization/messages_fa.js"></script>
+        <script src="assets/js/core.js"></script>
+        
+        <!-- BEGIN PAGE JAVASCRIPT -->
+        <script src="assets/js/pages/register.js"></script>
+        <!-- END PAGE JAVASCRIPT -->
+                
+    </body>
+</html>

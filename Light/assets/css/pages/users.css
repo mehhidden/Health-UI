@@ -1,0 +1,299 @@
+.user-edit-modal {
+  display: none;
+  position: fixed;
+  
+  z-index: 1050;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.user-edit-modal-content {
+  background-color: white;
+  max-height: 75vh;
+  overflow-y: auto;
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.user-edit-modal.show{
+  display: flex;
+}
+.user-edit-modal.show .user-edit-modal-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.user-edit-close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#userEditForm label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+#userEditForm input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+#userEditForm input:disabled {
+  background-color: #f0f0f0;
+  color: #999;
+}
+
+.user-edit-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.user-edit-cancel-btn,
+.user-edit-submit-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-edit-cancel-btn {
+  background-color: #ccc;
+}
+
+.user-edit-submit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.select-container {
+  margin-top: 1rem;
+}
+
+.select-scrollable {
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.select-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 6px;
+}
+
+.user-select {
+  flex-grow: 1;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: white;
+}
+
+.add-btn,
+.remove-btn {
+  padding: 4px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.add-btn {
+  background-color: #e0ffe0;
+  color: green;
+}
+
+.remove-btn {
+  background-color: #ffe0e0;
+  color: red;
+}
+
+
+
+
+.user-create-modal {
+  display: none;
+  position: fixed;
+  z-index: 1050;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.user-create-modal-content {
+  background-color: white;
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.user-create-modal.show {
+  display: flex;
+}
+
+.user-create-modal.show .user-create-modal-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.user-create-close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#userCreateForm label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+#userCreateForm input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.user-create-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.user-create-cancel-btn,
+.user-create-submit-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-create-cancel-btn {
+  background-color: #ccc;
+}
+
+.user-create-submit-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.user-info-modal {
+  display: none;
+  position: fixed;
+  z-index: 1060;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  direction: rtl;
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+.user-info-modal.show {
+  display: flex;
+}
+
+.user-info-modal-content {
+  background-color: #fff;
+  padding: 24px 28px;
+  width: 500px;
+  border-radius: 12px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  animation: scaleIn 0.3s ease forwards;
+  color: #222;
+  border-top: 6px solid #007bff;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.user-info-close {
+  position: absolute;
+  left: 20px;
+  top: 16px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s;
+}
+.user-info-close:hover {
+  color: #000;
+}
+
+.modal-title {
+  margin-bottom: 18px;
+  font-size: 22px;
+  color: #007bff;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+}
+
+.user-info-field {
+  margin-bottom: 16px;
+  font-size: 15px;
+}
+
+.user-info-list {
+  list-style: inside;
+  margin: 6px 0 0 0;
+  padding: 0;
+}
+
+.scrollable-list {
+  max-height: 120px;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
+
+.scrollable-list li {
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: #444;
+}
+
+
+

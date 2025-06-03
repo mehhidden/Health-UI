@@ -1,0 +1,244 @@
+.user-edit-modal,
+.user-create-modal {
+  display: none;
+  position: fixed;
+  z-index: 1050;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.user-edit-modal-content,
+.user-create-modal-content {
+  background-color: #1e1e1e;
+  padding: 20px;
+  width: 400px;
+  max-height: 75vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.3s ease;
+  color: #f1f1f1;
+}
+
+.user-edit-modal.show,
+.user-create-modal.show {
+  display: flex;
+}
+
+.user-edit-modal.show .user-edit-modal-content,
+.user-create-modal.show .user-create-modal-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.user-edit-close,
+.user-create-close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+  color: #ccc;
+}
+
+#userEditForm label,
+#userCreateForm label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-weight: bold;
+  color: #ccc;
+}
+
+#userEditForm input,
+#userCreateForm input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #2b2b2b;
+  color: #f1f1f1;
+  border: 1px solid #555;
+}
+
+#userEditForm input:disabled {
+  background-color: #333;
+  color: #777;
+}
+
+.user-edit-actions,
+.user-create-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.user-edit-cancel-btn,
+.user-edit-submit-btn,
+.user-create-cancel-btn,
+.user-create-submit-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+}
+
+.user-edit-cancel-btn,
+.user-create-cancel-btn {
+  background-color: #444;
+}
+
+.user-edit-submit-btn {
+  background-color: #3391ff;
+}
+
+
+.select-container {
+  margin-top: 1rem;
+}
+
+.select-scrollable {
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 5px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #1f1f1f;
+}
+
+.select-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 6px;
+}
+
+.user-select {
+  flex-grow: 1;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #2a2a2a;
+  color: #eee;
+}
+
+.add-btn,
+.remove-btn {
+  padding: 4px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.add-btn {
+  background-color: #2d4d2d;
+  color: #a0f0a0;
+}
+
+.remove-btn {
+  background-color: #4d2d2d;
+  color: #f5a0a0;
+}
+
+
+
+
+
+.user-create-submit-btn {
+  background-color: #28a745;
+}
+
+
+.user-info-modal {
+  display: none;
+  position: fixed;
+  z-index: 1060;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* تیره‌تر برای دارک مود */
+  justify-content: center;
+  align-items: center;
+  direction: rtl;
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+.user-info-modal.show {
+  display: flex;
+}
+
+.user-info-modal-content {
+  background-color: #1f1f1f; /* رنگ پس‌زمینه تیره */
+  padding: 24px 28px;
+  width: 500px;
+  border-radius: 12px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  animation: scaleIn 0.3s ease forwards;
+  color: #f0f0f0; /* رنگ متن روشن */
+  border-top: 6px solid #0d6efd; /* رنگ آبی مشابه تم روشن */
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.user-info-close {
+  position: absolute;
+  left: 20px;
+  top: 16px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #aaa; /* روشن‌تر از تم روشن */
+  transition: color 0.2s;
+}
+.user-info-close:hover {
+  color: #fff;
+}
+
+.modal-title {
+  margin-bottom: 18px;
+  font-size: 22px;
+  color: #0d6efd;
+  border-bottom: 1px solid #444;
+  padding-bottom: 8px;
+}
+
+.user-info-field {
+  margin-bottom: 16px;
+  font-size: 15px;
+  color: #e0e0e0;
+}
+
+.user-info-list {
+  list-style: inside;
+  margin: 6px 0 0 0;
+  padding: 0;
+}
+
+.scrollable-list {
+  max-height: 120px;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background-color: #2c2c2c;
+}
+
+.scrollable-list li {
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: #ccc;
+}

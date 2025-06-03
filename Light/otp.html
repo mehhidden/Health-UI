@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <title>قالب مدیریتی مدیران</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="قالب مدیریت ایرانی مدیران " />
+    <meta
+      name="keywords"
+      content="قالب مدیریت, قالب داشبورد, قالب ادمین, قالب مدیران, قالب مدیریت راستچین , قالب ایرانی مدیریت, پوسته مدیریت, قالب ادمین داشبورد سایت, قالب مدیریتی, مدیران, قالب مدیریت مدیران, پنل مدیریت, پنل مدیریت مدرن, قالب ادمین متریال, قالب مدیریت بوت استرپ, قالب ادمین بوتسترپ, قالب ادمین سایت, پوسته مدیریتی ایرانی, قالب مدیرتی مدیران ایرانی, بهترین قالب مدیریت, قالب مدیریت ریسپانسیو, قالب مدیریت ارزان, قالب admin"
+    />
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
+
+    <!-- BEGIN CSS -->
+    <link
+      href="assets/plugins/bootstrap/bootstrap5/css/bootstrap.rtl.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/plugins/simple-line-icons/css/simple-line-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/plugins/sweetalert2/dist/sweetalert2.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/plugins/paper-ripple/dist/paper-ripple.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/colors.css" rel="stylesheet" />
+    <link href="assets/css/pages/otp.css" rel="stylesheet" />
+    <!-- END CSS -->
+  </head>
+  <body class="fix-header active-ripple theme-darkpurple modal-wrapper">
+    <!-- BEGIN LOEADING -->
+    <div id="loader">
+      <div class="spinner"></div>
+    </div>
+    <!-- /.loader -->
+    <!-- END LOEADING -->
+
+    <!-- BEGIN WRAPPER -->
+    <div class="fixed-modal-bg"></div>
+    <a
+      href="#"
+      class="btn btn-primary btn-icon btn-round btn-lg"
+      id="toggle-dark-mode"
+    >
+      <i class="icon-bulb"></i>
+    </a>
+    <div class="modal-page shadow two-section">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="card shadow overflow-hidden">
+            <div class="row">
+              <div
+                class="col-lg-5 col-md-6 position-relative bg-cover"
+                style="
+                  background-image: url(assets/images/other/mobile-auth.jpg);
+                "
+              >
+                <div
+                  class="w-100 h-100 z-index-2 d-flex m-auto justify-content-center"
+                >
+                  <div class="mask bg-gradient-dark"></div>
+                  <div class="side-texts position-relative my-auto z-index-2">
+                    <div class="d-flex p-2 text-white my-3 bold">آتی بیمه</div>
+                  </div>
+                  <!-- /.side-texts -->
+                </div>
+                <!-- /.w-100 -->
+              </div>
+              <!-- /.col -->
+              <div class="col-lg-7 col-md-6 py-5">
+                <form method="post" action="" id="form">
+                  <div class="card-header px-4 py-2 text-center">
+                    <div class="logo-con mb-4">
+                      <a href="#">
+                        <img
+                          src=""
+                          class="dark-logo center-block img-responsive"
+                          alt="logo"
+                        />
+                        <img
+                          src=""
+                          class="light-logo center-block img-responsive"
+                          alt="logo"
+                        />
+                      </a>
+                    </div>
+                    <!-- /.logo-con -->
+
+                    <h1 class="bold text-center">ورود با رمز یکبار مصرف</h1>
+                  </div>
+                  <div class="card-body pt-1">
+                    <div
+                      class="alert alert-success fill text-center bold"
+                      id="mainAlert"
+                    >
+                      برای دریافت رمز یکبارمصرف شماره همراه خود را وارد کنید.
+                    </div>
+
+                    <div class="row form-group">
+                      <label for="txtCellphone">شماره همراه:</label>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="icon-screen-smartphone"></i>
+                        </span>
+                        <input
+                          type="text"
+                          id="txtCellphone"
+                          class="form-control numeric text-center ltr font-lg bold"
+                          value=""
+                          title="شماره همراه"
+                          maxlength="11"
+                          required
+                        />
+                      </div>
+                      <!-- /.input-group -->
+                      <div class="help-block"></div>
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row form-group row-sms d-none">
+                      <label for="txtCode">کد تایید:</label>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="icon-bubble"></i>
+                        </span>
+                        <input
+                          type="text"
+                          id="txtCode"
+                          class="form-control numeric text-center ltr font-lg bold"
+                          value=""
+                          title="کد شش رقمی"
+                          maxlength="6"
+                          required
+                        />
+                      </div>
+                      <!-- /.input-group -->
+                      <div class="help-block"></div>
+
+                      <div class="text-center font-sm">
+                        <div id="otpTickerBox">
+                          <span>زمان باقی مانده تا درخواست کد جدید: </span>
+                          <span class="bold">
+                            (<span id="minutes">--</span
+                            ><span class="colon">:</span
+                            ><span id="seconds">--</span>)
+                          </span>
+                        </div>
+                        <!-- /.text-center -->
+                        <a
+                          class="font-sm d-none"
+                          id="btnResendSms"
+                          href="javascript:void(0)"
+                          >ارسال مجدد کد فعال سازی</a
+                        >
+                      </div>
+                      <!-- /.text-center -->
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+                      <div class="col-md-6 m-auto">
+                        <button
+                          type="button"
+                          class="btn btn-success mt-3 mb-0 w-100"
+                          id="btnSubmit"
+                        >
+                          تایید و ادامه
+                        </button>
+                      </div>
+                      <!-- /.col -->
+                    </div>
+
+                    <div class="row">
+                      <hr class="m-b-30">
+                        <a href="login.html" class="btn btn-default btn-block m-b-10">
+                            <i class="icon-login font-lg"></i> 
+                            ورود با نام کاربری
+                        </a>
+                        <a href="register.html" class="btn btn-default btn-block">
+                            <i class="icon-user-follow font-lg"></i>
+                            حساب ندارید، ثبت نام کنید!    
+                        </a>
+                      <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                  </div>
+                  <!-- /.card-body -->
+                </form>
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /.modal-page -->
+    <!-- END WRAPPER -->
+
+    <script type="module" src="/js/shared/shared.js"></script>
+
+    <!-- BEGIN JS -->
+    <script src="assets/plugins/jquery/dist/jquery-3.6.1.min.js"></script>
+    <script src="assets/plugins/jquery-migrate/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/plugins/bootstrap/bootstrap5/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/plugins/paper-ripple/dist/PaperRipple.min.js"></script>
+    <script src="assets/plugins/sweetalert2//dist/sweetalert2.min.js"></script>
+    <script src="assets/plugins/iCheck/icheck.min.js"></script>
+    <script src="assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="assets/plugins/jquery-validation/src/localization/messages_fa.js"></script>
+    <script src="assets/js/core.js"></script>
+    <!-- این کد رو بعد از لود HTML بذار یا توی فایل جدا مثل otp-login.js -->
+    <!-- آخر فایل و بعد از لود سایر فایل‌های JS اینو بذار -->
+
+    <!-- BEGIN PAGE JAVASCRIPT -->
+    <script type="module" src="assets/js/pages/otp.js"></script>
+
+    
+    <!-- END PAGE JAVASCRIPT -->
+  </body>
+</html>
