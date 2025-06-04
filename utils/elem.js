@@ -28,3 +28,9 @@ export const handleIsSubmitingStatus = (
   btn.html(text);
   btn.css("opacity", opacity);
 };
+
+export const getTrInfo = (e) => {
+  const tr = e.currentTarget.closest("tr");
+  const info = JSON.parse(tr.dataset.info);
+  return info;
+};

@@ -597,22 +597,14 @@
       <thead>
         <tr>
           <th><input type="checkbox" id="province-check-all" /></th>
-          <th>ردیف</th>
+          <th>شناسه</th>
           <th>نام استان</th>
           <th>عملیات</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="provinces-table-body">
         <!-- پر میشه از سمت سرور -->
-        <tr>
-          <td><input type="checkbox" class="row-checkbox" /></td>
-          <td>1</td>
-          <td>تهران</td>
-          <td>
-            <button class="btn btn-info btn-sm" onclick="showProvinceEditModal(1)">ویرایش</button>
-            <button class="btn btn-danger btn-sm" onclick="deleteProvince(1)">حذف</button>
-          </td>
-        </tr>
+        
       </tbody>
     </table>
     <button class="btn btn-danger mt-2" onclick="deleteSelectedprovinces()">حذف انتخاب‌شده‌ها</button>
@@ -890,47 +882,9 @@
     <!-- END PAGE JAVASCRIPT -->
 
     <script>
-  function showProvinceCreateModal() {
-    document.querySelector(".province-create-modal").classList.add("show");
-  }
+  
 
-  function showProvinceEditModal(id) {
-    document.querySelector(".province-edit-modal").classList.add("show");
-    
-  }
-
-  function closeProvinceModals() {
-    document.querySelectorAll(".modal").forEach(modal => modal.classList.remove("show"));
-  }
-
-  function deleteProvince(id) {
-    if (confirm("استان حذف شود؟")) {
-      console.log("حذف استان با آیدی:", id);
-    }
-  }
-
-  function deleteSelectedprovinces() {
-    const selected = document.querySelectorAll(".row-checkbox:checked");
-    if (!selected.length) return alert("هیچ آیتمی انتخاب نشده.");
-    if (confirm("همه موارد انتخاب‌شده حذف شوند؟")) {
-      selected.forEach(cb => cb.closest("tr").remove());
-    }
-  }
-
-  document.getElementById("province-check-all").addEventListener("change", function () {
-    const checked = this.checked;
-    document.querySelectorAll(".row-checkbox").forEach(cb => cb.checked = checked);
-  });
-
-  $(document).ready(function () {
-    $('#province-table').DataTable({
-      pageLength: 10,
-      columnDefs: [{ targets: [0, 3], orderable: false }],
-      language: {
-        url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/fa.json'
-      }
-    });
-  });
+  
 </script>
 
   </body>

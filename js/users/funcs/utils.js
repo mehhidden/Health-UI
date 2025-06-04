@@ -3,12 +3,6 @@ import { API } from "../../../utils/data.js";
 import { insertTemplateToElement, select } from "../../../utils/elem.js";
 import { generateUsersTableTemplate } from "./templates.js";
 
-export const getTrInfo = (e) => {
-  const tr = e.currentTarget.closest("tr");
-  const info = JSON.parse(tr.dataset.info);
-  return info;
-};
-
 export const insertUsers = (users) => {
   const template = generateUsersTableTemplate(users);
 
