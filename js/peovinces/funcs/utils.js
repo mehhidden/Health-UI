@@ -20,11 +20,34 @@ export const deleteReq = async (id) => {
     },
   });
 
+  console.log(req)
+
   if (req.ok) {
-    return "حذف با موفقیت انجام شد";
+    return "حذف  استان با موفقیت انجام شد";
   } else {
     const response = await req.json();
     throw Error(response.detail || convertBackendValidationToMessage(response));
+  }
+};
+
+export const createReq = async (data) => {
+  const req = await fetch(`${API}/location/provinces/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${getCookie("access")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  const response = await req.json();
+  
+  if (req.ok) {
+
+    return response.detail || "ساخت استان با موفقیت انجام شد";
+  } else {
+    
+    throw Error(convertBackendValidationToMessage(response));
   }
 };
 

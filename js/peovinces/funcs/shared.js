@@ -1,5 +1,6 @@
+import { convertFormDataToObj } from "../../../utils/data.js";
 import { getTrInfo, select, selectAll } from "../../../utils/elem.js";
-import { deleteReq, fetchProvinces, insertProvinces } from "./utils.js";
+import { createReq, deleteReq, fetchProvinces, insertProvinces } from "./utils.js";
 
 const createModalEl = select(".province-create-modal");
 export function showProvinceCreateModal() {
@@ -18,14 +19,16 @@ export function closeProvinceModals() {
 
 export function deleteProvince(event) {
   const trInfo = getTrInfo(event);
-  swal(`آیا شهر ${trInfo.name} حذف شود؟`, "", "question").then(
+  swal(`آیا استان ${trInfo.name} حذف شود؟`, "", "question").then(
     async (result) => {
       if (result) {
         try {
-          const response = deleteReq(trInfo.id);
+          const response = await deleteReq(trInfo.id);
+          await renderProcinces();
+          console.log(response)
           swal(response, "", "success");
         } catch (error) {
-          swal("خطا در حذف شهر", error.message, "error");
+          swal("خطا در حذف استان", error.message, "error");
         }
       }
     }
@@ -35,7 +38,7 @@ export function deleteProvince(event) {
 export function deleteSelectedprovinces() {
   const selected = selectAll(".row-checkbox:checked");
   if (!selected.length) return swal("هیچ آیتمی انتخاب نشده است", "", "warning");
-  swal(`آیا ${selected.length} شهر انتخاب شده حذف شوند؟`, "", "question").then(
+  swal(`آیا ${selected.length} استان انتخاب شده حذف شوند؟`, "", "question").then(
     async (result) => {
       if (result) {
         try {
@@ -44,13 +47,28 @@ export function deleteSelectedprovinces() {
           );
           const promices = infos.map((id) => deleteReq(id));
           await Promise.all(promices);
-          swal("شهرها با موفقیت حذف شدند", "", "success");
+          await renderProcinces();
+          swal("استانها با موفقیت حذف شدند", "", "success");
         } catch (error) {
-          swal("خطا در حذف شهر", error.message, "error");
+          swal("خطا در حذف استان", error.message, "error");
         }
       }
     }
   );
+}
+
+export const createProvince = async (event) => {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const data = convertFormDataToObj(formData);
+  try {
+    const response = await createReq(data);
+    await renderProcinces();
+    swal(response, "", "success");
+    closeProvinceModals()
+  }catch (error) {
+    swal("خطا در ایجاد استان", error.message, "error");
+  }
 }
 
 export const renderProcinces = async () => {
