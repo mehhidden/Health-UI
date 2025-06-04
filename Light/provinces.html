@@ -631,10 +631,10 @@
   <div class="modal-content">
     <span class="modal-close" onclick="closeProvinceModals()">&times;</span>
     <h5 class="modal-title">ویرایش استان</h5>
-    <form>
+    <form onsubmit="editProvince(event)">
       <div class="form-group">
         <label>نام استان:</label>
-        <input type="text" class="form-control" value="تهران" />
+        <input name="name" type="text" class="form-control" value="تهران" />
       </div>
       <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
     </form>

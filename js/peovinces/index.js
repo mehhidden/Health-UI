@@ -4,6 +4,7 @@ import {
   createProvince,
   deleteProvince,
   deleteSelectedprovinces,
+  editProvince,
   renderProcinces,
   showProvinceCreateModal,
   showProvinceEditModal,
@@ -19,4 +20,5 @@ window.addEventListener("load", async () => {
   window.deleteProvince = deleteProvince;
   window.deleteSelectedprovinces = deleteSelectedprovinces;
   window.createProvince = createProvince;
+  window.editProvince = editProvince
 });

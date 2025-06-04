@@ -1,5 +1,5 @@
 import { getCookie } from "../../../utils/cookie.js"
-import { API } from "../../../utils/data.js"
+import { API, convertBackendValidationToMessage } from "../../../utils/data.js"
 import { insertTemplateToElement, select } from "../../../utils/elem.js"
 import {generateProvincesTemplate} from "./template.js"
 
@@ -45,6 +45,27 @@ export const createReq = async (data) => {
   if (req.ok) {
 
     return response.detail || "ساخت استان با موفقیت انجام شد";
+  } else {
+    
+    throw Error(convertBackendValidationToMessage(response));
+  }
+};
+
+export const editReq = async (id, data) => {
+  const req = await fetch(`${API}/location/provinces/${id}/`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${getCookie("access")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  const response = await req.json();
+  
+  if (req.ok) {
+
+    return response.detail || "ویرایش استان با موفقیت انجام شد";
   } else {
     
     throw Error(convertBackendValidationToMessage(response));

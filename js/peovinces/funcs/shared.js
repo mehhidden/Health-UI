@@ -1,6 +1,12 @@
 import { convertFormDataToObj } from "../../../utils/data.js";
 import { getTrInfo, select, selectAll } from "../../../utils/elem.js";
-import { createReq, deleteReq, fetchProvinces, insertProvinces } from "./utils.js";
+import {
+  createReq,
+  deleteReq,
+  editReq,
+  fetchProvinces,
+  insertProvinces,
+} from "./utils.js";
 
 const createModalEl = select(".province-create-modal");
 export function showProvinceCreateModal() {
@@ -8,8 +14,12 @@ export function showProvinceCreateModal() {
 }
 
 const editModalEl = select(".province-edit-modal");
-export function showProvinceEditModal(id) {
+const editModalInput = select(".province-edit-modal input");
+export function showProvinceEditModal(event) {
+  const trInfo = getTrInfo(event);
   editModalEl.classList.add("show");
+  editModalEl.dataset.id = trInfo.id;
+  editModalInput.value = trInfo.name;
 }
 
 const allModalEls = selectAll(".modal");
@@ -25,7 +35,7 @@ export function deleteProvince(event) {
         try {
           const response = await deleteReq(trInfo.id);
           await renderProcinces();
-          console.log(response)
+          console.log(response);
           swal(response, "", "success");
         } catch (error) {
           swal("خطا در حذف استان", error.message, "error");
@@ -38,23 +48,25 @@ export function deleteProvince(event) {
 export function deleteSelectedprovinces() {
   const selected = selectAll(".row-checkbox:checked");
   if (!selected.length) return swal("هیچ آیتمی انتخاب نشده است", "", "warning");
-  swal(`آیا ${selected.length} استان انتخاب شده حذف شوند؟`, "", "question").then(
-    async (result) => {
-      if (result) {
-        try {
-          const infos = [...selected].map(
-            (cb) => JSON.parse(cb.closest("tr").dataset.info).id
-          );
-          const promices = infos.map((id) => deleteReq(id));
-          await Promise.all(promices);
-          await renderProcinces();
-          swal("استانها با موفقیت حذف شدند", "", "success");
-        } catch (error) {
-          swal("خطا در حذف استان", error.message, "error");
-        }
+  swal(
+    `آیا ${selected.length} استان انتخاب شده حذف شوند؟`,
+    "",
+    "question"
+  ).then(async (result) => {
+    if (result) {
+      try {
+        const infos = [...selected].map(
+          (cb) => JSON.parse(cb.closest("tr").dataset.info).id
+        );
+        const promices = infos.map((id) => deleteReq(id));
+        await Promise.all(promices);
+        await renderProcinces();
+        swal("استانها با موفقیت حذف شدند", "", "success");
+      } catch (error) {
+        swal("خطا در حذف استان", error.message, "error");
       }
     }
-  );
+  });
 }
 
 export const createProvince = async (event) => {
@@ -65,11 +77,26 @@ export const createProvince = async (event) => {
     const response = await createReq(data);
     await renderProcinces();
     swal(response, "", "success");
-    closeProvinceModals()
-  }catch (error) {
+    closeProvinceModals();
+  } catch (error) {
     swal("خطا در ایجاد استان", error.message, "error");
   }
-}
+};
+
+export const editProvince = async (event) => {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const data = convertFormDataToObj(formData);
+  const id = editModalEl.dataset.id;
+  try {
+    const response = await editReq(id, data);
+    await renderProcinces();
+    swal(response, "", "success");
+    closeProvinceModals();
+  } catch (error) {
+    swal("خطا در ویرایش استان", error.message, "error");
+  }
+};
 
 export const renderProcinces = async () => {
   const procinces = await fetchProvinces();
