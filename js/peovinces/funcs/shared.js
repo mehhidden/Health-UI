@@ -34,7 +34,7 @@ export function deleteProvince(event) {
       if (result) {
         try {
           const response = await deleteReq(trInfo.id);
-          await renderProcinces();
+          await renderProvinces();
           console.log(response);
           swal(response, "", "success");
         } catch (error) {
@@ -45,7 +45,7 @@ export function deleteProvince(event) {
   );
 }
 
-export function deleteSelectedprovinces() {
+export function deleteSelectedProvinces() {
   const selected = selectAll(".row-checkbox:checked");
   if (!selected.length) return swal("هیچ آیتمی انتخاب نشده است", "", "warning");
   swal(
@@ -60,7 +60,7 @@ export function deleteSelectedprovinces() {
         );
         const promices = infos.map((id) => deleteReq(id));
         await Promise.all(promices);
-        await renderProcinces();
+        await renderProvinces();
         swal("استانها با موفقیت حذف شدند", "", "success");
       } catch (error) {
         swal("خطا در حذف استان", error.message, "error");
@@ -75,7 +75,7 @@ export const createProvince = async (event) => {
   const data = convertFormDataToObj(formData);
   try {
     const response = await createReq(data);
-    await renderProcinces();
+    await renderProvinces();
     swal(response, "", "success");
     closeProvinceModals();
   } catch (error) {
@@ -90,7 +90,7 @@ export const editProvince = async (event) => {
   const id = editModalEl.dataset.id;
   try {
     const response = await editReq(id, data);
-    await renderProcinces();
+    await renderProvinces();
     swal(response, "", "success");
     closeProvinceModals();
   } catch (error) {
@@ -98,7 +98,7 @@ export const editProvince = async (event) => {
   }
 };
 
-export const renderProcinces = async () => {
-  const procinces = await fetchProvinces();
-  insertProvinces(procinces);
+export const renderProvinces = async () => {
+  const provinces = await fetchProvinces();
+  insertProvinces(provinces);
 };

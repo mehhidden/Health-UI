@@ -3,22 +3,22 @@ import {
   closeProvinceModals,
   createProvince,
   deleteProvince,
-  deleteSelectedprovinces,
+  deleteSelectedProvinces,
   editProvince,
-  renderProcinces,
+  renderProvinces,
   showProvinceCreateModal,
   showProvinceEditModal,
 } from "./funcs/shared.js";
 
 window.addEventListener("load", async () => {
   await protectDashboard();
-  renderProcinces();
+  renderProvinces();
 
   window.showProvinceCreateModal = showProvinceCreateModal;
   window.showProvinceEditModal = showProvinceEditModal;
   window.closeProvinceModals = closeProvinceModals;
   window.deleteProvince = deleteProvince;
-  window.deleteSelectedprovinces = deleteSelectedprovinces;
+  window.deleteSelectedProvinces = deleteSelectedProvinces;
   window.createProvince = createProvince;
   window.editProvince = editProvince
 });

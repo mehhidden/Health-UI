@@ -20,8 +20,6 @@ export const deleteReq = async (id) => {
     },
   });
 
-  console.log(req)
-
   if (req.ok) {
     return "حذف  استان با موفقیت انجام شد";
   } else {
@@ -73,11 +71,11 @@ export const editReq = async (id, data) => {
 };
 
 export const insertProvinces = (provinces) => {
-  const procincesWrapper = select("#provinces-table-body")
+  const provincesWrapper = select("#provinces-table-body")
   const template = generateProvincesTemplate(provinces)
 
   insertTemplateToElement(
     template,
-    procincesWrapper
+    provincesWrapper
   )
 }
