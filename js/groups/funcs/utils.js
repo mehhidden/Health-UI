@@ -3,11 +3,7 @@ import { API } from "../../../utils/data.js";
 import { insertTemplateToElement, select } from "../../../utils/elem.js";
 import { generateGroupsTableTemplate } from "./templates.js";
 
-export const getTrInfo = (e) => {
-  const tr = e.currentTarget.closest("tr");
-  const info = JSON.parse(tr.dataset.info);
-  return info;
-};
+
 
 export const insertGroups = (groups) => {
   const template = generateGroupsTableTemplate(groups);
@@ -54,7 +50,6 @@ export const createGroup = async (name) => {
 
 export const addPermissionsReq = async (group_name, permissions) => {
   console.log(permissions)
- return false;
   const promices = permissions.map((permission_id) =>
     fetch(`${API}/permissions_manager/add_permission_to_group/`, {
       method: "POST",
@@ -66,7 +61,7 @@ export const addPermissionsReq = async (group_name, permissions) => {
     })
   );
 
-  // return Promise.all(promices);
+  return Promise.all(promices);
 };
 
 export const deletePermissionsReq = async (group_name, permissions) => {

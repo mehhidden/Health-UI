@@ -596,22 +596,15 @@
       <thead>
         <tr>
           <th><input type="checkbox" id="city-check-all" /></th>
-          <th>ردیف</th>
+          <th>شناسه</th>
+          <th>شناسه استان</th>
           <th>نام شهر</th>
           <th>عملیات</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="cities-table-body">
         <!-- پر میشه از سمت سرور -->
-        <tr>
-          <td><input type="checkbox" class="row-checkbox" /></td>
-          <td>1</td>
-          <td>تهران</td>
-          <td>
-            <button class="btn btn-info btn-sm" onclick="showCityEditModal(1)">ویرایش</button>
-            <button class="btn btn-danger btn-sm" onclick="deleteCity(1)">حذف</button>
-          </td>
-        </tr>
+        
       </tbody>
     </table>
     <button class="btn btn-danger mt-2" onclick="deleteSelectedCities()">حذف انتخاب‌شده‌ها</button>
@@ -623,23 +616,20 @@
   <div class="modal-content">
     <span class="modal-close" onclick="closeCityModals()">&times;</span>
     <h5 class="modal-title">افزودن شهر</h5>
-    <form>
+    <form onsubmit="createCity(event)">
 
       <div class="form-group mb-3">
-        <label for="province-select">انتخاب استان:</label>
-        <select id="province-select" class="form-control">
+        <label for="create-province-select">انتخاب استان:</label>
+        <select name="province" id="create-province-select" class="form-control province-select">
           <option value="" disabled selected>استان را انتخاب کنید</option>
-          <option value="1">تهران</option>
-          <option value="2">اصفهان</option>
-          <option value="3">فارس</option>
-          <option value="4">خراسان رضوی</option>
+          <!-- <Load By JS> -->
         </select>
       </div>
 
       
       <div class="form-group mb-3">
         <label for="city-name">نام شهر:</label>
-        <input type="text" id="city-name" class="form-control" placeholder="مثلاً تهران" />
+        <input name="name" type="text" id="city-name" class="form-control" placeholder="مثلاً تهران" />
       </div>
 
       <button class="btn btn-primary mt-3">ذخیره</button>
@@ -653,10 +643,17 @@
   <div class="modal-content">
     <span class="modal-close" onclick="closeCityModals()">&times;</span>
     <h5 class="modal-title">ویرایش شهر</h5>
-    <form>
+    <form onsubmit="editCity(event)">
+      <div class="form-group mb-3">
+        <label for="edit-province-select">انتخاب استان:</label>
+        <select name="province" id="edit-province-select" class="form-control province-select">
+          <option value="" disabled selected>استان را انتخاب کنید</option>
+          <!-- <Load By JS> -->
+        </select>
+      </div>
       <div class="form-group">
         <label>نام شهر:</label>
-        <input type="text" class="form-control" value="تهران" />
+        <input name="name" type="text" class="form-control" placeholder="شهر ..." />
       </div>
       <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
     </form>
@@ -901,51 +898,11 @@
     <!-- BEGIN PAGE JAVASCRIPT -->
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
     <!-- <script src="assets/js/pages/datatable.js"></script> -->
-    <script type="module" src="/js/groups/index.js"></script>
+    <script type="module" src="/js/cities/index.js"></script>
     <!-- END PAGE JAVASCRIPT -->
 
     <script>
-  function showCityCreateModal() {
-    document.querySelector(".city-create-modal").classList.add("show");
-  }
-
-  function showCityEditModal(id) {
-    document.querySelector(".city-edit-modal").classList.add("show");
-    
-  }
-
-  function closeCityModals() {
-    document.querySelectorAll(".modal").forEach(modal => modal.classList.remove("show"));
-  }
-
-  function deleteCity(id) {
-    if (confirm("شهر حذف شود؟")) {
-      console.log("حذف شهر با آیدی:", id);
-    }
-  }
-
-  function deleteSelectedCities() {
-    const selected = document.querySelectorAll(".row-checkbox:checked");
-    if (!selected.length) return alert("هیچ آیتمی انتخاب نشده.");
-    if (confirm("همه موارد انتخاب‌شده حذف شوند؟")) {
-      selected.forEach(cb => cb.closest("tr").remove());
-    }
-  }
-
-  document.getElementById("city-check-all").addEventListener("change", function () {
-    const checked = this.checked;
-    document.querySelectorAll(".row-checkbox").forEach(cb => cb.checked = checked);
-  });
-
-  $(document).ready(function () {
-    $('#city-table').DataTable({
-      pageLength: 10,
-      columnDefs: [{ targets: [0, 3], orderable: false }],
-      language: {
-        url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/fa.json'
-      }
-    });
-  });
+  
 </script>
 
 

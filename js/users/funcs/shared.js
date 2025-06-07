@@ -1,6 +1,7 @@
 import { getCookie } from "../../../utils/cookie.js";
 import { API } from "../../../utils/data.js";
 import {
+  getTrInfo,
   handleIsSubmitingStatus,
   insertTemplateToElement,
   select,
@@ -22,7 +23,6 @@ import {
   deleteReq,
   editReq,
   getSingleUser,
-  getTrInfo,
   insertUsers,
 } from "./utils.js";
 
