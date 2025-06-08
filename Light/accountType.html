@@ -531,7 +531,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="city.html" >
+                  <a href="city.html">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>جدول شهر ها</span>
                   </a>
@@ -544,7 +544,6 @@
                 <span>مدیریت بانک‌ها</span>
               </a>
               <ul>
-               
                 <li>
                   <a href="banks.html"> 
                     <!-- <i class="fas fa-grip"></i> -->
@@ -557,8 +556,39 @@
                     <span>نوع حساب های بانکی</span>
                   </a>
                 </li>
-                
-                
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="dropdown-toggle">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>طرح های بیمه ای</span>
+              </a>
+              <ul>
+               
+                <li>
+                  <a href="categories.html">  
+                    <!-- <i class="fas fa-grip"></i> -->
+                    <span>رشته های بیمه</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="products.html">
+                    <!-- <i class="fas fa-grip"></i> -->
+                    <span>محصولات</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="plans.html">
+                    <!-- <i class="fas fa-grip"></i> -->
+                    <span>طرح‌ها</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="coverage.html">
+                    <!-- <i class="fas fa-grip"></i> -->
+                    <span>پوشش‌ها</span>
+                  </a>
+                </li>
               </ul>
             </li>
             <li>
@@ -589,7 +619,7 @@
                 
                 
                 <li>
-                  <a href="changePassword.html" >
+                  <a href="changePassword.html">
                     <!-- <i class="icon-lock"></i> -->
                     <span>تغییر رمز عبور</span>
                   </a>
@@ -910,7 +940,7 @@
 }
 
 function showAccountTypeEditModal(id) {
-  // در صورت نیاز به گرفتن اطلاعات نوع حساب از سرور، اینجا کدش قرار می‌گیرد
+  
   document.querySelector('.account-type-edit-modal').classList.add('show');
 }
 
@@ -922,7 +952,7 @@ function closeAccountTypeModals() {
 
 function deleteAccountType(id) {
   if (confirm("آیا از حذف این نوع حساب مطمئن هستید؟")) {
-    // درخواست حذف به سرور (مثلاً fetch یا Ajax)
+    
     console.log("نوع حساب با شناسه " + id + " حذف شد");
   }
 }
@@ -936,14 +966,14 @@ function deleteSelectedAccountTypes() {
 
   if (confirm("آیا از حذف نوع حساب‌های انتخاب‌شده مطمئن هستید؟")) {
     checkboxes.forEach((checkbox, index) => {
-      // حذف هر ردیف از DOM یا ارسال درخواست حذف به سرور
+      
       const row = checkbox.closest('tr');
       row.remove();
     });
   }
 }
 
-// انتخاب همه
+
 document.getElementById('account-type-check-all')?.addEventListener('change', function () {
   const checked = this.checked;
   document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = checked);
