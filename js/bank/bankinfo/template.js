@@ -5,7 +5,6 @@ import {
   updateBank,
 } from "./bankserver.js";
 
-
 const ShowInfoTableElam = document.querySelector("#render-api");
 const BankNameInput = document.querySelector("#bank-name"); 
 const BankEditInput = document.querySelector(".input-set-save"); 
@@ -20,7 +19,7 @@ let editingBankId = null;
 const ShowInformationBank = (data) => {
   ShowInfoTableElam.innerHTML = "";
 
-  const banks = data.results.results || data;
+  const banks = data.results?.results || data;
 
   banks.forEach((info) => {
     ShowInfoTableElam.insertAdjacentHTML("beforeend", `
@@ -46,14 +45,23 @@ window.showBankEditModal = (id, name) => {
 
 
 window.handleDelete = async (id) => {
-  if (!confirm("آیا مطمئن هستید که می‌خواهید حذف کنید؟")) return;
+  const result = await Swal.fire({
+    title: 'حذف بانک',
+    text: 'آیا مطمئن هستید که می‌خواهید حذف کنید؟',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'بله، حذف کن',
+    cancelButtonText: 'لغو'
+  });
+
+  if (!result.isConfirmed) return;
 
   try {
     await deleteBank(id);
-    alert("با موفقیت حذف شد");
+    await Swal.fire('موفقیت', 'با موفقیت حذف شد', 'success');
     await FetchBankInfo();
   } catch (err) {
-    alert("خطا در حذف: " + err.message);
+    Swal.fire('خطا در حذف', err.message, 'error');
   }
 };
 
@@ -63,41 +71,47 @@ const FetchBankInfo = async () => {
     const data = await fetchBanks();
     ShowInformationBank(data);
   } catch (err) {
-    alert("خطا در دریافت اطلاعات: " + err.message);
+    Swal.fire('خطا در دریافت اطلاعات', err.message, 'error');
   }
 };
 
 
 const handleCreateBank = async () => {
   const name = BankNameInput.value.trim();
-  if (!name) return alert("نام بانک را وارد کنید");
+  if (!name) {
+    return Swal.fire('هشدار', 'نام بانک را وارد کنید', 'warning');
+  }
 
   try {
     await createBank({ name });
-    alert("بانک جدید با موفقیت ثبت شد");
+    await Swal.fire('موفقیت', 'بانک جدید با موفقیت ثبت شد', 'success');
     BankNameInput.value = "";
     ModalCreate.classList.remove("show");
     await FetchBankInfo();
   } catch (err) {
-    alert("خطا: " + err.message);
+    Swal.fire('خطا', err.message, 'error');
   }
 };
 
 
 const handleEditBank = async () => {
   const name = BankEditInput.value.trim();
-  if (!name) return alert("نام بانک را وارد کنید");
-  if (!editingBankId) return alert("شناسه‌ای برای ویرایش انتخاب نشده است.");
+  if (!name) {
+    return Swal.fire('هشدار', 'نام بانک را وارد کنید', 'warning');
+  }
+  if (!editingBankId) {
+    return Swal.fire('هشدار', 'شناسه‌ای برای ویرایش انتخاب نشده است.', 'warning');
+  }
 
   try {
     await updateBank(editingBankId, { name });
-    alert("بانک با موفقیت ویرایش شد");
+    await Swal.fire('موفقیت', 'بانک با موفقیت ویرایش شد', 'success');
     BankEditInput.value = "";
     editingBankId = null;
     ModalEdit.classList.remove("show");
     await FetchBankInfo();
   } catch (err) {
-    alert("خطا: " + err.message);
+    Swal.fire('خطا', err.message, 'error');
   }
 };
 
@@ -105,10 +119,19 @@ const handleEditBank = async () => {
 window.deleteSelectedBanks = async () => {
   const checkboxes = document.querySelectorAll(".row-checkbox:checked");
   if (checkboxes.length === 0) {
-    return alert("هیچ بانکی انتخاب نشده است.");
+    return Swal.fire('هشدار', 'هیچ بانکی انتخاب نشده است.', 'warning');
   }
 
-  if (!confirm("آیا مطمئن هستید که می‌خواهید بانک‌های انتخاب‌شده را حذف کنید؟")) return;
+  const confirm = await Swal.fire({
+    title: 'حذف گروهی',
+    text: 'آیا مطمئن هستید که می‌خواهید بانک‌های انتخاب‌شده را حذف کنید؟',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'بله، حذف کن',
+    cancelButtonText: 'لغو'
+  });
+
+  if (!confirm.isConfirmed) return;
 
   const ids = Array.from(checkboxes).map((checkbox) => {
     const row = checkbox.closest("tr");
@@ -119,11 +142,10 @@ window.deleteSelectedBanks = async () => {
     for (const id of ids) {
       await deleteBank(id);
     }
-
-    alert("بانک‌های انتخاب‌شده با موفقیت حذف شدند.");
+    await Swal.fire('موفقیت', 'بانک‌های انتخاب‌شده با موفقیت حذف شدند.', 'success');
     await FetchBankInfo();
   } catch (err) {
-    alert("خطا در حذف: " + err.message);
+    Swal.fire('خطا در حذف', err.message, 'error');
   }
 };
 
