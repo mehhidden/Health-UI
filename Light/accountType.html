@@ -603,17 +603,9 @@
           <th>عملیات</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="render-account-types">
         <!-- پر میشه از سمت سرور -->
-        <tr>
-          <td><input type="checkbox" class="row-checkbox" /></td>
-          <td>1</td>
-          <td>جاری</td>
-          <td>
-            <button class="btn btn-info btn-sm" onclick="showAccountTypeEditModal(1)">ویرایش</button>
-            <button class="btn btn-danger btn-sm" onclick="deleteAccountType(1)">حذف</button>
-          </td>
-        </tr>
+
       </tbody>
     </table>
     <button class="btn btn-danger mt-2" onclick="deleteSelectedAccountTypes()">حذف انتخاب‌شده‌ها</button>
@@ -621,7 +613,7 @@
 </div>
 
 <!-- Modal افزودن نوع حساب -->
-<div class="modal account-type-create-modal">
+<div class="modal account-type-create-modal modal-staicks-open">
   <div class="modal-content">
     <span class="modal-close" onclick="closeAccountTypeModals()">&times;</span>
     <h5 class="modal-title">افزودن نوع حساب</h5>
@@ -630,22 +622,22 @@
         <label for="account-type-name">نوع حساب:</label>
         <input type="text" id="account-type-name" class="form-control" placeholder="مثلاً جاری" />
       </div>
-      <button class="btn btn-primary mt-3">ذخیره</button>
+      <button class="btn btn-primary mt-3 save-account-type">ذخیره</button>
     </form>
   </div>
 </div>
 
 <!-- Modal ویرایش نوع حساب -->
-<div class="modal account-type-edit-modal">
+<div class="modal account-type-edit-modal modal-staicks">
   <div class="modal-content">
     <span class="modal-close" onclick="closeAccountTypeModals()">&times;</span>
     <h5 class="modal-title">ویرایش نوع حساب</h5>
     <form>
       <div class="form-group">
         <label>نوع حساب:</label>
-        <input type="text" class="form-control" value="جاری" />
+        <input type="text" class="form-control edit-account-type" value="جاری" />
       </div>
-      <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
+      <button class="btn btn-primary mt-3 sava-edit-btns">ذخیره تغییرات</button>
     </form>
   </div>
 </div>
@@ -939,6 +931,9 @@ document.getElementById('account-type-check-all')?.addEventListener('change', fu
 
 
 </script>
+
+<script type="module" src="../js//bank/account type/template.js"></script>
+
 
 
   </body>
