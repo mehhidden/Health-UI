@@ -1,5 +1,6 @@
-import { insertTemplateToElement, select } from "../../../utils/elem.js";
-import { fetchCategories, generateCategoriesTemplate } from "./utils.js";
+import { getTrInfo, insertTemplateToElement, select } from "../../../utils/elem.js";
+import { generateCategoriesTemplate } from "./template.js";
+import { editReq, fetchCategories } from "./utils.js";
 
 export function previewInsuranceIcon(input, previewSelector) {
   const preview = document.querySelector(previewSelector);
@@ -68,36 +69,49 @@ export function createInsuranceField(event) {
 }
 
 
-export function showEditInsuranceField(button) {
-  const row = button.closest('tr');
-  const name = row.children[2].textContent;
+const editModalEl = select(".insurance-edit-modal")
+const editModalInput = select("#edit-insurance-name")
 
-  document.getElementById('edit-insurance-name').value = name;
+export function showEditInsuranceField(event) {
+  const trInfo = getTrInfo(event);
+  editModalEl.dataset.id = trInfo.id
 
-  
-  document.querySelector('.insurance-edit-modal').dataset.row = row.rowIndex;
-  document.querySelector('.insurance-edit-modal').classList.add('show');
+  editModalInput.value = trInfo.name;
+  editModalEl.classList.add("show");
 }
 
-export function editInsuranceField(event) {
+export async function editInsuranceField(event) {
   event.preventDefault();
-
-  const name = document.getElementById('edit-insurance-name').value.trim();
-  if (!name) {
-    alert('نام رشته الزامی است.');
+  const formData = new FormData(event.target);
+  const formObj = Object.fromEntries(formData.entries());
+  if (!formObj.name) {
+    swal(
+      'نام رشته الزامی است.',
+      "",
+      "error"
+    );
     return;
   }
 
-  const modal = document.querySelector('.insurance-edit-modal');
-  const rowIndex = modal.dataset.row;
+  try {
+    const response = await editReq(editModalEl.dataset.id, formObj);
+    await renderCategories()
+    swal(
+      'رشته مورد نظر با موفقیت ویرایش شد.',
+      response,
+      "success"
+    )
+  } catch (error) {
+    swal(
+      'رشته مورد نظر ویرایش نشد.',
+      error.message,
+      "error"
+    )
+  }
 
-  const table = document.getElementById('insurance-field-table');
-  const row = table.rows[rowIndex];
-
-  row.children[2].textContent = name;
+  
 
   closeInsuranceModals();
-  delete modal.dataset.row;
 }
 
 

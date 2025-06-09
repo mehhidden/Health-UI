@@ -1,19 +1,7 @@
 import { getCookie } from "../../../utils/cookie.js";
-import { API } from "../../../utils/data.js";
+import { API, convertBackendValidationToMessage } from "../../../utils/data.js";
 
-export const generateCategoriesTemplate = categories => 
-  categories.map(category => `
-    <tr data-info='${JSON.stringify(category)}'>
-      <td><input type="checkbox" class="row-checkbox" /></td>
-      <td>${category.id}</td>
-      <td>${category.name}</td>
-      <td><img src="${category.icon}" alt="آیکون" style="max-width:40px;" /></td>
-      <td>
-        <button class="btn btn-sm edit-btn" onclick="showEditInsuranceField(this)">ویرایش</button>
-        <button class="btn btn-sm delete-btn" onclick="deleteInsuranceField(this)">حذف</button>
-      </td>
-    </tr>
-  `)
+
 
 export const fetchCategories = async () => {
   const req = await fetch(`${API}/catalog/categories/`, {
@@ -22,4 +10,25 @@ export const fetchCategories = async () => {
     },
   });
   return (await req.json()).results.results;
+};
+
+export const editReq = async (id, data) => {
+  const req = await fetch(`${API}/catalog/categories/${id}/`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${getCookie("access")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  const response = await req.json();
+  
+  if (req.ok) {
+
+    return response.detail || "ویرایش شهر با موفقیت انجام شد";
+  } else {
+    
+    throw Error(convertBackendValidationToMessage(response));
+  }
 };
