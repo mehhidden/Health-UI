@@ -1,3 +1,4 @@
+import { convertFormDataToObj } from "../../../utils/data.js";
 import {
   getTrInfo,
   insertTemplateToElement,
@@ -79,7 +80,7 @@ export function showEditInsuranceField(event) {
 export async function editInsuranceField(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
-  const formObj = Object.fromEntries(formData.entries());
+  const formObj = convertFormDataToObj(formData);
   if (!formObj.name) {
     swal("نام رشته الزامی است.", "", "error");
     return;
