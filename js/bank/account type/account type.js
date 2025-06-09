@@ -47,3 +47,4 @@ export const updateAccountType = async (id, data) => {
 
   return await res.json();
 };
+ 
