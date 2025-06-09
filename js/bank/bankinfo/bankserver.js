@@ -71,3 +71,4 @@ export const updateBank = async (id, data) => {
     throw error;
   }
 };
+
