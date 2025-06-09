@@ -1,3 +1,6 @@
+import { insertTemplateToElement, select } from "../../../utils/elem.js";
+import { fetchCategories, generateCategoriesTemplate } from "./utils.js";
+
 export function previewInsuranceIcon(input, previewSelector) {
   const preview = document.querySelector(previewSelector);
   if (input.files && input.files[0]) {
@@ -121,4 +124,16 @@ export function deleteSelectedInsuranceFields() {
   if (confirm('آیا از حذف موارد انتخاب‌شده مطمئن هستید؟')) {
     selected.forEach(cb => cb.closest('tr').remove());
   }
+}
+
+
+
+const categoriesWrapper = select("#insurance-fields-table-body")
+export const renderCategories = async () => {
+  const categories = await fetchCategories();
+  const template = generateCategoriesTemplate(categories);
+  insertTemplateToElement(
+    template,
+    categoriesWrapper
+  )
 }

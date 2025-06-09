@@ -5,11 +5,15 @@ import {
   deleteSelectedInsuranceFields,
   editInsuranceField,
   previewInsuranceIcon,
+  renderCategories,
   showEditInsuranceField,
   showInsuranceFieldCreateModal,
 } from "./funcs/shared.js";
 
 window.addEventListener("load", () => {
+  renderCategories()
+
+
   window.previewInsuranceIcon = previewInsuranceIcon;
   window.showInsuranceFieldCreateModal = showInsuranceFieldCreateModal;
   window.closeInsuranceModals = closeInsuranceModals;
