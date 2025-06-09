@@ -1,4 +1,4 @@
-function previewInsuranceIcon(input, previewSelector) {
+export function previewInsuranceIcon(input, previewSelector) {
   const preview = document.querySelector(previewSelector);
   if (input.files && input.files[0]) {
     const reader = new FileReader();
@@ -14,17 +14,17 @@ function previewInsuranceIcon(input, previewSelector) {
 }
 
 
-function showInsuranceFieldCreateModal() {
+export function showInsuranceFieldCreateModal() {
   document.querySelector('.insurance-create-modal').classList.add('show');
 }
 
 
-function closeInsuranceModals() {
+export function closeInsuranceModals() {
   document.querySelectorAll('.modal').forEach(modal => modal.classList.remove('show'));
 }
 
 
-function createInsuranceField(event) {
+export function createInsuranceField(event) {
   event.preventDefault();
 
   const nameInput = document.getElementById('insurance-name');
@@ -65,7 +65,7 @@ function createInsuranceField(event) {
 }
 
 
-function showEditInsuranceField(button) {
+export function showEditInsuranceField(button) {
   const row = button.closest('tr');
   const name = row.children[2].textContent;
 
@@ -76,7 +76,7 @@ function showEditInsuranceField(button) {
   document.querySelector('.insurance-edit-modal').classList.add('show');
 }
 
-function editInsuranceField(event) {
+export function editInsuranceField(event) {
   event.preventDefault();
 
   const name = document.getElementById('edit-insurance-name').value.trim();
@@ -98,7 +98,7 @@ function editInsuranceField(event) {
 }
 
 
-function deleteInsuranceField(button) {
+export function deleteInsuranceField(button) {
   if (confirm('آیا از حذف این رشته مطمئن هستید؟')) {
     const row = button.closest('tr');
     row.remove();
@@ -112,7 +112,7 @@ document.getElementById('insurance-check-all').addEventListener('change', functi
 });
 
 
-function deleteSelectedInsuranceFields() {
+export function deleteSelectedInsuranceFields() {
   const selected = document.querySelectorAll('#insurance-fields-table-body .row-checkbox:checked');
   if (selected.length === 0) {
     alert('هیچ ردیفی انتخاب نشده است.');
