@@ -5,7 +5,7 @@ import {
   setStyleToEl,
 } from "../../../utils/elem.js";
 import { generateCategoriesTemplate } from "./template.js";
-import { createReq, editReq, fetchCategories } from "./utils.js";
+import { createReq, deleteReq, editReq, fetchCategories } from "./utils.js";
 
 export function previewInsuranceIcon(input, previewSelector) {
   const preview = document.querySelector(previewSelector);
@@ -96,11 +96,21 @@ export async function editInsuranceField(event) {
   }
 }
 
-export function deleteInsuranceField(button) {
-  if (confirm("آیا از حذف این رشته مطمئن هستید؟")) {
-    const row = button.closest("tr");
-    row.remove();
-  }
+export function deleteInsuranceField(event) {
+  const trInfo = getTrInfo(event);
+  swal(`آیا از حذف رشته ${trInfo.name} اطمینان دارید؟`, "", "question").then(
+    async (res) => {
+      if (res) {
+        try {
+          const response = await deleteReq(trInfo.id);
+          await renderCategories();
+          swal(response, "", "success");
+        } catch (error) {
+          swal("خطا در حذف رشته بیمه", error.message, "error");
+        }
+      }
+    }
+  );
 }
 
 document
@@ -120,9 +130,23 @@ export function deleteSelectedInsuranceFields() {
     swal("هیچ ردیفی انتخاب نشده است.", "", "error");
     return;
   }
-  if (confirm("آیا از حذف موارد انتخاب‌شده مطمئن هستید؟")) {
-    selected.forEach((cb) => cb.closest("tr").remove());
-  }
+  swal(`آیا ${selected.length} رشته انتخاب شده حذف شوند؟`, "", "question").then(
+    async (result) => {
+      if (result) {
+        try {
+          const infos = [...selected].map(
+            (cb) => JSON.parse(cb.closest("tr").dataset.info).id
+          );
+          const promices = infos.map((id) => deleteReq(id));
+          await Promise.all(promices);
+          await renderCategories();
+          swal("رشته ها با موفقیت حذف شدند", "", "success");
+        } catch (error) {
+          swal("خطا در حذف رشته ها", error.message, "error");
+        }
+      }
+    }
+  );
 }
 
 const categoriesWrapper = select("#insurance-fields-table-body");

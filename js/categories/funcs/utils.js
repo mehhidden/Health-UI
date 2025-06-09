@@ -12,6 +12,22 @@ export const fetchCategories = async () => {
   return (await req.json()).results.results;
 };
 
+export const deleteReq = async (id) => {
+  const req = await fetch(`${API}/catalog/categories/${id}/`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${getCookie("access")}`,
+    },
+  });
+
+  if (req.ok) {
+    return "حذف  رشته بیمه با موفقیت انجام شد";
+  } else {
+    const response = await req.json();
+    throw Error(response.detail || convertBackendValidationToMessage(response));
+  }
+};
+
 export const editReq = async (id, data) => {
   const req = await fetch(`${API}/catalog/categories/${id}/`, {
     method: "PATCH",
