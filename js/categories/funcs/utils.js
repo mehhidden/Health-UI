@@ -26,7 +26,27 @@ export const editReq = async (id, data) => {
   
   if (req.ok) {
 
-    return response.detail || "ویرایش شهر با موفقیت انجام شد";
+    return response.detail || "ویرایش رشته با موفقیت انجام شد";
+  } else {
+    
+    throw Error(convertBackendValidationToMessage(response));
+  }
+};
+
+export const createReq = async (formData) => {
+  const req = await fetch(`${API}/catalog/categories/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${getCookie("access")}`,
+    },
+    body: formData,
+  });
+
+  const response = await req.json();
+  
+  if (req.ok) {
+
+    return response.detail || "ساخت رشته با موفقیت انجام شد";
   } else {
     
     throw Error(convertBackendValidationToMessage(response));
