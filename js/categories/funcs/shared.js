@@ -1,124 +1,159 @@
-function previewInsuranceIcon(input, previewSelector) {
+import { convertFormDataToObj } from "../../../utils/data.js";
+import {
+  getTrInfo,
+  insertTemplateToElement,
+  select,
+  setStyleToEl,
+} from "../../../utils/elem.js";
+import { generateCategoriesTemplate } from "./template.js";
+import { createReq, deleteReq, editReq, fetchCategories } from "./utils.js";
+
+export function previewInsuranceIcon(input, previewSelector) {
   const preview = document.querySelector(previewSelector);
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = function (e) {
       preview.src = e.target.result;
-      preview.style.display = 'block';
+      preview.style.display = "block";
     };
     reader.readAsDataURL(input.files[0]);
   } else {
-    preview.src = '';
-    preview.style.display = 'none';
+    preview.src = "";
+    preview.style.display = "none";
   }
 }
 
-
-function showInsuranceFieldCreateModal() {
-  document.querySelector('.insurance-create-modal').classList.add('show');
+export function showInsuranceFieldCreateModal() {
+  document.querySelector(".insurance-create-modal").classList.add("show");
 }
 
-
-function closeInsuranceModals() {
-  document.querySelectorAll('.modal').forEach(modal => modal.classList.remove('show'));
+const allModals = document.querySelectorAll(".modal");
+const allModalsInputs = [...allModals].map(modal => [...modal.querySelectorAll("select, input")]);
+export function closeInsuranceModals() {
+  allModals.forEach((modal) => modal.classList.remove("show"));
+  allModalsInputs.forEach(inputs => inputs.forEach(input => input.value = ""));
 }
 
-
-function createInsuranceField(event) {
+const nameInput = select("#insurance-name");
+const iconInput = select("#insurance-icon-create");
+export async function createInsuranceField(event) {
   event.preventDefault();
-
-  const nameInput = document.getElementById('insurance-name');
-  const iconInput = document.getElementById('insurance-icon-create');
 
   const name = nameInput.value.trim();
   const iconFile = iconInput.files[0];
 
-  if (!name || !iconFile) {
-    alert('نام رشته و آیکون الزامی هستند.');
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    const iconSrc = e.target.result;
-
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
-      <td><input type="checkbox" class="row-checkbox" /></td>
-      <td>${Date.now()}</td>
-      <td>${name}</td>
-      <td><img src="${iconSrc}" alt="آیکون" style="max-width:40px;" /></td>
-      <td>
-        <button class="btn btn-sm edit-btn" onclick="showEditInsuranceField(this)">ویرایش</button>
-        <button class="btn btn-sm delete-btn" onclick="deleteInsuranceField(this)">حذف</button>
-      </td>
-
-    `;
-
-    document.getElementById('insurance-fields-table-body').appendChild(newRow);
-    closeInsuranceModals();
-    event.target.reset();
-    document.getElementById('preview-icon-create').style.display = 'none';
-  };
-
-  reader.readAsDataURL(iconFile);
-}
-
-
-function showEditInsuranceField(button) {
-  const row = button.closest('tr');
-  const name = row.children[2].textContent;
-
-  document.getElementById('edit-insurance-name').value = name;
+  const formData = new FormData();
+  formData.append("name",name);
+  formData.append("icon", iconFile);
 
   
-  document.querySelector('.insurance-edit-modal').dataset.row = row.rowIndex;
-  document.querySelector('.insurance-edit-modal').classList.add('show');
+
+  if (!name || !iconFile) {
+    swal("نام رشته و آیکون الزامی هستند.", "", "error");
+    return;
+  }
+
+  try {
+    const response = await createReq(formData);
+    await renderCategories();
+    swal("رشته مورد نظر با موفقیت ساخته شد.", response, "success");
+  } catch (error) {
+    swal("رشته مورد نظر ساخته نشد.", error.message, "error");
+  } finally {
+    closeInsuranceModals();
+    setStyleToEl(select(".icon-preview"), {
+      display: "none",
+    });
+  }
 }
 
-function editInsuranceField(event) {
+const editModalEl = select(".insurance-edit-modal");
+const editModalInput = select("#edit-insurance-name");
+
+export function showEditInsuranceField(event) {
+  const trInfo = getTrInfo(event);
+  editModalEl.dataset.id = trInfo.id;
+
+  editModalInput.value = trInfo.name;
+  editModalEl.classList.add("show");
+}
+
+export async function editInsuranceField(event) {
   event.preventDefault();
-
-  const name = document.getElementById('edit-insurance-name').value.trim();
-  if (!name) {
-    alert('نام رشته الزامی است.');
+  const formData = new FormData(event.target);
+  const formObj = convertFormDataToObj(formData);
+  if (!formObj.name) {
+    swal("نام رشته الزامی است.", "", "error");
     return;
   }
 
-  const modal = document.querySelector('.insurance-edit-modal');
-  const rowIndex = modal.dataset.row;
-
-  const table = document.getElementById('insurance-field-table');
-  const row = table.rows[rowIndex];
-
-  row.children[2].textContent = name;
-
-  closeInsuranceModals();
-  delete modal.dataset.row;
-}
-
-
-function deleteInsuranceField(button) {
-  if (confirm('آیا از حذف این رشته مطمئن هستید؟')) {
-    const row = button.closest('tr');
-    row.remove();
+  try {
+    const response = await editReq(editModalEl.dataset.id, formObj);
+    await renderCategories();
+    swal("رشته مورد نظر با موفقیت ویرایش شد.", response, "success");
+  } catch (error) {
+    swal("رشته مورد نظر ویرایش نشد.", error.message, "error");
+  } finally {
+    closeInsuranceModals();
   }
 }
 
+export function deleteInsuranceField(event) {
+  const trInfo = getTrInfo(event);
+  swal(`آیا از حذف رشته ${trInfo.name} اطمینان دارید؟`, "", "question").then(
+    async (res) => {
+      if (res) {
+        try {
+          const response = await deleteReq(trInfo.id);
+          await renderCategories();
+          swal(response, "", "success");
+        } catch (error) {
+          swal("خطا در حذف رشته بیمه", error.message, "error");
+        }
+      }
+    }
+  );
+}
 
-document.getElementById('insurance-check-all').addEventListener('change', function () {
-  const checked = this.checked;
-  document.querySelectorAll('#insurance-fields-table-body .row-checkbox').forEach(cb => cb.checked = checked);
-});
+document
+  .getElementById("insurance-check-all")
+  .addEventListener("change", function () {
+    const checked = this.checked;
+    document
+      .querySelectorAll("#insurance-fields-table-body .row-checkbox")
+      .forEach((cb) => (cb.checked = checked));
+  });
 
-
-function deleteSelectedInsuranceFields() {
-  const selected = document.querySelectorAll('#insurance-fields-table-body .row-checkbox:checked');
+export function deleteSelectedInsuranceFields() {
+  const selected = document.querySelectorAll(
+    "#insurance-fields-table-body .row-checkbox:checked"
+  );
   if (selected.length === 0) {
-    alert('هیچ ردیفی انتخاب نشده است.');
+    swal("هیچ ردیفی انتخاب نشده است.", "", "error");
     return;
   }
-  if (confirm('آیا از حذف موارد انتخاب‌شده مطمئن هستید؟')) {
-    selected.forEach(cb => cb.closest('tr').remove());
-  }
+  swal(`آیا ${selected.length} رشته انتخاب شده حذف شوند؟`, "", "question").then(
+    async (result) => {
+      if (result) {
+        try {
+          const infos = [...selected].map(
+            (cb) => JSON.parse(cb.closest("tr").dataset.info).id
+          );
+          const promices = infos.map((id) => deleteReq(id));
+          await Promise.all(promices);
+          await renderCategories();
+          swal("رشته ها با موفقیت حذف شدند", "", "success");
+        } catch (error) {
+          swal("خطا در حذف رشته ها", error.message, "error");
+        }
+      }
+    }
+  );
 }
+
+const categoriesWrapper = select("#insurance-fields-table-body");
+export const renderCategories = async () => {
+  const categories = await fetchCategories();
+  const template = generateCategoriesTemplate(categories);
+  insertTemplateToElement(template, categoriesWrapper);
+};

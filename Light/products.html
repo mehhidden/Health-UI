@@ -676,11 +676,8 @@
     <form onsubmit="createInsuranceField(event)">
       <div class="form-group mb-3">
         <label for="product-insurance-select">انتخاب رشته بیمه‌ای:</label>
-        <select name="product" id="product-insurance-select" class="form-control" required>
-          <option value="">انتخاب کنید...</option>
-          <option value="1">شخص ثالث</option>
-          <option value="2">درمان</option>
-          <option value="3">عمر و سرمایه‌گذاری</option>
+        <select name="category" id="product-insurance-select" class="form-control category-select " required>
+          <option disabled value="">انتخاب کنید...</option>
         </select>
       </div>
 
@@ -714,11 +711,7 @@
     <form onsubmit="editInsuranceField(event)">
       <div class="form-group mb-3">
         <label for="edit-product-insurance-select">رشته بیمه‌ای:</label>
-        <select name="product" id="edit-product-insurance-select" class="form-control" required>
-          <option value="">انتخاب کنید...</option>
-          <option value="1">شخص ثالث</option>
-          <option value="2">درمان</option>
-          <option value="3">عمر و سرمایه‌گذاری</option>
+        <select name="category" id="edit-product-insurance-select" class="form-control category-select" required>
         </select>
       </div>
 
@@ -727,17 +720,7 @@
         <input name="name" type="text" id="edit-insurance-name" class="form-control" placeholder="نام محصول ..." required />
       </div>
 
-      <div class="form-group mb-3">
-        <label for="insurance-icon-edit">آیکون:</label>
-        <button type="button" class="btn btn-outline-primary file-upload-btn" onclick="document.getElementById('insurance-icon-edit').click()">
-          انتخاب فایل آیکون
-        </button>
-        <input type="file" id="insurance-icon-edit" accept=".png,.jpg,.jpeg,.svg" style="display:none"
-          onchange="previewInsuranceIcon(this, '#preview-icon-edit')" />
-        <div class="icon-preview mt-2">
-          <img id="preview-icon-edit" src="" alt="پیش‌نمایش آیکون" style="max-width: 100px; display: none;" />
-        </div>
-      </div>
+     
 
       <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
     </form>
@@ -985,8 +968,7 @@
     <!-- BEGIN PAGE JAVASCRIPT -->
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
     <!-- <script src="assets/js/pages/datatable.js"></script> -->    
-    <script type="module" src="../js/categories/index.js"></script>
-    <script src="../js/categories/funcs/shared.js"></script>
+    <script type="module" src="../js/products/index.js"></script>
     <!-- END PAGE JAVASCRIPT -->
 
   

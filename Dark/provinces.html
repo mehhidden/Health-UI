@@ -40,7 +40,7 @@
     <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/colors.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/pages/categories.css" />
+    <link rel="stylesheet" href="assets/css/pages/provinces.css" />
     <!-- END CSS -->
     <!-- BEGIN PAGE CSS -->
     <link
@@ -49,7 +49,7 @@
     />
     <!-- END PAGE CSS -->
   </head>
-  <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">
+  <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1 dark">
     <!-- BEGIN LOEADING -->
     <div id="loader">
       <div class="spinner"></div>
@@ -503,13 +503,13 @@
               <ul>
                
                 <li>
-                  <a href="provinces.html">
+                  <a href="provinces.html" class="current">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>جدول استان ها</span>
                   </a>
                 </li>
                 <li>
-                  <a href="city.html">
+                  <a href="city.html" >
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>جدول شهر ها</span>
                   </a>
@@ -522,6 +522,7 @@
                 <span>مدیریت بانک‌ها</span>
               </a>
               <ul>
+               
                 <li>
                   <a href="banks.html"> 
                     <!-- <i class="fas fa-grip"></i> -->
@@ -534,39 +535,8 @@
                     <span>نوع حساب های بانکی</span>
                   </a>
                 </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="fa-solid fa-shield-halved"></i>
-                <span>طرح های بیمه ای</span>
-              </a>
-              <ul>
-               
-                <li>
-                  <a href="categories.html" class="current">  
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>رشته های بیمه</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="products.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>محصولات</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="plans.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>طرح‌ها</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="coverage.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>پوشش‌ها</span>
-                  </a>
-                </li>
+                
+                
               </ul>
             </li>
             <li>
@@ -615,88 +585,61 @@
       <!-- BEGIN PAGE CONTENT -->
       <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">مدیریت رشته‌های بیمه‌ای</h5>
-    <button class="btn btn-success" onclick="showInsuranceFieldCreateModal()">
-      <i class="icon-plus"></i> افزودن رشته
+    <h5 class="mb-0">مدیریت استان‌ها</h5>
+    <button class="btn btn-success" onclick="showProvinceCreateModal()">
+      <i class="icon-plus"></i> افزودن استان
     </button>
   </div>
 
-  <div class="card-body insurance-card-body">
-    <table id="insurance-field-table" class="table table-bordered text-center">
-  <thead>
-    <tr>
-      <th><input type="checkbox" id="insurance-check-all" /></th>
-      <th>شناسه</th>
-      <th>نام رشته</th>
-      <th>آیکون</th>
-      <th>عملیات</th>
-    </tr>
-  </thead>
-  <tbody id="insurance-fields-table-body">
-    
-  </tbody>
-</table>
-
-    <button class="btn btn-danger mt-2" onclick="deleteSelectedInsuranceFields()">حذف انتخاب‌شده‌ها</button>
+  
+  <div class="card-body province-card-body">
+    <table id="province-table" class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="province-check-all" /></th>
+          <th>شناسه</th>
+          <th>نام استان</th>
+          <th>عملیات</th>
+        </tr>
+      </thead>
+      <tbody id="provinces-table-body">
+        <!-- پر میشه از سمت سرور -->
+        
+      </tbody>
+    </table>
+    <button class="btn btn-danger mt-2" onclick="deleteSelectedProvinces()">حذف انتخاب‌شده‌ها</button>
   </div>
 </div>
 
 
-<div class="modal insurance-create-modal">
+<div class="modal province-create-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeInsuranceModals()">&times;</span>
-    <h5 class="modal-title">افزودن رشته بیمه‌ای</h5>
-    <form onsubmit="createInsuranceField(event)">
-
-  <div class="form-group mb-3">
-    <label for="insurance-name">نام رشته بیمه‌ای:</label>
-    <input name="name" type="text" id="insurance-name" class="form-control" placeholder="مثلاً شخص ثالث" required />
-  </div>
-
-  
-  <div class="form-group mb-3">
-    <label for="insurance-icon-create">آیکون رشته:</label>
-
-  
-    <button type="button" class="btn btn-outline-primary file-upload-btn" onclick="document.getElementById('insurance-icon-create').click()">
-      انتخاب فایل آیکون
-    </button>
-
-    
-    <input name="icon" type="file" id="insurance-icon-create" accept=".png,.jpg,.jpeg,.svg" style="display:none"
-           onchange="previewInsuranceIcon(this, '#preview-icon-create')" required />
-
-    
-    <div class="icon-preview mt-2">
-      <img id="preview-icon-create" src="" alt="پیش‌نمایش آیکون" style="max-width: 100px; display: none;" />
-    </div>
-  </div>
-
-  <button class="btn btn-primary mt-3">ذخیره</button>
-</form>
-
-  </div>
-</div>
-
-
-<div class="modal insurance-edit-modal">
-  <div class="modal-content">
-    <span class="modal-close" onclick="closeInsuranceModals()">&times;</span>
-    <h5 class="modal-title">ویرایش رشته بیمه‌ای</h5>
-    <form onsubmit="editInsuranceField(event)">
+    <span class="modal-close" onclick="closeProvinceModals()">&times;</span>
+    <h5 class="modal-title">افزودن استان</h5>
+    <form onsubmit="createProvince(event)">
       <div class="form-group">
-        <label for="edit-insurance-name">نام رشته:</label>
-        <input name="name" type="text" id="edit-insurance-name" class="form-control" placeholder="رشته ..." />
+        <label>نام استان:</label>
+        <input type="text" class="form-control" name="name" placeholder="مثلاً تهران" />
       </div>
-      
-
-      
-      <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
+      <button class="btn btn-primary mt-3">ذخیره</button>
     </form>
   </div>
 </div>
 
 
+<div class="modal province-edit-modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeProvinceModals()">&times;</span>
+    <h5 class="modal-title">ویرایش استان</h5>
+    <form onsubmit="editProvince(event)">
+      <div class="form-group">
+        <label>نام استان:</label>
+        <input name="name" type="text" class="form-control" value="تهران" />
+      </div>
+      <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
+    </form>
+  </div>
+</div>
 
       <!-- /#page-content -->
       <!-- END PAGE CONTENT -->
@@ -934,9 +877,15 @@
 
     <!-- BEGIN PAGE JAVASCRIPT -->
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
-    <!-- <script src="assets/js/pages/datatable.js"></script> -->    
-    <script type="module" src="../js/categories/index.js"></script>
+    <!-- <script src="assets/js/pages/datatable.js"></script> -->
+     <script type="module" src="/js/peovinces/index.js"></script>
     <!-- END PAGE JAVASCRIPT -->
+
+    <script>
+  
+
+  
+</script>
 
   </body>
 </html>

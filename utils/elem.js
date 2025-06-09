@@ -34,3 +34,9 @@ export const getTrInfo = (e) => {
   const info = JSON.parse(tr.dataset.info);
   return info;
 };
+
+export const setStyleToEl = (el, styleObj) => {
+  Object.keys(styleObj).forEach((key) => {
+    el.style[key] = styleObj[key];
+  });
+};
