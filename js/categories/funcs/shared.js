@@ -27,10 +27,11 @@ export function showInsuranceFieldCreateModal() {
   document.querySelector(".insurance-create-modal").classList.add("show");
 }
 
+const allModals = document.querySelectorAll(".modal");
+const allModalsInputs = [...allModals].map(modal => [...modal.querySelectorAll("select, input")]);
 export function closeInsuranceModals() {
-  document
-    .querySelectorAll(".modal")
-    .forEach((modal) => modal.classList.remove("show"));
+  allModals.forEach((modal) => modal.classList.remove("show"));
+  allModalsInputs.forEach(inputs => inputs.forEach(input => input.value = ""));
 }
 
 const nameInput = select("#insurance-name");
@@ -38,12 +39,14 @@ const iconInput = select("#insurance-icon-create");
 export async function createInsuranceField(event) {
   event.preventDefault();
 
-  const formData = new FormData();
-  formData.append("name", nameInput.value.trim());
-  formData.append("icon", iconInput.files[0]);
-
   const name = nameInput.value.trim();
   const iconFile = iconInput.files[0];
+
+  const formData = new FormData();
+  formData.append("name",name);
+  formData.append("icon", iconFile);
+
+  
 
   if (!name || !iconFile) {
     swal("نام رشته و آیکون الزامی هستند.", "", "error");
@@ -58,8 +61,6 @@ export async function createInsuranceField(event) {
     swal("رشته مورد نظر ساخته نشد.", error.message, "error");
   } finally {
     closeInsuranceModals();
-    nameInput.value = "";
-    iconInput.value = "";
     setStyleToEl(select(".icon-preview"), {
       display: "none",
     });
