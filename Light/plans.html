@@ -40,7 +40,7 @@
     <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/colors.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/pages/city.css" />
+    <link rel="stylesheet" href="assets/css/pages/plans.css" />
     <!-- END CSS -->
     <!-- BEGIN PAGE CSS -->
     <link
@@ -509,7 +509,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="city.html" class="current">
+                  <a href="city.html">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>جدول شهر ها</span>
                   </a>
@@ -544,7 +544,7 @@
               <ul>
                
                 <li>
-                  <a href="categories.html"> 
+                  <a href="categories.html">  
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>رشته های بیمه</span>
                   </a>
@@ -556,7 +556,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="plans.html">
+                  <a href="plans.html" class="current">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>طرح‌ها</span>
                   </a>
@@ -615,51 +615,80 @@
       <!-- BEGIN PAGE CONTENT -->
       <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">مدیریت شهر‌ها</h5>
-    <button class="btn btn-success" onclick="showCityCreateModal()">
-      <i class="icon-plus"></i> افزودن شهر
+    <h5 class="mb-0">مدیریت طرح‌ها</h5>
+    <button class="btn btn-success" onclick="showPlanCreateModal()">
+      <i class="icon-plus"></i> افزودن طرح
     </button>
   </div>
 
-  <div class="card-body city-card-body">
-    <table id="city-table" class="table table-bordered text-center">
+  <div class="card-body insurance-card-body">
+    <table id="insurance-field-table" class="table table-bordered text-center">
       <thead>
         <tr>
-          <th><input type="checkbox" id="city-check-all" /></th>
+          <th><input type="checkbox" id="plan-check-all" /></th>
           <th>شناسه</th>
-          <th>شناسه استان</th>
-          <th>نام شهر</th>
+          <th>شناسه محصول</th>
+          <th>نام طرح</th>
+          <th>آیکون</th>
+          <th>فرانشیز</th>
           <th>عملیات</th>
         </tr>
       </thead>
-      <tbody id="cities-table-body">
-        <!-- پر میشه از سمت سرور -->
-        
+      <tbody id="insurance-fields-table-body">
+        <!-- ردیف‌های داینامیک -->
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>201</td>
+          <td>101</td>
+          <td>طرح پایه آتش‌سوزی</td>
+          <td><img src="icons/fire.png" alt="آیکون" style="max-width: 32px;" /></td>
+          <td>10٪</td>
+          <td>
+            <button class="btn btn-sm edit-btn" onclick="showEditPlanModal(201)">ویرایش</button>
+            <button class="btn btn-sm delete-btn" onclick="deletePlan(201)">حذف</button>
+          </td>
+        </tr>
       </tbody>
     </table>
-    <button class="btn btn-danger mt-2" onclick="deleteSelectedCities()">حذف انتخاب‌شده‌ها</button>
+    <button class="btn btn-danger mt-2" onclick="deleteSelectedPlans()">حذف انتخاب‌شده‌ها</button>
   </div>
 </div>
 
 
-<div class="modal city-create-modal">
+<div class="modal plan-create-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeCityModals()">&times;</span>
-    <h5 class="modal-title">افزودن شهر</h5>
-    <form onsubmit="createCity(event)">
-
+    <span class="modal-close" onclick="closePlanModals()">&times;</span>
+    <h5 class="modal-title">افزودن طرح</h5>
+    <form onsubmit="createPlan(event)">
       <div class="form-group mb-3">
-        <label for="create-province-select">انتخاب استان:</label>
-        <select name="province" id="create-province-select" class="form-control province-select">
-          <option value="" disabled selected>استان را انتخاب کنید</option>
-          <!-- <Load By JS> -->
+        <label for="product-plan-select">انتخاب محصول بیمه‌ای:</label>
+        <select name="plan" id="product-plan-select" class="form-control" required>
+          <option value="">انتخاب کنید...</option>
+          <option value="101">پوشش آتش‌سوزی</option>
+          <option value="102">پوشش زلزله</option>
         </select>
       </div>
 
-      
       <div class="form-group mb-3">
-        <label for="city-name">نام شهر:</label>
-        <input name="name" type="text" id="city-name" class="form-control" placeholder="مثلاً تهران" />
+        <label for="plan-name">نام طرح:</label>
+        <input name="name" type="text" id="plan-name" class="form-control" placeholder="مثلاً طرح طلایی" required />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="plan-deduction">فرانشیز:</label>
+        <input type="text" id="plan-deduction" class="form-control" placeholder="مثلاً 10٪" required />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="plan-icon-create">آیکون:</label>
+        <button type="button" class="btn btn-outline-primary file-upload-btn" onclick="document.getElementById('plan-icon-create').click()">
+          انتخاب فایل آیکون
+        </button>
+        <input type="file" id="plan-icon-create" accept=".png,.jpg,.jpeg,.svg" style="display:none"
+          onchange="previewInsuranceIcon(this, '#preview-icon-create')" required />
+        <div class="icon-preview mt-2">
+          <img id="preview-icon-create" src="" alt="پیش‌نمایش آیکون" style="max-width: 100px; display: none;" />
+        </div>
       </div>
 
       <button class="btn btn-primary mt-3">ذخیره</button>
@@ -668,27 +697,48 @@
 </div>
 
 
-
-<div class="modal city-edit-modal">
+<div class="modal plan-edit-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeCityModals()">&times;</span>
-    <h5 class="modal-title">ویرایش شهر</h5>
-    <form onsubmit="editCity(event)">
+    <span class="modal-close" onclick="closePlanModals()">&times;</span>
+    <h5 class="modal-title">ویرایش طرح</h5>
+    <form onsubmit="editPlan(event)">
       <div class="form-group mb-3">
-        <label for="edit-province-select">انتخاب استان:</label>
-        <select name="province" id="edit-province-select" class="form-control province-select">
-          <option value="" disabled selected>استان را انتخاب کنید</option>
-          <!-- <Load By JS> -->
+        <label for="edit-product-plan-select">انتخاب محصول:</label>
+        <select name="plan" id="edit-product-plan-select" class="form-control" required>
+          <option value="">انتخاب کنید...</option>
+          <option value="101">پوشش آتش‌سوزی</option>
+          <option value="102">پوشش زلزله</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>نام شهر:</label>
-        <input name="name" type="text" class="form-control" placeholder="شهر ..." />
+
+      <div class="form-group mb-3">
+        <label for="edit-plan-name">نام طرح:</label>
+        <input name="name" type="text" id="edit-plan-name" class="form-control" required />
       </div>
+
+      <div class="form-group mb-3">
+        <label for="edit-plan-deduction">فرانشیز:</label>
+        <input type="text" id="edit-plan-deduction" class="form-control" required />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="plan-icon-edit">آیکون:</label>
+        <button type="button" class="btn btn-outline-primary file-upload-btn" onclick="document.getElementById('plan-icon-edit').click()">
+          انتخاب فایل آیکون
+        </button>
+        <input type="file" id="plan-icon-edit" accept=".png,.jpg,.jpeg,.svg" style="display:none"
+          onchange="previewInsuranceIcon(this, '#preview-icon-edit')" />
+        <div class="icon-preview mt-2">
+          <img id="preview-icon-edit" src="" alt="پیش‌نمایش آیکون" style="max-width: 100px; display: none;" />
+        </div>
+      </div>
+
       <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
     </form>
   </div>
 </div>
+
+
 
 
       <!-- /#page-content -->
@@ -927,14 +977,10 @@
 
     <!-- BEGIN PAGE JAVASCRIPT -->
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
-    <!-- <script src="assets/js/pages/datatable.js"></script> -->
-    <script type="module" src="/js/cities/index.js"></script>
+    <!-- <script src="assets/js/pages/datatable.js"></script> -->    
+    <script type="module" src="../js/plans/index.js"></script>
+    <script src="../js/plans/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
-
-    <script>
-  
-</script>
-
 
   </body>
 </html>

@@ -40,7 +40,7 @@
     <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/colors.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/pages/city.css" />
+    <link rel="stylesheet" href="assets/css/pages/coverage.css" />
     <!-- END CSS -->
     <!-- BEGIN PAGE CSS -->
     <link
@@ -509,7 +509,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="city.html" class="current">
+                  <a href="city.html">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>جدول شهر ها</span>
                   </a>
@@ -544,7 +544,7 @@
               <ul>
                
                 <li>
-                  <a href="categories.html"> 
+                  <a href="categories.html">  
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>رشته های بیمه</span>
                   </a>
@@ -562,7 +562,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="coverage.html">
+                  <a href="coverage.html" class="current">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>پوشش‌ها</span>
                   </a>
@@ -615,51 +615,68 @@
       <!-- BEGIN PAGE CONTENT -->
       <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">مدیریت شهر‌ها</h5>
-    <button class="btn btn-success" onclick="showCityCreateModal()">
-      <i class="icon-plus"></i> افزودن شهر
+    <h5 class="mb-0">مدیریت پوشش‌ها</h5>
+    <button class="btn btn-success" onclick="showCoverageCreateModal()">
+      <i class="icon-plus"></i> افزودن پوشش
     </button>
   </div>
 
-  <div class="card-body city-card-body">
-    <table id="city-table" class="table table-bordered text-center">
+  <div class="card-body insurance-card-body">
+    <table id="coverage-table" class="table table-bordered text-center">
       <thead>
         <tr>
-          <th><input type="checkbox" id="city-check-all" /></th>
+          <th><input type="checkbox" id="coverage-check-all" /></th>
           <th>شناسه</th>
-          <th>شناسه استان</th>
-          <th>نام شهر</th>
+          <th>شناسه طرح</th>
+          <th>نام پوشش</th>
+          <th>مبلغ پوشش (تومان)</th>
           <th>عملیات</th>
         </tr>
       </thead>
-      <tbody id="cities-table-body">
-        <!-- پر میشه از سمت سرور -->
-        
+      <tbody id="coverage-table-body">
+        <!-- ردیف‌های داینامیک -->
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>201</td>
+          <td>3</td>
+          <td>پوشش سرقت</td>
+          <td>500,000</td>
+          <td>
+            <button class="btn btn-sm edit-btn" onclick="showEditCoverageModal(201)">ویرایش</button>
+            <button class="btn btn-sm delete-btn" onclick="deleteCoverage(201)">حذف</button>
+          </td>
+        </tr>
       </tbody>
     </table>
-    <button class="btn btn-danger mt-2" onclick="deleteSelectedCities()">حذف انتخاب‌شده‌ها</button>
+
+    <button class="btn btn-danger mt-2" onclick="deleteSelectedCoverages()">حذف انتخاب‌شده‌ها</button>
   </div>
 </div>
 
 
-<div class="modal city-create-modal">
+<div class="modal coverage-create-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeCityModals()">&times;</span>
-    <h5 class="modal-title">افزودن شهر</h5>
-    <form onsubmit="createCity(event)">
-
+    <span class="modal-close" onclick="closeCoverageModals()">&times;</span>
+    <h5 class="modal-title">افزودن پوشش</h5>
+    <form onsubmit="createCoverage(event)">
       <div class="form-group mb-3">
-        <label for="create-province-select">انتخاب استان:</label>
-        <select name="province" id="create-province-select" class="form-control province-select">
-          <option value="" disabled selected>استان را انتخاب کنید</option>
-          <!-- <Load By JS> -->
+        <label for="plan-select">انتخاب طرح:</label>
+        <select name="coverage" id="plan-select" class="form-control" required>
+          <option value="">انتخاب کنید...</option>
+          <option value="1">طرح طلایی</option>
+          <option value="2">طرح نقره‌ای</option>
+          <option value="3">طرح برنزی</option>
         </select>
       </div>
 
-      
       <div class="form-group mb-3">
-        <label for="city-name">نام شهر:</label>
-        <input name="name" type="text" id="city-name" class="form-control" placeholder="مثلاً تهران" />
+        <label for="coverage-name">نام پوشش:</label>
+        <input name="name" type="text" id="coverage-name" class="form-control" placeholder="مثلاً پوشش تصادف" required />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="coverage-amount">مبلغ پوشش:</label>
+        <input name="amount" type="number" id="coverage-amount" class="form-control" placeholder="مثلاً 200000" required />
       </div>
 
       <button class="btn btn-primary mt-3">ذخیره</button>
@@ -668,27 +685,39 @@
 </div>
 
 
-
-<div class="modal city-edit-modal">
+<div class="modal coverage-edit-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeCityModals()">&times;</span>
-    <h5 class="modal-title">ویرایش شهر</h5>
-    <form onsubmit="editCity(event)">
+    <span class="modal-close" onclick="closeCoverageModals()">&times;</span>
+    <h5 class="modal-title">ویرایش پوشش</h5>
+    <form onsubmit="editCoverage(event)">
       <div class="form-group mb-3">
-        <label for="edit-province-select">انتخاب استان:</label>
-        <select name="province" id="edit-province-select" class="form-control province-select">
-          <option value="" disabled selected>استان را انتخاب کنید</option>
-          <!-- <Load By JS> -->
+        <label for="edit-plan-select">انتخاب طرح:</label>
+        <select name="coverage" id="edit-plan-select" class="form-control" required>
+          <option value="">انتخاب کنید...</option>
+          <option value="1">طرح طلایی</option>
+          <option value="2">طرح نقره‌ای</option>
+          <option value="3">طرح برنزی</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>نام شهر:</label>
-        <input name="name" type="text" class="form-control" placeholder="شهر ..." />
+
+      <div class="form-group mb-3">
+        <label for="edit-coverage-name">نام پوشش:</label>
+        <input name="name" type="text" id="edit-coverage-name" class="form-control" placeholder="نام پوشش..." required />
       </div>
+
+      <div class="form-group mb-3">
+        <label for="edit-coverage-amount">مبلغ پوشش:</label>
+        <input name="amount" type="number" id="edit-coverage-amount" class="form-control" placeholder="مبلغ..." required />
+      </div>
+
       <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
     </form>
   </div>
 </div>
+
+
+
+
 
 
       <!-- /#page-content -->
@@ -927,14 +956,14 @@
 
     <!-- BEGIN PAGE JAVASCRIPT -->
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
-    <!-- <script src="assets/js/pages/datatable.js"></script> -->
-    <script type="module" src="/js/cities/index.js"></script>
+    <!-- <script src="assets/js/pages/datatable.js"></script> -->    
+    <script type="module" src="../js/coverage/index.js"></script>
+    <script src="../js/coverage/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
 
-    <script>
-  
-</script>
+    
 
+  
 
   </body>
 </html>

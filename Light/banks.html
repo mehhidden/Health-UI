@@ -48,6 +48,21 @@
       href="assets/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css"
       rel="stylesheet"
     />
+
+    <!--sweetalert2 -->
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <style>
+        div:where(.swal2-icon) .swal2-icon-content {
+            font-size: 1.75em !important;
+        }
+
+    </style>
+
+
+    <!-- end sweetalert2 -->
+
     <!-- END PAGE CSS -->
   </head>
   <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">
@@ -510,7 +525,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="city.html" >
+                  <a href="city.html">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>جدول شهر ها</span>
                   </a>
@@ -523,9 +538,8 @@
                 <span>مدیریت بانک‌ها</span>
               </a>
               <ul>
-               
                 <li>
-                  <a href="banks.html" class="current">  
+                  <a href="banks.html" class="current"> 
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>بانک ها</span>
                   </a>
@@ -536,8 +550,39 @@
                     <span>نوع حساب های بانکی</span>
                   </a>
                 </li>
-                
-                
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="dropdown-toggle">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>طرح های بیمه ای</span>
+              </a>
+              <ul>
+               
+                <li>
+                  <a href="categories.html">  
+                    <!-- <i class="fas fa-grip"></i> -->
+                    <span>رشته های بیمه</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="products.html">
+                    <!-- <i class="fas fa-grip"></i> -->
+                    <span>محصولات</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="plans.html">
+                    <!-- <i class="fas fa-grip"></i> -->
+                    <span>طرح‌ها</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="coverage.html">
+                    <!-- <i class="fas fa-grip"></i> -->
+                    <span>پوشش‌ها</span>
+                  </a>
+                </li>
               </ul>
             </li>
             <li>
@@ -568,7 +613,7 @@
                 
                 
                 <li>
-                  <a href="changePassword.html" >
+                  <a href="changePassword.html">
                     <!-- <i class="icon-lock"></i> -->
                     <span>تغییر رمز عبور</span>
                   </a>
@@ -602,17 +647,10 @@
           <th>عملیات</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="render-api">
         <!-- پر میشه از سمت سرور -->
-        <tr>
-          <td><input type="checkbox" class="row-checkbox" /></td>
-          <td>1</td>
-          <td>ملت</td>
-          <td>
-            <button class="btn btn-info btn-sm" onclick="showBankEditModal(1)">ویرایش</button>
-            <button class="btn btn-danger btn-sm" onclick="deleteBank(1)">حذف</button>
-          </td>
-        </tr>
+
+        <!-- Load Data From Js -->
       </tbody>
     </table>
     <button class="btn btn-danger mt-2" onclick="deleteSelectedBanks()">حذف انتخاب‌شده‌ها</button>
@@ -620,7 +658,7 @@
 </div>
 
 <!-- Modal افزودن بانک -->
-<div class="modal bank-create-modal">
+<div class="modal bank-create-modal modal-staicks">
   <div class="modal-content">
     <span class="modal-close" onclick="closeBankModals()">&times;</span>
     <h5 class="modal-title">افزودن بانک</h5>
@@ -629,7 +667,7 @@
         <label for="bank-name">نام بانک:</label>
         <input type="text" id="bank-name" class="form-control" placeholder="مثلاً ملت" />
       </div>
-      <button class="btn btn-primary mt-3">ذخیره</button>
+      <button  class="btn btn-primary mt-3 sava-input">ذخیره</button>
     </form>
   </div>
 </div>
@@ -642,9 +680,9 @@
     <form>
       <div class="form-group">
         <label>نام بانک:</label>
-        <input type="text" class="form-control" value="ملت" />
+        <input type="text" class="form-control input-set-save" value="ملت" />
       </div>
-      <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
+      <button class="btn btn-primary mt-3 btn-edits">ذخیره تغییرات</button>
     </form>
   </div>
 </div>
@@ -934,6 +972,7 @@ $(document).ready(function () {
 });
 
 </script>
+   <script type="module" src="/Health-UI/js/bank/bankinfo/template.js"></script>
 
 
   </body>

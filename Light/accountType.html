@@ -49,6 +49,26 @@
       href="assets/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css"
       rel="stylesheet"
     />
+
+        <!--sweetalert2 -->
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <style>
+          div:where(.swal2-icon) .swal2-icon-content {
+              font-size: 1.75em !important;
+          }
+
+        </style>
+
+
+      <!-- end sweetalert2 -->
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <!-- END PAGE CSS -->
   </head>
   <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">
@@ -511,7 +531,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="city.html" >
+                  <a href="city.html">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>جدول شهر ها</span>
                   </a>
@@ -524,7 +544,6 @@
                 <span>مدیریت بانک‌ها</span>
               </a>
               <ul>
-               
                 <li>
                   <a href="banks.html"> 
                     <!-- <i class="fas fa-grip"></i> -->
@@ -537,8 +556,39 @@
                     <span>نوع حساب های بانکی</span>
                   </a>
                 </li>
-                
-                
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="dropdown-toggle">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>طرح های بیمه ای</span>
+              </a>
+              <ul>
+               
+                <li>
+                  <a href="categories.html">  
+                    <!-- <i class="fas fa-grip"></i> -->
+                    <span>رشته های بیمه</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="products.html">
+                    <!-- <i class="fas fa-grip"></i> -->
+                    <span>محصولات</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="plans.html">
+                    <!-- <i class="fas fa-grip"></i> -->
+                    <span>طرح‌ها</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="coverage.html">
+                    <!-- <i class="fas fa-grip"></i> -->
+                    <span>پوشش‌ها</span>
+                  </a>
+                </li>
               </ul>
             </li>
             <li>
@@ -569,7 +619,7 @@
                 
                 
                 <li>
-                  <a href="changePassword.html" >
+                  <a href="changePassword.html">
                     <!-- <i class="icon-lock"></i> -->
                     <span>تغییر رمز عبور</span>
                   </a>
@@ -603,17 +653,9 @@
           <th>عملیات</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="render-account-types">
         <!-- پر میشه از سمت سرور -->
-        <tr>
-          <td><input type="checkbox" class="row-checkbox" /></td>
-          <td>1</td>
-          <td>جاری</td>
-          <td>
-            <button class="btn btn-info btn-sm" onclick="showAccountTypeEditModal(1)">ویرایش</button>
-            <button class="btn btn-danger btn-sm" onclick="deleteAccountType(1)">حذف</button>
-          </td>
-        </tr>
+
       </tbody>
     </table>
     <button class="btn btn-danger mt-2" onclick="deleteSelectedAccountTypes()">حذف انتخاب‌شده‌ها</button>
@@ -621,7 +663,7 @@
 </div>
 
 <!-- Modal افزودن نوع حساب -->
-<div class="modal account-type-create-modal">
+<div class="modal account-type-create-modal modal-staicks-open">
   <div class="modal-content">
     <span class="modal-close" onclick="closeAccountTypeModals()">&times;</span>
     <h5 class="modal-title">افزودن نوع حساب</h5>
@@ -630,22 +672,22 @@
         <label for="account-type-name">نوع حساب:</label>
         <input type="text" id="account-type-name" class="form-control" placeholder="مثلاً جاری" />
       </div>
-      <button class="btn btn-primary mt-3">ذخیره</button>
+      <button class="btn btn-primary mt-3 save-account-type">ذخیره</button>
     </form>
   </div>
 </div>
 
 <!-- Modal ویرایش نوع حساب -->
-<div class="modal account-type-edit-modal">
+<div class="modal account-type-edit-modal modal-staicks">
   <div class="modal-content">
     <span class="modal-close" onclick="closeAccountTypeModals()">&times;</span>
     <h5 class="modal-title">ویرایش نوع حساب</h5>
     <form>
       <div class="form-group">
         <label>نوع حساب:</label>
-        <input type="text" class="form-control" value="جاری" />
+        <input type="text" class="form-control edit-account-type" value="جاری" />
       </div>
-      <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
+      <button class="btn btn-primary mt-3 sava-edit-btns">ذخیره تغییرات</button>
     </form>
   </div>
 </div>
@@ -898,7 +940,7 @@
 }
 
 function showAccountTypeEditModal(id) {
-  // در صورت نیاز به گرفتن اطلاعات نوع حساب از سرور، اینجا کدش قرار می‌گیرد
+  
   document.querySelector('.account-type-edit-modal').classList.add('show');
 }
 
@@ -910,7 +952,7 @@ function closeAccountTypeModals() {
 
 function deleteAccountType(id) {
   if (confirm("آیا از حذف این نوع حساب مطمئن هستید؟")) {
-    // درخواست حذف به سرور (مثلاً fetch یا Ajax)
+    
     console.log("نوع حساب با شناسه " + id + " حذف شد");
   }
 }
@@ -924,14 +966,14 @@ function deleteSelectedAccountTypes() {
 
   if (confirm("آیا از حذف نوع حساب‌های انتخاب‌شده مطمئن هستید؟")) {
     checkboxes.forEach((checkbox, index) => {
-      // حذف هر ردیف از DOM یا ارسال درخواست حذف به سرور
+      
       const row = checkbox.closest('tr');
       row.remove();
     });
   }
 }
 
-// انتخاب همه
+
 document.getElementById('account-type-check-all')?.addEventListener('change', function () {
   const checked = this.checked;
   document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = checked);
@@ -939,6 +981,9 @@ document.getElementById('account-type-check-all')?.addEventListener('change', fu
 
 
 </script>
+
+<script type="module" src="../js//bank/account type/template.js"></script>
+
 
 
   </body>

@@ -1,4 +1,5 @@
 import {
+  getTrInfo,
   handleIsSubmitingStatus,
   insertTemplateToElement,
   select,
@@ -16,7 +17,6 @@ import {
   addPermissionsReq,
   createGroup,
   deletePermissionsReq,
-  getTrInfo,
   insertGroups,
 } from "./utils.js";
 

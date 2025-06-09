@@ -1,0 +1,98 @@
+.insurance-card-body {
+  margin-right: 215px;
+}
+
+.card-header .btn-success {
+  margin-left: 60px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-close {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.file-upload-btn {
+  cursor: pointer;
+  padding: 8px 15px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1.5px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.file-upload-btn:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.edit-btn {
+  background-color: #03a9f4;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.edit-btn:hover {
+  background-color: #36c0ff;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.delete-btn:hover {
+  background-color: #ce0000;
+}
+
+@media (max-width: 991px) {
+  .insurance-card-body {
+    margin-right: 0;
+  }
+
+  .modal-content {
+    padding: 20px;
+    width: 90%;
+  }
+}
