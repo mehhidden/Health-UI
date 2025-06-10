@@ -23,7 +23,7 @@ const editCoverageBtn = document.querySelector(".edit-coverage-btn");
 const bulkDeleteBtn = document.querySelector(".bulk-delete-btn");
 
 let editingCoverageId = null;
-
+ 
 
 const renderCoverageTable = (data) => {
   CoverageTableBody.innerHTML = "";
