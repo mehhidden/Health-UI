@@ -48,6 +48,21 @@
       rel="stylesheet"
     />
     <!-- END PAGE CSS -->
+
+
+        <!--sweetalert2 -->
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <style>
+          div:where(.swal2-icon) .swal2-icon-content {
+              font-size: 1.75em !important;
+          }
+
+        </style>
+ 
+
+      <!-- end sweetalert2 -->
   </head>
   <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">
     <!-- BEGIN LOEADING -->
@@ -636,18 +651,7 @@
       </thead>
       <tbody id="insurance-fields-table-body">
         <!-- ردیف‌های داینامیک -->
-        <tr>
-          <td><input type="checkbox" /></td>
-          <td>201</td>
-          <td>101</td>
-          <td>طرح پایه آتش‌سوزی</td>
-          <td><img src="icons/fire.png" alt="آیکون" style="max-width: 32px;" /></td>
-          <td>10٪</td>
-          <td>
-            <button class="btn btn-sm edit-btn" onclick="showEditPlanModal(201)">ویرایش</button>
-            <button class="btn btn-sm delete-btn" onclick="deletePlan(201)">حذف</button>
-          </td>
-        </tr>
+
       </tbody>
     </table>
     <button class="btn btn-danger mt-2" onclick="deleteSelectedPlans()">حذف انتخاب‌شده‌ها</button>
@@ -664,8 +668,8 @@
         <label for="product-plan-select">انتخاب محصول بیمه‌ای:</label>
         <select name="plan" id="product-plan-select" class="form-control" required>
           <option value="">انتخاب کنید...</option>
-          <option value="101">پوشش آتش‌سوزی</option>
-          <option value="102">پوشش زلزله</option>
+          <option value="1">پوشش آتش‌سوزی</option>
+          <option value="3">پوشش زلزله</option>
         </select>
       </div>
 
@@ -691,7 +695,7 @@
         </div>
       </div>
 
-      <button class="btn btn-primary mt-3">ذخیره</button>
+      <button class="btn btn-primary mt-3 create-plan">ذخیره</button>
     </form>
   </div>
 </div>
@@ -707,7 +711,7 @@
         <select name="plan" id="edit-product-plan-select" class="form-control" required>
           <option value="">انتخاب کنید...</option>
           <option value="101">پوشش آتش‌سوزی</option>
-          <option value="102">پوشش زلزله</option>
+          <option value="3">پوشش زلزله</option>
         </select>
       </div>
 
@@ -733,7 +737,7 @@
         </div>
       </div>
 
-      <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
+      <button class="btn btn-primary mt-3 btn-edits">ذخیره تغییرات</button>
     </form>
   </div>
 </div>
@@ -981,6 +985,8 @@
     <script type="module" src="../js/plans/index.js"></script>
     <script src="../js/plans/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
+
+    <script type="module" src="../js/catalog/plans/template.js"></script>
 
   </body>
 </html>

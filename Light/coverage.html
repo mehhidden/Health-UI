@@ -47,6 +47,20 @@
       href="assets/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css"
       rel="stylesheet"
     />
+
+    <!--sweetalert2 -->
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <style>
+          div:where(.swal2-icon) .swal2-icon-content {
+              font-size: 1.75em !important;
+          }
+
+        </style>
+ 
+
+    <!-- end sweetalert2 -->
     <!-- END PAGE CSS -->
   </head>
   <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">
@@ -635,17 +649,7 @@
       </thead>
       <tbody id="coverage-table-body">
         <!-- ردیف‌های داینامیک -->
-        <tr>
-          <td><input type="checkbox" /></td>
-          <td>201</td>
-          <td>3</td>
-          <td>پوشش سرقت</td>
-          <td>500,000</td>
-          <td>
-            <button class="btn btn-sm edit-btn" onclick="showEditCoverageModal(201)">ویرایش</button>
-            <button class="btn btn-sm delete-btn" onclick="deleteCoverage(201)">حذف</button>
-          </td>
-        </tr>
+
       </tbody>
     </table>
 
@@ -661,12 +665,14 @@
     <form onsubmit="createCoverage(event)">
       <div class="form-group mb-3">
         <label for="plan-select">انتخاب طرح:</label>
-        <select name="coverage" id="plan-select" class="form-control" required>
+        <select name="plan" id="plan-select" class="form-control" required>
           <option value="">انتخاب کنید...</option>
           <option value="1">طرح طلایی</option>
           <option value="2">طرح نقره‌ای</option>
           <option value="3">طرح برنزی</option>
         </select>
+
+
       </div>
 
       <div class="form-group mb-3">
@@ -679,7 +685,7 @@
         <input name="amount" type="number" id="coverage-amount" class="form-control" placeholder="مثلاً 200000" required />
       </div>
 
-      <button class="btn btn-primary mt-3">ذخیره</button>
+      <button class="btn btn-primary mt-3 create-coverage-btn">ذخیره</button>
     </form>
   </div>
 </div>
@@ -710,7 +716,7 @@
         <input name="amount" type="number" id="edit-coverage-amount" class="form-control" placeholder="مبلغ..." required />
       </div>
 
-      <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
+      <button class="btn btn-primary mt-3 edit-coverage-btn">ذخیره تغییرات</button>
     </form>
   </div>
 </div>
@@ -963,6 +969,7 @@
 
     
 
+    <script type="module" src="../js/catalog/coverages/template.js"></script>
   
 
   </body>
