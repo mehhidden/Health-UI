@@ -16,7 +16,6 @@ const saveEditBtn = document.querySelector(".sava-edit-btns");
 const createModal = document.querySelector(".account-type-create-modal");
 const editModal = document.querySelector(".account-type-edit-modal");
 
-
 let editingId = null;
 
 const renderList = (data) => {
@@ -59,22 +58,33 @@ window.closeAccountTypeModals = () => {
 
 window.deleteAccountTypeHandler = async (id) => {
   const result = await Swal.fire({
-    title: 'حذف اکانت تایپ',
-    text: 'آیا مطمئن هستید که می‌خواهید حذف کنید؟',
-    icon: 'warning',
+    title: "حذف نوع حساب",
+    text: "آیا از حذف این نوع حساب مطمئن هستید؟",
+    icon: "warning",
     showCancelButton: true,
-    confirmButtonText: 'بله، حذف کن',
-    cancelButtonText: 'لغو',
+    confirmButtonText: "بله، حذف شود",
+    cancelButtonText: "لغو",
+    reverseButtons: true,
   });
 
   if (!result.isConfirmed) return;
 
   try {
     await deleteAccountType(id);
-    await Swal.fire('موفقیت', 'با موفقیت حذف شد', 'success');
+    await Swal.fire({
+      title: "موفقیت",
+      text: "نوع حساب با موفقیت حذف شد.",
+      icon: "success",
+      confirmButtonText: "تایید",
+    });
     await loadAccountTypes();
   } catch (err) {
-    Swal.fire('خطا در حذف', err.message, 'error');
+    Swal.fire({
+      title: "خطا در حذف",
+      text: err.message,
+      icon: "error",
+      confirmButtonText: "تایید",
+    });
   }
 };
 
@@ -83,54 +93,102 @@ const loadAccountTypes = async () => {
     const data = await fetchAccountTypes();
     renderList(data);
   } catch (err) {
-    Swal.fire('خطا در دریافت اطلاعات', err.message, 'error');
+    Swal.fire({
+      title: "خطا در دریافت اطلاعات",
+      text: err.message,
+      icon: "error",
+      confirmButtonText: "تایید",
+    });
   }
 };
 
 const createAccountTypeHandler = async () => {
   const title = inputEl.value.trim();
-  if (!title) return Swal.fire('خطا', 'نام را وارد کنید', 'warning');
+  if (!title)
+    return Swal.fire({
+      title: "هشدار",
+      text: "لطفاً نام نوع حساب را وارد کنید.",
+      icon: "warning",
+      confirmButtonText: "تایید",
+    });
 
   try {
     await createAccountType({ title });
-    await Swal.fire('موفقیت', 'ثبت شد', 'success');
+    await Swal.fire({
+      title: "موفقیت",
+      text: "نوع حساب جدید با موفقیت ثبت شد.",
+      icon: "success",
+      confirmButtonText: "تایید",
+    });
     inputEl.value = "";
     closeAccountTypeModals();
     await loadAccountTypes();
   } catch (err) {
-    Swal.fire('خطا', err.message, 'error');
+    Swal.fire({
+      title: "خطا",
+      text: err.message,
+      icon: "error",
+      confirmButtonText: "تایید",
+    });
   }
 };
 
 const updateAccountTypeHandler = async () => {
   const title = editInputEl.value.trim();
-  if (!title) return Swal.fire('خطا', 'نام را وارد کنید', 'warning');
+  if (!title)
+    return Swal.fire({
+      title: "هشدار",
+      text: "لطفاً نام نوع حساب را وارد کنید.",
+      icon: "warning",
+      confirmButtonText: "تایید",
+    });
 
-  if (!editingId) return Swal.fire('خطا', 'شناسه برای ویرایش انتخاب نشده است.', 'warning');
+  if (!editingId)
+    return Swal.fire({
+      title: "هشدار",
+      text: "هیچ نوع حسابی برای ویرایش انتخاب نشده است.",
+      icon: "warning",
+      confirmButtonText: "تایید",
+    });
 
   try {
     await updateAccountType(editingId, { title });
-    await Swal.fire('موفقیت', 'بروزرسانی شد', 'success');
+    await Swal.fire({
+      title: "موفقیت",
+      text: "نوع حساب با موفقیت به‌روزرسانی شد.",
+      icon: "success",
+      confirmButtonText: "تایید",
+    });
     closeAccountTypeModals();
     await loadAccountTypes();
   } catch (err) {
-    Swal.fire('خطا', err.message, 'error');
+    Swal.fire({
+      title: "خطا",
+      text: err.message,
+      icon: "error",
+      confirmButtonText: "تایید",
+    });
   }
 };
 
 window.deleteSelectedAccountTypes = async () => {
   const checkboxes = document.querySelectorAll(".row-checkbox:checked");
-  if (checkboxes.length === 0) {
-    return Swal.fire('خطا', 'هیچ اکانتی انتخاب نشده است.', 'warning');
-  }
+  if (checkboxes.length === 0)
+    return Swal.fire({
+      title: "هشدار",
+      text: "هیچ نوع حسابی انتخاب نشده است.",
+      icon: "warning",
+      confirmButtonText: "تایید",
+    });
 
   const result = await Swal.fire({
-    title: 'حذف اکانت‌ها',
-    text: 'آیا مطمئن هستید که می‌خواهید اکانت‌های انتخاب‌شده را حذف کنید؟',
-    icon: 'warning',
+    title: "حذف گروهی نوع حساب",
+    text: `آیا از حذف ${checkboxes.length} نوع حساب انتخاب شده مطمئن هستید؟`,
+    icon: "warning",
     showCancelButton: true,
-    confirmButtonText: 'بله، حذف کن',
-    cancelButtonText: 'لغو',
+    confirmButtonText: "بله، حذف شود",
+    cancelButtonText: "لغو",
+    reverseButtons: true,
   });
 
   if (!result.isConfirmed) return;
@@ -144,10 +202,20 @@ window.deleteSelectedAccountTypes = async () => {
     for (const id of ids) {
       await deleteAccountType(id);
     }
-    await Swal.fire('موفقیت', 'اکانت‌های انتخاب‌شده با موفقیت حذف شدند.', 'success');
+    await Swal.fire({
+      title: "موفقیت",
+      text: "نوع حساب‌های انتخاب شده با موفقیت حذف شدند.",
+      icon: "success",
+      confirmButtonText: "تایید",
+    });
     await loadAccountTypes();
   } catch (err) {
-    Swal.fire('خطا در حذف', err.message, 'error');
+    Swal.fire({
+      title: "خطا در حذف",
+      text: err.message,
+      icon: "error",
+      confirmButtonText: "تایید",
+    });
   }
 };
 
@@ -168,4 +236,3 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
- 

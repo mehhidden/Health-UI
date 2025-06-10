@@ -6,15 +6,14 @@ import {
 } from "./bankserver.js";
 
 const ShowInfoTableElam = document.querySelector("#render-api");
-const BankNameInput = document.querySelector("#bank-name"); 
-const BankEditInput = document.querySelector(".input-set-save"); 
-const createSavaBank = document.querySelector(".sava-input"); 
+const BankNameInput = document.querySelector("#bank-name");
+const BankEditInput = document.querySelector(".input-set-save");
+const createSavaBank = document.querySelector(".sava-input");
 const ModalCreate = document.querySelector(".bank-create-modal");
 const ModalEdit = document.querySelector(".bank-edit-modal");
-const BtnEdits = document.querySelector(".btn-edits"); 
+const BtnEdits = document.querySelector(".btn-edits");
 
 let editingBankId = null;
-
 
 const ShowInformationBank = (data) => {
   ShowInfoTableElam.innerHTML = "";
@@ -22,7 +21,9 @@ const ShowInformationBank = (data) => {
   const banks = data.results?.results || data;
 
   banks.forEach((info) => {
-    ShowInfoTableElam.insertAdjacentHTML("beforeend", `
+    ShowInfoTableElam.insertAdjacentHTML(
+      "beforeend",
+      `
       <tr data-id="${info.id}">
         <td><input type="checkbox" class="row-checkbox" /></td>
         <td>${info.id}</td>
@@ -32,10 +33,10 @@ const ShowInformationBank = (data) => {
           <button class="btn btn-danger btn-sm" onclick="handleDelete(${info.id})">حذف</button>
         </td>
       </tr>
-    `);
+    `
+    );
   });
 };
-
 
 window.showBankEditModal = (id, name) => {
   editingBankId = id;
@@ -43,92 +44,144 @@ window.showBankEditModal = (id, name) => {
   ModalEdit.classList.add("show");
 };
 
-
 window.handleDelete = async (id) => {
   const result = await Swal.fire({
-    title: 'حذف بانک',
-    text: 'آیا مطمئن هستید که می‌خواهید حذف کنید؟',
-    icon: 'warning',
+    title: "حذف بانک",
+    text: "آیا از حذف این بانک مطمئن هستید؟",
+    icon: "warning",
     showCancelButton: true,
-    confirmButtonText: 'بله، حذف کن',
-    cancelButtonText: 'لغو'
+    confirmButtonText: "بله، حذف شود",
+    cancelButtonText: "لغو",
+    reverseButtons: true,
   });
 
   if (!result.isConfirmed) return;
 
   try {
     await deleteBank(id);
-    await Swal.fire('موفقیت', 'با موفقیت حذف شد', 'success');
+    await Swal.fire({
+      title: "موفقیت",
+      text: "بانک با موفقیت حذف شد.",
+      icon: "success",
+      confirmButtonText: "تایید",
+    });
     await FetchBankInfo();
   } catch (err) {
-    Swal.fire('خطا در حذف', err.message, 'error');
+    Swal.fire({
+      title: "خطا",
+      text: err.message,
+      icon: "error",
+      confirmButtonText: "تایید",
+    });
   }
 };
-
 
 const FetchBankInfo = async () => {
   try {
     const data = await fetchBanks();
     ShowInformationBank(data);
   } catch (err) {
-    Swal.fire('خطا در دریافت اطلاعات', err.message, 'error');
+    Swal.fire({
+      title: "خطا در دریافت اطلاعات",
+      text: err.message,
+      icon: "error",
+      confirmButtonText: "تایید",
+    });
   }
 };
-
 
 const handleCreateBank = async () => {
   const name = BankNameInput.value.trim();
   if (!name) {
-    return Swal.fire('هشدار', 'نام بانک را وارد کنید', 'warning');
+    return Swal.fire({
+      title: "هشدار",
+      text: "لطفاً نام بانک را وارد کنید.",
+      icon: "warning",
+      confirmButtonText: "تایید",
+    });
   }
 
   try {
     await createBank({ name });
-    await Swal.fire('موفقیت', 'بانک جدید با موفقیت ثبت شد', 'success');
+    await Swal.fire({
+      title: "موفقیت",
+      text: "بانک جدید با موفقیت ثبت شد.",
+      icon: "success",
+      confirmButtonText: "تایید",
+    });
     BankNameInput.value = "";
     ModalCreate.classList.remove("show");
     await FetchBankInfo();
   } catch (err) {
-    Swal.fire('خطا', err.message, 'error');
+    Swal.fire({
+      title: "خطا",
+      text: err.message,
+      icon: "error",
+      confirmButtonText: "تایید",
+    });
   }
 };
-
 
 const handleEditBank = async () => {
   const name = BankEditInput.value.trim();
   if (!name) {
-    return Swal.fire('هشدار', 'نام بانک را وارد کنید', 'warning');
+    return Swal.fire({
+      title: "هشدار",
+      text: "لطفاً نام بانک را وارد کنید.",
+      icon: "warning",
+      confirmButtonText: "تایید",
+    });
   }
   if (!editingBankId) {
-    return Swal.fire('هشدار', 'شناسه‌ای برای ویرایش انتخاب نشده است.', 'warning');
+    return Swal.fire({
+      title: "هشدار",
+      text: "هیچ بانکی برای ویرایش انتخاب نشده است.",
+      icon: "warning",
+      confirmButtonText: "تایید",
+    });
   }
 
   try {
     await updateBank(editingBankId, { name });
-    await Swal.fire('موفقیت', 'بانک با موفقیت ویرایش شد', 'success');
+    await Swal.fire({
+      title: "موفقیت",
+      text: "بانک با موفقیت ویرایش شد.",
+      icon: "success",
+      confirmButtonText: "تایید",
+    });
     BankEditInput.value = "";
     editingBankId = null;
     ModalEdit.classList.remove("show");
     await FetchBankInfo();
   } catch (err) {
-    Swal.fire('خطا', err.message, 'error');
+    Swal.fire({
+      title: "خطا",
+      text: err.message,
+      icon: "error",
+      confirmButtonText: "تایید",
+    });
   }
 };
-
 
 window.deleteSelectedBanks = async () => {
   const checkboxes = document.querySelectorAll(".row-checkbox:checked");
   if (checkboxes.length === 0) {
-    return Swal.fire('هشدار', 'هیچ بانکی انتخاب نشده است.', 'warning');
+    return Swal.fire({
+      title: "هشدار",
+      text: "هیچ بانکی انتخاب نشده است.",
+      icon: "warning",
+      confirmButtonText: "تایید",
+    });
   }
 
   const confirm = await Swal.fire({
-    title: 'حذف گروهی',
-    text: 'آیا مطمئن هستید که می‌خواهید بانک‌های انتخاب‌شده را حذف کنید؟',
-    icon: 'warning',
+    title: "حذف گروهی بانک‌ها",
+    text: `آیا مطمئن هستید که می‌خواهید ${checkboxes.length} بانک انتخاب‌شده را حذف کنید؟`,
+    icon: "warning",
     showCancelButton: true,
-    confirmButtonText: 'بله، حذف کن',
-    cancelButtonText: 'لغو'
+    confirmButtonText: "بله، حذف شود",
+    cancelButtonText: "لغو",
+    reverseButtons: true,
   });
 
   if (!confirm.isConfirmed) return;
@@ -142,31 +195,36 @@ window.deleteSelectedBanks = async () => {
     for (const id of ids) {
       await deleteBank(id);
     }
-    await Swal.fire('موفقیت', 'بانک‌های انتخاب‌شده با موفقیت حذف شدند.', 'success');
+    await Swal.fire({
+      title: "موفقیت",
+      text: "بانک‌های انتخاب‌شده با موفقیت حذف شدند.",
+      icon: "success",
+      confirmButtonText: "تایید",
+    });
     await FetchBankInfo();
   } catch (err) {
-    Swal.fire('خطا در حذف', err.message, 'error');
+    Swal.fire({
+      title: "خطا در حذف",
+      text: err.message,
+      icon: "error",
+      confirmButtonText: "تایید",
+    });
   }
 };
-
 
 window.closeBankModals = () => {
   ModalCreate.classList.remove("show");
   ModalEdit.classList.remove("show");
 };
 
-
 window.addEventListener("DOMContentLoaded", FetchBankInfo);
-
 
 createSavaBank.addEventListener("click", (event) => {
   event.preventDefault();
   handleCreateBank();
 });
 
-
 BtnEdits.addEventListener("click", (event) => {
   event.preventDefault();
   handleEditBank();
 });
-
