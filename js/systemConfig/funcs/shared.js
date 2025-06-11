@@ -27,7 +27,7 @@ export const previewImage = (event, previewId) => {
 
   reader.onload = function (e) {
     const preview = document.getElementById(previewId);
-    preview.src = e.target.result; // پیش‌نمایش تصویر را آپدیت می‌کند
+    preview.src = e.target.result; 
   };
 
   if (file) {
@@ -97,3 +97,29 @@ export const submitEdit = async event => {
     )
   }
 }
+
+
+
+function checkSidebarOverlay() {
+    const overlay = document.querySelector('.sidebar-overlay');
+    const fileInputs = document.querySelectorAll('input[type="file"]');
+
+    if (overlay && window.getComputedStyle(overlay).display !== 'none') {
+      fileInputs.forEach(input => {
+        input.setAttribute('disabled', 'true'); 
+        input.style.pointerEvents = 'none'; 
+      });
+    } else {
+      fileInputs.forEach(input => {
+        input.removeAttribute('disabled');
+        input.style.pointerEvents = 'auto';
+      });
+    }
+  }
+
+  
+  document.addEventListener('DOMContentLoaded', checkSidebarOverlay);
+
+  
+  const observer = new MutationObserver(checkSidebarOverlay);
+  observer.observe(document.body, { childList: true, subtree: true });
