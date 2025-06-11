@@ -40,7 +40,7 @@
     <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/colors.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/pages/products.css" />
+    <link rel="stylesheet" href="assets/css/pages/questions.css" />
     <!-- END CSS -->
     <!-- BEGIN PAGE CSS -->
     <link
@@ -550,7 +550,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="products.html" class="current">
+                  <a href="products.html">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>محصولات</span>
                   </a>
@@ -577,7 +577,7 @@
               <ul>
                
                 <li>
-                  <a href="questions.html">  
+                  <a href="questions.html" class="current">  
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>سوالات</span>
                   </a>
@@ -636,87 +636,68 @@
       <!-- BEGIN PAGE CONTENT -->
       <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">مدیریت محصولات بیمه‌ای</h5>
-    <button class="btn btn-success" onclick="showInsuranceFieldCreateModal()">
-      <i class="icon-plus"></i> افزودن محصول
+    <h5 class="mb-0">مدیریت سوالات</h5>
+    <button class="btn btn-success" onclick="showQuestionCreateModal()">
+      <i class="icon-plus"></i> افزودن سوال
     </button>
   </div>
 
   <div class="card-body insurance-card-body">
-    <table id="insurance-field-table" class="table table-bordered text-center">
+  <div class="table-responsive">
+    <table id="question-table" class="table table-bordered text-center">
       <thead>
         <tr>
-          <th><input type="checkbox" id="insurance-check-all" /></th>
-          <th>شناسه محصول</th>
-          <th>شناسه رشته</th>
-          <th>نام محصول</th>
-          <th>آیکون</th>
+          <th><input type="checkbox" id="question-check-all" /></th>
+          <th>شناسه</th>
+          <th>شناسه طرح</th>
+          <th>شناسه پوشش</th>
+          <th>متن سوال</th>
+          <th>نوع پاسخ</th>
           <th>عملیات</th>
         </tr>
       </thead>
-      <tbody id="insurance-fields-table-body">
-        <!-- ردیف‌های داینامیک -->
-        <tr>
-          <td><input type="checkbox" /></td>
-          <td>101</td>
-          <td>1</td>
-          <td>پوشش آتش‌سوزی</td>
-          <td>
-            <img src="icons/fire.png" alt="آیکون" style="max-width: 32px;" />
-          </td>
-          <td>
-            <button class="btn btn-sm edit-btn" onclick="showEditInsuranceFieldModal(101)">ویرایش</button>
-            <button class="btn btn-sm delete-btn" onclick="deleteInsuranceField(101)">حذف</button>
-          </td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" /></td>
-          <td>102</td>
-          <td>2</td>
-          <td>پوشش زلزله</td>
-          <td>
-            <img src="icons/earthquake.svg" alt="آیکون" style="max-width: 32px;" />
-          </td>
-          <td>
-            <button class="btn btn-sm edit-btn" onclick="showEditInsuranceFieldModal(102)">ویرایش</button>
-            <button class="btn btn-sm delete-btn" onclick="deleteInsuranceField(102)">حذف</button>
-          </td>
-        </tr>
+      <tbody id="question-table-body">
+        <!-- سطرهای دینامیک -->
       </tbody>
     </table>
-
-    <button class="btn btn-danger mt-2" onclick="deleteSelectedInsuranceFields()">حذف انتخاب‌شده‌ها</button>
   </div>
+
+  <button class="btn btn-danger mt-2" onclick="deleteSelectedQuestions()">حذف انتخاب‌شده‌ها</button>
+</div>
+
 </div>
 
 
-<div class="modal insurance-create-modal">
+<div class="modal question-create-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeInsuranceModals()">&times;</span>
-    <h5 class="modal-title">افزودن محصول بیمه‌ای</h5>
-    <form onsubmit="createInsuranceField(event)">
+    <span class="modal-close" onclick="closeQuestionModals()">&times;</span>
+    <h5 class="modal-title">افزودن سوال</h5>
+    <form onsubmit="createQuestion(event)">
       <div class="form-group mb-3">
-        <label for="product-insurance-select">انتخاب رشته بیمه‌ای:</label>
-        <select name="category" id="product-insurance-select" class="form-control category-select " required>
-          <option disabled value="">انتخاب کنید...</option>
+        <label for="question-text">متن سوال:</label>
+        <input name="text" type="text" id="question-text" class="form-control" placeholder="مثلاً وضعیت سلامت شما؟" required />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="question-type">نوع پاسخ:</label>
+        <select name="type" id="question-type" class="form-control" required>
+          <option value="single">تک پاسخ</option>
+          <option value="multiple">چند گزینه‌ای</option>
         </select>
       </div>
 
       <div class="form-group mb-3">
-        <label for="insurance-name">نام محصول بیمه‌ای:</label>
-        <input name="name" type="text" id="insurance-name" class="form-control" placeholder="مثلاً پوشش زلزله" required />
+        <label for="plan-select">انتخاب طرح:</label>
+        <select name="plan" id="plan-select" class="form-control" required>
+          <!-- گزینه‌ها با جاوااسکریپت اضافه می‌شوند -->
+        </select>
       </div>
 
       <div class="form-group mb-3">
-        <label for="insurance-icon-create">آیکون محصول:</label>
-        <button type="button" class="btn btn-outline-primary file-upload-btn" onclick="document.getElementById('insurance-icon-create').click()">
-          انتخاب فایل آیکون
-        </button>
-        <input type="file" id="insurance-icon-create" accept=".png,.jpg,.jpeg,.svg" style="display:none"
-          onchange="previewInsuranceIcon(this, '#preview-icon-create')" required />
-        <div class="icon-preview mt-2">
-          <img id="preview-icon-create" src="" alt="پیش‌نمایش آیکون" style="max-width: 100px; display: none;" />
-        </div>
+        <label for="coverage-select">انتخاب پوشش:</label>
+        <select name="coverage" id="coverage-select" class="form-control" required>
+          <!-- گزینه‌ها با جاوااسکریپت اضافه می‌شوند -->
+        </select>
       </div>
 
       <button class="btn btn-primary mt-3">ذخیره</button>
@@ -725,29 +706,42 @@
 </div>
 
 
-<div class="modal insurance-edit-modal">
+<div class="modal question-edit-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeInsuranceModals()">&times;</span>
-    <h5 class="modal-title">ویرایش محصول بیمه‌ای</h5>
-    <form onsubmit="editInsuranceField(event)">
+    <span class="modal-close" onclick="closeQuestionModals()">&times;</span>
+    <h5 class="modal-title">ویرایش سوال</h5>
+    <form onsubmit="editQuestion(event)">
       <div class="form-group mb-3">
-        <label for="edit-product-insurance-select">رشته بیمه‌ای:</label>
-        <select name="category" id="edit-product-insurance-select" class="form-control category-select" required>
+        <label for="edit-question-text">متن سوال:</label>
+        <input name="text" type="text" id="edit-question-text" class="form-control" />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="edit-question-type">نوع پاسخ:</label>
+        <select name="type" id="edit-question-type" class="form-control">
+          <option value="single">تک پاسخ</option>
+          <option value="multiple">چند گزینه‌ای</option>
         </select>
       </div>
 
       <div class="form-group mb-3">
-        <label for="edit-insurance-name">نام محصول:</label>
-        <input name="name" type="text" id="edit-insurance-name" class="form-control" placeholder="نام محصول ..." required />
+        <label for="edit-plan-select">انتخاب طرح:</label>
+        <select name="plan" id="edit-plan-select" class="form-control">
+          <!-- گزینه‌ها با JS -->
+        </select>
       </div>
 
-     
+      <div class="form-group mb-3">
+        <label for="edit-coverage-select">انتخاب پوشش:</label>
+        <select name="coverage" id="edit-coverage-select" class="form-control">
+          <!-- گزینه‌ها با JS -->
+        </select>
+      </div>
 
       <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
     </form>
   </div>
 </div>
-
 
 
 
@@ -989,10 +983,10 @@
     <!-- BEGIN PAGE JAVASCRIPT -->
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
     <!-- <script src="assets/js/pages/datatable.js"></script> -->    
-    <script type="module" src="../js/products/index.js"></script>
+    <script type="module" src="../js/questions/index.js"></script>
+    <script src="../js/questions/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
 
-  
 
   </body>
 </html>
