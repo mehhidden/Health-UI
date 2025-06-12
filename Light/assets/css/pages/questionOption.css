@@ -1,0 +1,83 @@
+.insurance-card-body {
+  margin-right: 215px;
+}
+
+.card-header .btn-success {
+  margin-left: 60px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table td, .table th {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-close {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.edit-btn, .delete-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  min-width: 70px;
+}
+
+.edit-btn {
+  background-color: #03a9f4;
+}
+
+.edit-btn:hover {
+  background-color: #36c0ff;
+}
+
+.delete-btn {
+  background-color: #f44336;
+}
+
+.delete-btn:hover {
+  background-color: #ce0000;
+}
+
+@media (max-width: 991px) {
+  .insurance-card-body {
+    margin-right: 0;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+}

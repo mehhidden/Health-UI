@@ -40,7 +40,7 @@
     <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/colors.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/pages/products.css" />
+    <link rel="stylesheet" href="assets/css/pages/questionOption.css" />
     <!-- END CSS -->
     <!-- BEGIN PAGE CSS -->
     <link
@@ -550,7 +550,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="products.html" class="current">
+                  <a href="products.html">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>محصولات</span>
                   </a>
@@ -583,7 +583,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="questionOption.html">
+                  <a href="questionOption.html" class="current">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>گزینه های سوالات</span>
                   </a>
@@ -615,8 +615,6 @@
                     <span>ثبت نام</span>
                   </a>
                 </li> -->
-                
-                
                 <li>
                   <a href="changePassword.html">
                     <!-- <i class="icon-lock"></i> -->
@@ -636,87 +634,55 @@
       <!-- BEGIN PAGE CONTENT -->
       <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">مدیریت محصولات بیمه‌ای</h5>
-    <button class="btn btn-success" onclick="showInsuranceFieldCreateModal()">
-      <i class="icon-plus"></i> افزودن محصول
+    <h5 class="mb-0">مدیریت گزینه سوالات</h5>
+    <button class="btn btn-success" onclick="showQuestionOptionCreateModal()">
+      <i class="icon-plus"></i> افزودن گزینه
     </button>
   </div>
 
   <div class="card-body insurance-card-body">
-    <table id="insurance-field-table" class="table table-bordered text-center">
-      <thead>
-        <tr>
-          <th><input type="checkbox" id="insurance-check-all" /></th>
-          <th>شناسه محصول</th>
-          <th>شناسه رشته</th>
-          <th>نام محصول</th>
-          <th>آیکون</th>
-          <th>عملیات</th>
-        </tr>
-      </thead>
-      <tbody id="insurance-fields-table-body">
-        <!-- ردیف‌های داینامیک -->
-        <tr>
-          <td><input type="checkbox" /></td>
-          <td>101</td>
-          <td>1</td>
-          <td>پوشش آتش‌سوزی</td>
-          <td>
-            <img src="icons/fire.png" alt="آیکون" style="max-width: 32px;" />
-          </td>
-          <td>
-            <button class="btn btn-sm edit-btn" onclick="showEditInsuranceFieldModal(101)">ویرایش</button>
-            <button class="btn btn-sm delete-btn" onclick="deleteInsuranceField(101)">حذف</button>
-          </td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" /></td>
-          <td>102</td>
-          <td>2</td>
-          <td>پوشش زلزله</td>
-          <td>
-            <img src="icons/earthquake.svg" alt="آیکون" style="max-width: 32px;" />
-          </td>
-          <td>
-            <button class="btn btn-sm edit-btn" onclick="showEditInsuranceFieldModal(102)">ویرایش</button>
-            <button class="btn btn-sm delete-btn" onclick="deleteInsuranceField(102)">حذف</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <button class="btn btn-danger mt-2" onclick="deleteSelectedInsuranceFields()">حذف انتخاب‌شده‌ها</button>
+    <div class="table-responsive">
+      <table id="question-option-table" class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="question-option-check-all" /></th>
+            <th>شناسه</th>
+            <th>شناسه سوال</th>
+            <th>متن گزینه</th>
+            <th>درصد تأثیر</th>
+            <th>عملیات</th>
+          </tr>
+        </thead>
+        <tbody id="question-option-table-body">
+          <!-- سطرهای دینامیک -->
+        </tbody>
+      </table>
+    </div>
+    <button class="btn btn-danger mt-2" onclick="deleteSelectedQuestionOptions()">حذف انتخاب‌شده‌ها</button>
   </div>
 </div>
 
-
-<div class="modal insurance-create-modal">
+<!-- Modal افزودن -->
+<div class="modal question-option-create-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeInsuranceModals()">&times;</span>
-    <h5 class="modal-title">افزودن محصول بیمه‌ای</h5>
-    <form onsubmit="createInsuranceField(event)">
+    <span class="modal-close" onclick="closeQuestionOptionModals()">&times;</span>
+    <h5 class="modal-title">افزودن گزینه سوال</h5>
+    <form onsubmit="createQuestionOption(event)">
       <div class="form-group mb-3">
-        <label for="product-insurance-select">انتخاب رشته بیمه‌ای:</label>
-        <select name="category" id="product-insurance-select" class="form-control category-select " required>
-          <option disabled value="">انتخاب کنید...</option>
+        <label for="question-select">انتخاب سوال:</label>
+        <select name="question_id" id="question-select" class="form-control" required>
+          <!-- گزینه‌ها با JS اضافه می‌شوند -->
         </select>
       </div>
 
       <div class="form-group mb-3">
-        <label for="insurance-name">نام محصول بیمه‌ای:</label>
-        <input name="name" type="text" id="insurance-name" class="form-control" placeholder="مثلاً پوشش زلزله" required />
+        <label for="option-text">متن گزینه:</label>
+        <input name="option_text" type="text" id="option-text" class="form-control" required />
       </div>
 
       <div class="form-group mb-3">
-        <label for="insurance-icon-create">آیکون محصول:</label>
-        <button type="button" class="btn btn-outline-primary file-upload-btn" onclick="document.getElementById('insurance-icon-create').click()">
-          انتخاب فایل آیکون
-        </button>
-        <input type="file" id="insurance-icon-create" accept=".png,.jpg,.jpeg,.svg" style="display:none"
-          onchange="previewInsuranceIcon(this, '#preview-icon-create')" required />
-        <div class="icon-preview mt-2">
-          <img id="preview-icon-create" src="" alt="پیش‌نمایش آیکون" style="max-width: 100px; display: none;" />
-        </div>
+        <label for="impact-percent">درصد تأثیر:</label>
+        <input name="impact" type="number" id="impact-percent" class="form-control" required min="0" max="100" />
       </div>
 
       <button class="btn btn-primary mt-3">ذخیره</button>
@@ -724,24 +690,28 @@
   </div>
 </div>
 
-
-<div class="modal insurance-edit-modal">
+<!-- Modal ویرایش -->
+<div class="modal question-option-edit-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeInsuranceModals()">&times;</span>
-    <h5 class="modal-title">ویرایش محصول بیمه‌ای</h5>
-    <form onsubmit="editInsuranceField(event)">
+    <span class="modal-close" onclick="closeQuestionOptionModals()">&times;</span>
+    <h5 class="modal-title">ویرایش گزینه سوال</h5>
+    <form onsubmit="editQuestionOption(event)">
       <div class="form-group mb-3">
-        <label for="edit-product-insurance-select">رشته بیمه‌ای:</label>
-        <select name="category" id="edit-product-insurance-select" class="form-control category-select" required>
+        <label for="edit-question-select">انتخاب سوال:</label>
+        <select name="question_id" id="edit-question-select" class="form-control" required>
+          <!-- گزینه‌ها با JS اضافه می‌شوند -->
         </select>
       </div>
 
       <div class="form-group mb-3">
-        <label for="edit-insurance-name">نام محصول:</label>
-        <input name="name" type="text" id="edit-insurance-name" class="form-control" placeholder="نام محصول ..." required />
+        <label for="edit-option-text">متن گزینه:</label>
+        <input name="option_text" type="text" id="edit-option-text" class="form-control" required />
       </div>
 
-     
+      <div class="form-group mb-3">
+        <label for="edit-impact-percent">درصد تأثیر:</label>
+        <input name="impact" type="number" id="edit-impact-percent" class="form-control" required min="0" max="100" />
+      </div>
 
       <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
     </form>
@@ -987,12 +957,13 @@
     <script src="assets/js/core.js"></script>
 
     <!-- BEGIN PAGE JAVASCRIPT -->
-    <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
+    <!-- <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script> -->
     <!-- <script src="assets/js/pages/datatable.js"></script> -->    
-    <script type="module" src="../js/products/index.js"></script>
+    <script type="module" src="../js/questionOption/index.js"></script>
+    <script src="../js/questionOption/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
 
-  
+    
 
   </body>
 </html>

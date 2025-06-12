@@ -92,3 +92,45 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+@media (max-width: 768px) {
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-header .btn-success {
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .insurance-card-body {
+    padding: 0 10px;
+    overflow-x: auto;
+  }
+
+  table#coverage-table {
+    width: 100%;
+    min-width: 600px;
+  }
+
+  .btn-danger.mt-2 {
+    width: 100%;
+    margin-top: 15px !important;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .modal-title {
+    font-size: 1.1rem;
+  }
+
+  .create-coverage-btn,
+  .edit-coverage-btn {
+    width: 100%;
+  }
+}
