@@ -68,3 +68,4 @@ export const updateCoverages = async (id, formData) => {
     throw error;
   }
 };
+  

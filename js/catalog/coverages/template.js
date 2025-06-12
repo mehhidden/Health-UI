@@ -199,3 +199,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     bulkDeleteBtn.addEventListener("click", window.deleteSelectedCoverages);
   }
 });
+  
