@@ -1,0 +1,1466 @@
+[1mdiff --git a/Light/accountType.html b/Light/accountType.html[m
+[1mindex 232af19..7ccd98c 100644[m
+[1m--- a/Light/accountType.html[m
+[1m+++ b/Light/accountType.html[m
+[36m@@ -50,19 +50,7 @@[m
+       rel="stylesheet"[m
+     />[m
+ [m
+[31m-        <!--sweetalert2 -->[m
+ [m
+[31m-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>[m
+[31m-[m
+[31m-        <style>[m
+[31m-          div:where(.swal2-icon) .swal2-icon-content {[m
+[31m-              font-size: 1.75em !important;[m
+[31m-          }[m
+[31m-[m
+[31m-        </style>[m
+[31m- [m
+[31m-[m
+[31m-      <!-- end sweetalert2 -->[m
+ [m
+ [m
+ [m
+[1mdiff --git a/Light/banks.html b/Light/banks.html[m
+[1mindex 929fe5a..2e89d59 100644[m
+[1m--- a/Light/banks.html[m
+[1m+++ b/Light/banks.html[m
+[36m@@ -49,19 +49,7 @@[m
+       rel="stylesheet"[m
+     />[m
+  [m
+[31m-    <!--sweetalert2 -->[m
+ [m
+[31m-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>[m
+[31m-[m
+[31m-        <style>[m
+[31m-        div:where(.swal2-icon) .swal2-icon-content {[m
+[31m-            font-size: 1.75em !important;[m
+[31m-        }[m
+[31m-[m
+[31m-    </style>[m
+[31m-[m
+[31m-[m
+[31m-    <!-- end sweetalert2 -->[m
+ [m
+     <!-- END PAGE CSS -->[m
+   </head>[m
+[1mdiff --git a/Light/coverage.html b/Light/coverage.html[m
+[1mindex f054921..dec8308 100644[m
+[1m--- a/Light/coverage.html[m
+[1m+++ b/Light/coverage.html[m
+[36m@@ -48,19 +48,7 @@[m
+       rel="stylesheet"[m
+     />[m
+ [m
+[31m-    <!--sweetalert2 -->[m
+ [m
+[31m-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>[m
+[31m-[m
+[31m-        <style>[m
+[31m-          div:where(.swal2-icon) .swal2-icon-content {[m
+[31m-              font-size: 1.75em !important;[m
+[31m-          }[m
+[31m-[m
+[31m-        </style> [m
+[31m- [m
+[31m-[m
+[31m-    <!-- end sweetalert2 -->[m
+     <!-- END PAGE CSS -->[m
+   </head>[m
+   <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">[m
+[36m@@ -666,10 +654,7 @@[m
+       <div class="form-group mb-3">[m
+         <label for="plan-select">انتخاب طرح:</label>[m
+         <select name="plan" id="plan-select" class="form-control" required>[m
+[31m-          <option value="">انتخاب کنید...</option>[m
+[31m-          <option value="1">طرح طلایی</option>[m
+[31m-          <option value="2">طرح نقره‌ای</option>[m
+[31m-          <option value="3">طرح برنزی</option>[m
+[32m+[m
+         </select>[m
+ [m
+ [m
+[36m@@ -699,10 +684,7 @@[m
+       <div class="form-group mb-3">[m
+         <label for="edit-plan-select">انتخاب طرح:</label>[m
+         <select name="coverage" id="edit-plan-select" class="form-control" required>[m
+[31m-          <option value="">انتخاب کنید...</option>[m
+[31m-          <option value="1">طرح طلایی</option>[m
+[31m-          <option value="2">طرح نقره‌ای</option>[m
+[31m-          <option value="3">طرح برنزی</option>[m
+[32m+[m
+         </select>[m
+       </div>[m
+ [m
+[1mdiff --git a/Light/plans.html b/Light/plans.html[m
+[1mindex e192d1d..70b9240 100644[m
+[1m--- a/Light/plans.html[m
+[1m+++ b/Light/plans.html[m
+[36m@@ -47,22 +47,7 @@[m
+       href="assets/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css"[m
+       rel="stylesheet"[m
+     />[m
+[31m-    <!-- END PAGE CSS -->[m
+ [m
+[31m-[m
+[31m-        <!--sweetalert2 -->[m
+[31m-[m
+[31m-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>[m
+[31m-[m
+[31m-        <style>[m
+[31m-          div:where(.swal2-icon) .swal2-icon-content {[m
+[31m-              font-size: 1.75em !important;[m
+[31m-          } [m
+[31m-[m
+[31m-        </style>[m
+[31m- [m
+[31m-[m
+[31m-      <!-- end sweetalert2 -->[m
+   </head>[m
+   <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">[m
+     <!-- BEGIN LOEADING -->[m
+[36m@@ -666,11 +651,10 @@[m
+     <form onsubmit="createPlan(event)">[m
+       <div class="form-group mb-3">[m
+         <label for="product-plan-select">انتخاب محصول بیمه‌ای:</label>[m
+[32m+[m
+         <select name="plan" id="product-plan-select" class="form-control" required>[m
+[31m-          <option value="">انتخاب کنید...</option>[m
+[31m-          <option value="1">پوشش آتش‌سوزی</option>[m
+[31m-          <option value="3">پوشش زلزله</option>[m
+         </select>[m
+[32m+[m
+       </div>[m
+ [m
+       <div class="form-group mb-3">[m
+[36m@@ -709,9 +693,7 @@[m
+       <div class="form-group mb-3">[m
+         <label for="edit-product-plan-select">انتخاب محصول:</label>[m
+         <select name="plan" id="edit-product-plan-select" class="form-control" required>[m
+[31m-          <option value="">انتخاب کنید...</option>[m
+[31m-          <option value="101">پوشش آتش‌سوزی</option>[m
+[31m-          <option value="3">پوشش زلزله</option>[m
+[32m+[m[41m          [m
+         </select>[m
+       </div>[m
+ [m
+[1mdiff --git a/js/bank/account type/template.js b/js/bank/account type/template.js[m
+[1mindex 41d2feb..aaec849 100644[m
+[1m--- a/js/bank/account type/template.js[m	
+[1m+++ b/js/bank/account type/template.js[m	
+[36m@@ -20,7 +20,7 @@[m [mlet editingId = null;[m
+ [m
+ const renderList = (data) => {[m
+   listEl.innerHTML = "";[m
+[31m-  const items = data.results.results || data;[m
+[32m+[m[32m  const items = data.results?.results || data;[m
+ [m
+   items.forEach((item) => {[m
+     listEl.insertAdjacentHTML([m
+[36m@@ -57,35 +57,19 @@[m [mwindow.closeAccountTypeModals = () => {[m
+ };[m
+ [m
+ window.deleteAccountTypeHandler = async (id) => {[m
+[31m-  const result = await Swal.fire({[m
+[31m-    title: "حذف نوع حساب",[m
+[31m-    text: "آیا از حذف این نوع حساب مطمئن هستید؟",[m
+[31m-    icon: "warning",[m
+[31m-    showCancelButton: true,[m
+[31m-    confirmButtonText: "بله، حذف شود",[m
+[31m-    cancelButtonText: "لغو",[m
+[31m-    reverseButtons: true,[m
+[31m-  });[m
+[31m-[m
+[31m-  if (!result.isConfirmed) return;[m
+[31m-[m
+[31m-  try {[m
+[31m-    await deleteAccountType(id);[m
+[31m-    await Swal.fire({[m
+[31m-      title: "موفقیت",[m
+[31m-      text: "نوع حساب با موفقیت حذف شد.",[m
+[31m-      icon: "success",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[31m-    await loadAccountTypes();[m
+[31m-  } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا در حذف",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[31m-  }[m
+[32m+[m[32m  swal("آیا مطمئن هستید که می‌خواهید حذف کنید؟", "", "question").then([m
+[32m+[m[32m    async (willDelete) => {[m
+[32m+[m[32m      if (!willDelete) return;[m
+[32m+[m
+[32m+[m[32m      try {[m
+[32m+[m[32m        await deleteAccountType(id);[m
+[32m+[m[32m        swal("نوع حساب با موفقیت حذف شد", "", "success");[m
+[32m+[m[32m        await loadAccountTypes();[m
+[32m+[m[32m      } catch (err) {[m
+[32m+[m[32m        swal("خطا در حذف", err.message, "error");[m
+[32m+[m[32m      }[m
+[32m+[m[32m    }[m
+[32m+[m[32m  );[m
+ };[m
+ [m
+ const loadAccountTypes = async () => {[m
+[36m@@ -93,130 +77,74 @@[m [mconst loadAccountTypes = async () => {[m
+     const data = await fetchAccountTypes();[m
+     renderList(data);[m
+   } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا در دریافت اطلاعات",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    swal("خطا در دریافت اطلاعات", err.message, "error");[m
+   }[m
+ };[m
+ [m
+ const createAccountTypeHandler = async () => {[m
+   const title = inputEl.value.trim();[m
+[31m-  if (!title)[m
+[31m-    return Swal.fire({[m
+[31m-      title: "هشدار",[m
+[31m-      text: "لطفاً نام نوع حساب را وارد کنید.",[m
+[31m-      icon: "warning",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m  if (!title) {[m
+[32m+[m[32m    return swal("لطفاً نام نوع حساب را وارد کنید.", "", "warning");[m
+[32m+[m[32m  }[m
+ [m
+   try {[m
+     await createAccountType({ title });[m
+[31m-    await Swal.fire({[m
+[31m-      title: "موفقیت",[m
+[31m-      text: "نوع حساب جدید با موفقیت ثبت شد.",[m
+[31m-      icon: "success",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    swal("نوع حساب جدید با موفقیت ثبت شد", "", "success");[m
+     inputEl.value = "";[m
+     closeAccountTypeModals();[m
+     await loadAccountTypes();[m
+   } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    swal("خطا", err.message, "error");[m
+   }[m
+ };[m
+ [m
+ const updateAccountTypeHandler = async () => {[m
+   const title = editInputEl.value.trim();[m
+[31m-  if (!title)[m
+[31m-    return Swal.fire({[m
+[31m-      title: "هشدار",[m
+[31m-      text: "لطفاً نام نوع حساب را وارد کنید.",[m
+[31m-      icon: "warning",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[31m-[m
+[31m-  if (!editingId)[m
+[31m-    return Swal.fire({[m
+[31m-      title: "هشدار",[m
+[31m-      text: "هیچ نوع حسابی برای ویرایش انتخاب نشده است.",[m
+[31m-      icon: "warning",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m  if (!title) {[m
+[32m+[m[32m    return swal("لطفاً نام نوع حساب را وارد کنید.", "", "warning");[m
+[32m+[m[32m  }[m
+[32m+[m[32m  if (!editingId) {[m
+[32m+[m[32m    return swal("هیچ نوع حسابی برای ویرایش انتخاب نشده است.", "", "warning");[m
+[32m+[m[32m  }[m
+ [m
+   try {[m
+     await updateAccountType(editingId, { title });[m
+[31m-    await Swal.fire({[m
+[31m-      title: "موفقیت",[m
+[31m-      text: "نوع حساب با موفقیت به‌روزرسانی شد.",[m
+[31m-      icon: "success",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    swal("نوع حساب با موفقیت ویرایش شد.", "", "success");[m
+     closeAccountTypeModals();[m
+     await loadAccountTypes();[m
+   } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    swal("خطا", err.message, "error");[m
+   }[m
+ };[m
+ [m
+ window.deleteSelectedAccountTypes = async () => {[m
+   const checkboxes = document.querySelectorAll(".row-checkbox:checked");[m
+[31m-  if (checkboxes.length === 0)[m
+[31m-    return Swal.fire({[m
+[31m-      title: "هشدار",[m
+[31m-      text: "هیچ نوع حسابی انتخاب نشده است.",[m
+[31m-      icon: "warning",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[31m-[m
+[31m-  const result = await Swal.fire({[m
+[31m-    title: "حذف گروهی نوع حساب",[m
+[31m-    text: `آیا از حذف ${checkboxes.length} نوع حساب انتخاب شده مطمئن هستید؟`,[m
+[31m-    icon: "warning",[m
+[31m-    showCancelButton: true,[m
+[31m-    confirmButtonText: "بله، حذف شود",[m
+[31m-    cancelButtonText: "لغو",[m
+[31m-    reverseButtons: true,[m
+[31m-  });[m
+[32m+[m[32m  if (checkboxes.length === 0) {[m
+[32m+[m[32m    return swal("هشدار", "هیچ نوع حسابی انتخاب نشده است.", "question");[m
+[32m+[m[32m  }[m
+ [m
+[31m-  if (!result.isConfirmed) return;[m
+[32m+[m[32m  swal([m
+[32m+[m[32m    `آیا مطمئن هستید که می‌خواهید ${checkboxes.length} نوع حساب انتخاب‌شده را حذف کنید؟`,[m
+[32m+[m[32m    "",[m
+[32m+[m[32m    "question"[m
+[32m+[m[32m  ).then(async (confirm) => {[m
+[32m+[m[32m    if (!confirm) return;[m
+ [m
+[31m-  const ids = Array.from(checkboxes).map((checkbox) => {[m
+[31m-    const row = checkbox.closest("tr");[m
+[31m-    return row.dataset.id;[m
+[31m-  });[m
+[32m+[m[32m    const ids = Array.from(checkboxes).map((checkbox) => {[m
+[32m+[m[32m      const row = checkbox.closest("tr");[m
+[32m+[m[32m      return row.dataset.id;[m
+[32m+[m[32m    });[m
+ [m
+[31m-  try {[m
+[31m-    for (const id of ids) {[m
+[31m-      await deleteAccountType(id);[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      for (const id of ids) {[m
+[32m+[m[32m        await deleteAccountType(id);[m
+[32m+[m[32m      }[m
+[32m+[m[32m      swal("نوع حساب‌ها با موفقیت حذف شدند", "", "success");[m
+[32m+[m[32m      await loadAccountTypes();[m
+[32m+[m[32m    } catch (err) {[m
+[32m+[m[32m      swal("خطا در حذف", err.message, "error");[m
+     }[m
+[31m-    await Swal.fire({[m
+[31m-      title: "موفقیت",[m
+[31m-      text: "نوع حساب‌های انتخاب شده با موفقیت حذف شدند.",[m
+[31m-      icon: "success",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[31m-    await loadAccountTypes();[m
+[31m-  } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا در حذف",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[31m-  }[m
+[32m+[m[32m  });[m
+ };[m
+ [m
+ window.addEventListener("DOMContentLoaded", () => {[m
+[1mdiff --git a/js/bank/bankinfo/template.js b/js/bank/bankinfo/template.js[m
+[1mindex b01ba39..7666468 100644[m
+[1m--- a/js/bank/bankinfo/template.js[m
+[1m+++ b/js/bank/bankinfo/template.js[m
+[36m@@ -45,35 +45,17 @@[m [mwindow.showBankEditModal = (id, name) => {[m
+ };[m
+ [m
+ window.handleDelete = async (id) => {[m
+[31m-  const result = await Swal.fire({[m
+[31m-    title: "حذف بانک",[m
+[31m-    text: "آیا از حذف این بانک مطمئن هستید؟",[m
+[31m-    icon: "warning",[m
+[31m-    showCancelButton: true,[m
+[31m-    confirmButtonText: "بله، حذف شود",[m
+[31m-    cancelButtonText: "لغو",[m
+[31m-    reverseButtons: true,[m
+[31m-  });[m
+[31m-[m
+[31m-  if (!result.isConfirmed) return;[m
+[32m+[m[32m  swal("آیا مطمئن هستید که می‌خواهید حذف کنید؟", "", "question").then(async (willDelete) => {[m
+[32m+[m[32m    if (!willDelete) return;[m
+ [m
+[31m-  try {[m
+[31m-    await deleteBank(id);[m
+[31m-    await Swal.fire({[m
+[31m-      title: "موفقیت",[m
+[31m-      text: "بانک با موفقیت حذف شد.",[m
+[31m-      icon: "success",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[31m-    await FetchBankInfo();[m
+[31m-  } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[31m-  }[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      await deleteBank(id);[m
+[32m+[m[32m      swal("بانک با موفقیت حذف شد", "", "success");[m
+[32m+[m[32m      await FetchBankInfo();[m
+[32m+[m[32m    } catch (err) {[m
+[32m+[m[32m      swal("خطا در حذف", err.message, "error");[m
+[32m+[m[32m    }[m
+[32m+[m[32m  });[m
+ };[m
+ [m
+ const FetchBankInfo = async () => {[m
+[36m@@ -81,135 +63,72 @@[m [mconst FetchBankInfo = async () => {[m
+     const data = await fetchBanks();[m
+     ShowInformationBank(data);[m
+   } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا در دریافت اطلاعات",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    swal("خطا در دریافت اطلاعات", err.message, "error");[m
+   }[m
+ };[m
+ [m
+ const handleCreateBank = async () => {[m
+   const name = BankNameInput.value.trim();[m
+   if (!name) {[m
+[31m-    return Swal.fire({[m
+[31m-      title: "هشدار",[m
+[31m-      text: "لطفاً نام بانک را وارد کنید.",[m
+[31m-      icon: "warning",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    return swal("لطفاً نام بانک را وارد کنید.", "", "warning");[m
+   }[m
+ [m
+   try {[m
+     await createBank({ name });[m
+[31m-    await Swal.fire({[m
+[31m-      title: "موفقیت",[m
+[31m-      text: "بانک جدید با موفقیت ثبت شد.",[m
+[31m-      icon: "success",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    swal("بانک جدید با موفقیت ثبت شد", "", "success");[m
+     BankNameInput.value = "";[m
+     ModalCreate.classList.remove("show");[m
+     await FetchBankInfo();[m
+   } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    swal("خطا", err.message, "error");[m
+   }[m
+ };[m
+ [m
+ const handleEditBank = async () => {[m
+   const name = BankEditInput.value.trim();[m
+   if (!name) {[m
+[31m-    return Swal.fire({[m
+[31m-      title: "هشدار",[m
+[31m-      text: "لطفاً نام بانک را وارد کنید.",[m
+[31m-      icon: "warning",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    return swal("لطفاً نام بانک را وارد کنید.", "", "warning");[m
+   }[m
+   if (!editingBankId) {[m
+[31m-    return Swal.fire({[m
+[31m-      title: "هشدار",[m
+[31m-      text: "هیچ بانکی برای ویرایش انتخاب نشده است.",[m
+[31m-      icon: "warning",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    return swal("هیچ بانکی برای ویرایش انتخاب نشده است.", "", "warning");[m
+   }[m
+ [m
+   try {[m
+     await updateBank(editingBankId, { name });[m
+[31m-    await Swal.fire({[m
+[31m-      title: "موفقیت",[m
+[31m-      text: "بانک با موفقیت ویرایش شد.",[m
+[31m-      icon: "success",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    swal("بانک با موفقیت ویرایش شد.", "", "success");[m
+     BankEditInput.value = "";[m
+     editingBankId = null;[m
+     ModalEdit.classList.remove("show");[m
+     await FetchBankInfo();[m
+   } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    swal("خطا", err.message, "error");[m
+   }[m
+ };[m
+ [m
+ window.deleteSelectedBanks = async () => {[m
+   const checkboxes = document.querySelectorAll(".row-checkbox:checked");[m
+   if (checkboxes.length === 0) {[m
+[31m-    return Swal.fire({[m
+[31m-      title: "هشدار",[m
+[31m-      text: "هیچ بانکی انتخاب نشده است.",[m
+[31m-      icon: "warning",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    return swal("هشدار", "هیچ بانکی انتخاب نشده است.", "question");[m
+   }[m
+ [m
+[31m-  const confirm = await Swal.fire({[m
+[31m-    title: "حذف گروهی بانک‌ها",[m
+[31m-    text: `آیا مطمئن هستید که می‌خواهید ${checkboxes.length} بانک انتخاب‌شده را حذف کنید؟`,[m
+[31m-    icon: "warning",[m
+[31m-    showCancelButton: true,[m
+[31m-    confirmButtonText: "بله، حذف شود",[m
+[31m-    cancelButtonText: "لغو",[m
+[31m-    reverseButtons: true,[m
+[31m-  });[m
+[31m-[m
+[31m-  if (!confirm.isConfirmed) return;[m
+[32m+[m[32m  swal("آیا مطمئن هستید که می‌خواهید بانک‌های انتخاب‌شده را حذف کنید؟", "", "question").then(async (confirm) => {[m
+[32m+[m[32m    if (!confirm) return;[m
+ [m
+[31m-  const ids = Array.from(checkboxes).map((checkbox) => {[m
+[31m-    const row = checkbox.closest("tr");[m
+[31m-    return row.dataset.id;[m
+[31m-  });[m
+[32m+[m[32m    const ids = Array.from(checkboxes).map((checkbox) => {[m
+[32m+[m[32m      const row = checkbox.closest("tr");[m
+[32m+[m[32m      return row.dataset.id;[m
+[32m+[m[32m    });[m
+ [m
+[31m-  try {[m
+[31m-    for (const id of ids) {[m
+[31m-      await deleteBank(id);[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      for (const id of ids) {[m
+[32m+[m[32m        await deleteBank(id);[m
+[32m+[m[32m      }[m
+[32m+[m[32m      swal("بانک‌ها با موفقیت حذف شدند", "", "success");[m
+[32m+[m[32m      await FetchBankInfo();[m
+[32m+[m[32m    } catch (err) {[m
+[32m+[m[32m      swal("خطا در حذف", err.message, "error");[m
+     }[m
+[31m-    await Swal.fire({[m
+[31m-      title: "موفقیت",[m
+[31m-      text: "بانک‌های انتخاب‌شده با موفقیت حذف شدند.",[m
+[31m-      icon: "success",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[31m-    await FetchBankInfo();[m
+[31m-  } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا در حذف",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[31m-  }[m
+[32m+[m[32m  });[m
+ };[m
+ [m
+ window.closeBankModals = () => {[m
+[36m@@ -228,4 +147,3 @@[m [mBtnEdits.addEventListener("click", (event) => {[m
+   event.preventDefault();[m
+   handleEditBank();[m
+ });[m
+[31m- [m
+\ No newline at end of file[m
+[1mdiff --git a/js/catalog/coverages/coverages.js b/js/catalog/coverages/coverages.js[m
+[1mindex 16b294c..19b48c4 100644[m
+[1m--- a/js/catalog/coverages/coverages.js[m
+[1m+++ b/js/catalog/coverages/coverages.js[m
+[36m@@ -1,17 +1,26 @@[m
+ const API = "http://185.94.99.37:81/api";[m
+ [m
+[31m-[m
+ export const fetchCoverages = async () => {[m
+   try {[m
+     const res = await fetch(`${API}/catalog/coverages/`);[m
+     if (!res.ok) throw new Error("⛔ خطا در دریافت اطلاعات پوشش‌ها");[m
+[31m-    return await res.json();[m
+[32m+[m[32m    const data = await res.json();[m
+[32m+[m[32m    return data.results?.results || [];[m
+   } catch (error) {[m
+[31m-    console.error("❌ fetchCoverages error:", error);[m
+     throw error;[m
+   }[m
+ };[m
+ [m
+[32m+[m[32mexport const fetchPlans = async () => {[m
+[32m+[m[32m  try {[m
+[32m+[m[32m    const res = await fetch(`${API}/catalog/plans/`);[m
+[32m+[m[32m    if (!res.ok) throw new Error("⛔ خطا در دریافت لیست پلن‌ها");[m
+[32m+[m[32m    const data = await res.json();[m
+[32m+[m[32m    return data.results?.results || [];[m
+[32m+[m[32m  } catch (error) {[m
+[32m+[m[32m    throw error;[m
+[32m+[m[32m  }[m
+[32m+[m[32m};[m
+ [m
+ export const createCoverages = async (formData) => {[m
+   try {[m
+[36m@@ -19,56 +28,43 @@[m [mexport const createCoverages = async (formData) => {[m
+       method: "POST",[m
+       body: formData,[m
+     });[m
+[31m-[m
+     if (!res.ok) {[m
+       const err = await res.json();[m
+[31m-      console.error("🛑 createCoverages server response:", err);[m
+       throw new Error(err.detail || "⛔ ایجاد پوشش با خطا مواجه شد");[m
+     }[m
+[31m-[m
+     return await res.json();[m
+   } catch (error) {[m
+[31m-    console.error("❌ createCoverages error:", error);[m
+     throw error;[m
+   }[m
+ };[m
+ [m
+[31m-[m
+ export const deleteCoverages = async (id) => {[m
+   try {[m
+     const res = await fetch(`${API}/catalog/coverages/${id}/`, {[m
+       method: "DELETE",[m
+     });[m
+[31m-[m
+     if (!res.ok) {[m
+       const err = await res.json();[m
+       throw new Error(err.detail || "⛔ حذف پوشش با خطا مواجه شد");[m
+     }[m
+[31m-[m
+     return true;[m
+   } catch (error) {[m
+[31m-    console.error("❌ deleteCoverages error:", error);[m
+     throw error;[m
+   }[m
+ };[m
+ [m
+[31m-[m
+ export const updateCoverages = async (id, formData) => {[m
+   try {[m
+     const res = await fetch(`${API}/catalog/coverages/${id}/`, {[m
+       method: "PUT",[m
+       body: formData,[m
+     });[m
+[31m-[m
+     if (!res.ok) {[m
+       const err = await res.json();[m
+       throw new Error(err.detail || "⛔ خطا در ویرایش اطلاعات پوشش");[m
+     }[m
+[31m-[m
+     return await res.json();[m
+   } catch (error) {[m
+[31m-    console.error("❌ updateCoverages error:", error);[m
+     throw error;[m
+   }[m
+ };[m
+[31m- [m
+\ No newline at end of file[m
+[1mdiff --git a/js/catalog/coverages/template.js b/js/catalog/coverages/template.js[m
+[1mindex e4a06e3..469c9c4 100644[m
+[1m--- a/js/catalog/coverages/template.js[m
+[1m+++ b/js/catalog/coverages/template.js[m
+[36m@@ -1,4 +1,5 @@[m
+ import {[m
+[32m+[m[32m  fetchPlans,[m
+   fetchCoverages,[m
+   createCoverages,[m
+   deleteCoverages,[m
+[36m@@ -8,28 +9,20 @@[m [mimport {[m
+ const CoverageTableBody = document.querySelector("#coverage-table-body");[m
+ const CreateModal = document.querySelector(".coverage-create-modal");[m
+ const EditModal = document.querySelector(".coverage-edit-modal");[m
+[31m-[m
+ const CreatePlanSelect = document.querySelector("#plan-select");[m
+ const CreateNameInput = document.querySelector("#coverage-name");[m
+ const CreateAmountInput = document.querySelector("#coverage-amount");[m
+[31m-[m
+ const EditPlanSelect = document.querySelector("#edit-plan-select");[m
+ const EditNameInput = document.querySelector("#edit-coverage-name");[m
+ const EditAmountInput = document.querySelector("#edit-coverage-amount");[m
+[31m-[m
+ const createCoverageBtn = document.querySelector(".create-coverage-btn");[m
+ const editCoverageBtn = document.querySelector(".edit-coverage-btn");[m
+[31m-[m
+ const bulkDeleteBtn = document.querySelector(".bulk-delete-btn");[m
+ [m
+ let editingCoverageId = null;[m
+[31m- [m
+ [m
+[31m-const renderCoverageTable = (data) => {[m
+[32m+[m[32mconst renderCoverageTable = (coverages) => {[m
+   CoverageTableBody.innerHTML = "";[m
+[31m-[m
+[31m-  const coverages = data.results?.results || data;[m
+[31m-[m
+   coverages.forEach((item) => {[m
+     CoverageTableBody.insertAdjacentHTML([m
+       "beforeend",[m
+[36m@@ -37,7 +30,7 @@[m [mconst renderCoverageTable = (data) => {[m
+       <tr data-id="${item.id}">[m
+         <td><input type="checkbox" class="row-checkbox" /></td>[m
+         <td>${item.id}</td>[m
+[31m-        <td>${item.plan}</td>[m
+[32m+[m[32m        <td>${item.plan} (${item.plan_name || "بدون نام"})</td>[m
+         <td>${item.name}</td>[m
+         <td>${parseInt(item.amount).toLocaleString()}</td>[m
+         <td>[m
+[36m@@ -50,236 +43,159 @@[m [mconst renderCoverageTable = (data) => {[m
+   });[m
+ };[m
+ [m
+[31m-[m
+[31m-const fetchAndRenderCoverages = async () => {[m
+[32m+[m[32mconst loadPlansToSelects = async () => {[m
+   try {[m
+[31m-    const data = await fetchCoverages();[m
+[31m-    renderCoverageTable(data);[m
+[31m-  } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[32m+[m[32m    const plans = await fetchPlans();[m
+[32m+[m[32m    CreatePlanSelect.innerHTML = `<option value="">انتخاب طرح</option>`;[m
+[32m+[m[32m    EditPlanSelect.innerHTML = `<option value="">انتخاب طرح</option>`;[m
+[32m+[m[32m    plans.forEach((plan) => {[m
+[32m+[m[32m      const option = `<option value="${plan.id}">${plan.name}</option>`;[m
+[32m+[m[32m      CreatePlanSelect.insertAdjacentHTML("beforeend", option);[m
+[32m+[m[32m      EditPlanSelect.insertAdjacentHTML("beforeend", option);[m
+     });[m
+[32m+[m[32m  } catch {[m
+[32m+[m[32m    swal("خطا در بارگذاری طرح‌ها", "", "error");[m
+   }[m
+ };[m
+ [m
+[31m-[m
+[31m-window.deleteCoverage = async function (id) {[m
+[31m-  const result = await Swal.fire({[m
+[31m-    title: "حذف پوشش",[m
+[31m-    text: "آیا مطمئن هستید که می‌خواهید این پوشش را حذف کنید؟",[m
+[31m-    icon: "warning",[m
+[31m-    showCancelButton: true,[m
+[31m-    confirmButtonText: "بله، حذف کن",[m
+[31m-    cancelButtonText: "لغو",[m
+[31m-  });[m
+[31m-[m
+[31m-  if (!result.isConfirmed) return;[m
+[31m-[m
+[32m+[m[32mconst fetchAndRenderCoverages = async () => {[m
+   try {[m
+[31m-    await deleteCoverages(id);[m
+[31m-    await Swal.fire({[m
+[31m-      title: "موفقیت",[m
+[31m-      text: "پوشش با موفقیت حذف شد",[m
+[31m-      icon: "success",[m
+[31m-      confirmButtonText: "تایید",[m
+[32m+[m[32m    const coverages = await fetchCoverages();[m
+[32m+[m[32m    const plans = await fetchPlans();[m
+[32m+[m[32m    const plansMap = {};[m
+[32m+[m[32m    plans.forEach((plan) => {[m
+[32m+[m[32m      plansMap[plan.id] = plan.name;[m
+     });[m
+[31m-    await fetchAndRenderCoverages();[m
+[32m+[m[32m    const allCoverages = coverages.map((cov) => ({[m
+[32m+[m[32m      ...cov,[m
+[32m+[m[32m      plan_name: plansMap[cov.plan] || "بدون نام",[m
+[32m+[m[32m    }));[m
+[32m+[m[32m    renderCoverageTable(allCoverages);[m
+   } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    swal("خطا در دریافت پوشش‌ها", err.message, "error");[m
+   }[m
+ };[m
+ [m
+[32m+[m[32mwindow.deleteCoverage = async function (id) {[m
+[32m+[m[32m  swal(`آیا از حذف این پوشش اطمینان دارید؟`, "", "question").then(async (willDelete) => {[m
+[32m+[m[32m    if (!willDelete) return;[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      await deleteCoverages(id);[m
+[32m+[m[32m      swal("پوشش با موفقیت حذف شد", "", "success");[m
+[32m+[m[32m      await fetchAndRenderCoverages();[m
+[32m+[m[32m    } catch (err) {[m
+[32m+[m[32m      swal("خطا در حذف پوشش", err.message, "error");[m
+[32m+[m[32m    }[m
+[32m+[m[32m  });[m
+[32m+[m[32m};[m
+ [m
+ window.deleteSelectedCoverages = async () => {[m
+   const checkedBoxes = document.querySelectorAll(".row-checkbox:checked");[m
+[31m-[m
+   if (checkedBoxes.length === 0) {[m
+[31m-    return Swal.fire({[m
+[31m-      title: "هشدار",[m
+[31m-      text: "هیچ پوششی انتخاب نشده است.",[m
+[31m-      icon: "warning",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    return swal("هیچ پوششی انتخاب نشده است", "", "error");[m
+   }[m
+ [m
+[31m-  const result = await Swal.fire({[m
+[31m-    title: "حذف گروهی پوشش‌ها",[m
+[31m-    text: `آیا مطمئن هستید که می‌خواهید ${checkedBoxes.length} پوشش را حذف کنید؟`,[m
+[31m-    icon: "warning",[m
+[31m-    showCancelButton: true,[m
+[31m-    confirmButtonText: "بله، حذف کن",[m
+[31m-    cancelButtonText: "لغو",[m
+[31m-  });[m
+[31m-[m
+[31m-  if (!result.isConfirmed) return;[m
+[31m-[m
+[31m-  const ids = Array.from(checkedBoxes).map((checkbox) => {[m
+[31m-    const tr = checkbox.closest("tr");[m
+[31m-    return tr.dataset.id;[m
+[31m-  });[m
+[31m-[m
+[31m-  try {[m
+[31m-    for (const id of ids) {[m
+[31m-      await deleteCoverages(id);[m
+[31m-    }[m
+[31m-    await Swal.fire({[m
+[31m-      title: "موفقیت",[m
+[31m-      text: "پوشش‌های انتخاب‌شده حذف شدند",[m
+[31m-      icon: "success",[m
+[31m-      confirmButtonText: "تایید",[m
+[32m+[m[32m  swal([m
+[32m+[m[32m    `آیا مطمئن هستید که می‌خواهید ${checkedBoxes.length} پوشش را حذف کنید؟`,[m
+[32m+[m[32m    "",[m
+[32m+[m[32m    "question"[m
+[32m+[m[32m  ).then(async (willDelete) => {[m
+[32m+[m[32m    if (!willDelete) return;[m
+[32m+[m[32m    const ids = Array.from(checkedBoxes).map((checkbox) => {[m
+[32m+[m[32m      const tr = checkbox.closest("tr");[m
+[32m+[m[32m      return tr.dataset.id;[m
+     });[m
+[31m-    await fetchAndRenderCoverages();[m
+[31m-  } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[31m-  }[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      for (const id of ids) {[m
+[32m+[m[32m        await deleteCoverages(id);[m
+[32m+[m[32m      }[m
+[32m+[m[32m      swal("پوشش‌های انتخاب‌شده حذف شدند", "", "success");[m
+[32m+[m[32m      await fetchAndRenderCoverages();[m
+[32m+[m[32m    } catch (err) {[m
+[32m+[m[32m      swal("خطا در حذف گروهی پوشش‌ها", err.message, "error");[m
+[32m+[m[32m    }[m
+[32m+[m[32m  });[m
+ };[m
+ [m
+[31m-[m
+ window.showEditCoverageModal = async function (id) {[m
+   try {[m
+[31m-    const allCoverages = await fetchCoverages();[m
+[31m-    const target =[m
+[31m-      allCoverages.results?.results?.find((item) => item.id === id) ||[m
+[31m-      allCoverages.find((item) => item.id === id);[m
+[31m-[m
+[32m+[m[32m    const coverages = await fetchCoverages();[m
+[32m+[m[32m    const plans = await fetchPlans();[m
+[32m+[m[32m    const plansMap = {};[m
+[32m+[m[32m    plans.forEach((plan) => {[m
+[32m+[m[32m      plansMap[plan.id] = plan.name;[m
+[32m+[m[32m    });[m
+[32m+[m[32m    const allCoverages = coverages.map((cov) => ({[m
+[32m+[m[32m      ...cov,[m
+[32m+[m[32m      plan_name: plansMap[cov.plan] || "بدون نام",[m
+[32m+[m[32m    }));[m
+[32m+[m[32m    const target = allCoverages.find((item) => item.id === id);[m
+     if (!target) {[m
+[31m-      return Swal.fire({[m
+[31m-        title: "خطا",[m
+[31m-        text: "پوشش پیدا نشد",[m
+[31m-        icon: "error",[m
+[31m-        confirmButtonText: "تایید",[m
+[31m-      });[m
+[32m+[m[32m      return swal("پوشش مورد نظر پیدا نشد", "", "error");[m
+     }[m
+[31m-[m
+     editingCoverageId = id;[m
+     EditPlanSelect.value = target.plan;[m
+     EditNameInput.value = target.name;[m
+     EditAmountInput.value = target.amount;[m
+[31m-[m
+     EditModal.classList.add("show");[m
+   } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    swal("خطا در باز کردن فرم ویرایش", err.message, "error");[m
+   }[m
+ };[m
+ [m
+[31m-[m
+ window.editCoverage = async function (e) {[m
+   if (e) e.preventDefault();[m
+[31m-[m
+   if (!editingCoverageId) {[m
+[31m-    return Swal.fire({[m
+[31m-      title: "خطا",[m
+[31m-      text: "شناسه‌ای برای ویرایش مشخص نشده",[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    return swal("شناسه پوشش معتبر نیست", "", "error");[m
+   }[m
+[31m-[m
+   const formData = new FormData();[m
+   formData.append("plan", EditPlanSelect.value);[m
+   formData.append("name", EditNameInput.value.trim());[m
+   formData.append("amount", EditAmountInput.value.trim());[m
+[31m-[m
+   try {[m
+     await updateCoverages(editingCoverageId, formData);[m
+[31m-    await Swal.fire({[m
+[31m-      title: "موفقیت",[m
+[31m-      text: "پوشش ویرایش شد",[m
+[31m-      icon: "success",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[31m-[m
+[32m+[m[32m    swal("پوشش ویرایش شد", "", "success");[m
+     editingCoverageId = null;[m
+     EditModal.classList.remove("show");[m
+     EditNameInput.value = "";[m
+     EditAmountInput.value = "";[m
+     EditPlanSelect.value = "";[m
+[31m-[m
+     await fetchAndRenderCoverages();[m
+   } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    swal("خطا در ویرایش پوشش", err.message, "error");[m
+   }[m
+ };[m
+ [m
+[31m-[m
+ window.createCoverage = async function (e) {[m
+   if (e) e.preventDefault();[m
+[31m-[m
+   const formData = new FormData();[m
+   formData.append("plan", CreatePlanSelect.value);[m
+   formData.append("name", CreateNameInput.value.trim());[m
+   formData.append("amount", CreateAmountInput.value.trim());[m
+[31m-[m
+   try {[m
+     await createCoverages(formData);[m
+[31m-    await Swal.fire({[m
+[31m-      title: "موفقیت",[m
+[31m-      text: "پوشش با موفقیت ثبت شد",[m
+[31m-      icon: "success",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[31m-[m
+[32m+[m[32m    swal("پوشش جدید با موفقیت ایجاد شد", "", "success");[m
+     CreateModal.classList.remove("show");[m
+[32m+[m[32m    CreatePlanSelect.value = "";[m
+     CreateNameInput.value = "";[m
+     CreateAmountInput.value = "";[m
+[31m-    CreatePlanSelect.value = "";[m
+[31m-[m
+     await fetchAndRenderCoverages();[m
+   } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: "تایید",[m
+[31m-    });[m
+[32m+[m[32m    swal("خطا در ایجاد پوشش", err.message, "error");[m
+   }[m
+ };[m
+ [m
+[32m+[m[32mdocument.addEventListener("DOMContentLoaded", async () => {[m
+[32m+[m[32m  await loadPlansToSelects();[m
+[32m+[m[32m  await fetchAndRenderCoverages();[m
+ [m
+[31m-window.closeCoverageModals = () => {[m
+[31m-  CreateModal.classList.remove("show");[m
+[31m-  EditModal.classList.remove("show");[m
+[31m-};[m
+[31m-[m
+[31m-[m
+[31m-window.addEventListener("DOMContentLoaded", () => {[m
+[31m-  fetchAndRenderCoverages();[m
+[31m-[m
+[31m-  bulkDeleteBtn?.addEventListener("click", (event) => {[m
+[31m-    event.preventDefault();[m
+[31m-    deleteSelectedCoverages();[m
+[31m-  });[m
+[31m-[m
+[31m-  createCoverageBtn?.addEventListener("click", (event) => {[m
+[31m-    event.preventDefault();[m
+[31m-    window.createCoverage(event);[m
+[31m-  });[m
+[31m-[m
+[31m-  editCoverageBtn?.addEventListener("click", (event) => {[m
+[31m-    event.preventDefault();[m
+[31m-    window.editCoverage(event);[m
+[31m-  });[m
+[32m+[m[32m  if (createCoverageBtn) {[m
+[32m+[m[32m    createCoverageBtn.addEventListener("click", window.createCoverage);[m
+[32m+[m[32m  }[m
+[32m+[m[32m  if (editCoverageBtn) {[m
+[32m+[m[32m    editCoverageBtn.addEventListener("click", window.editCoverage);[m
+[32m+[m[32m  }[m
+[32m+[m[32m  if (bulkDeleteBtn) {[m
+[32m+[m[32m    bulkDeleteBtn.addEventListener("click", window.deleteSelectedCoverages);[m
+[32m+[m[32m  }[m
+ });[m
+[1mdiff --git a/js/catalog/plans/plans.js b/js/catalog/plans/plans.js[m
+[1mindex dfe0889..5abe834 100644[m
+[1m--- a/js/catalog/plans/plans.js[m
+[1m+++ b/js/catalog/plans/plans.js[m
+[36m@@ -51,21 +51,44 @@[m [mexport const deletePlan = async (id) => {[m
+   }[m
+ };[m
+ [m
+[31m-export const updatePlan = async (id, formData) => {[m
+[31m-  try {[m
+[31m-    const res = await fetch(`${API}/catalog/plans/${id}/`, {[m
+[31m-      method: "PUT",[m
+[31m-      body: formData, [m
+[31m-    });[m
+ [m
+[31m-    if (!res.ok) {[m
+[31m-      const err = await res.json();[m
+[31m-      throw new Error(err.detail || "خطا در ویرایش پلن");[m
+[32m+[m[32mexport async function updatePlan(id, formData) {[m
+[32m+[m[32m  const response = await fetch(`${API}/catalog/plans/${id}/`, {[m
+[32m+[m[32m    method: "PUT",[m
+[32m+[m[32m    body: formData,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  if (!response.ok) {[m
+[32m+[m
+[32m+[m[32m    let errorMessage = "خطا در ویرایش پلن";[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      const errorData = await response.json();[m
+[32m+[m
+[32m+[m[32m      if (errorData.message) errorMessage = errorData.message;[m
+[32m+[m[32m      else if (errorData.detail) errorMessage = errorData.detail;[m
+[32m+[m[32m      else if (typeof errorData === "object") {[m
+[32m+[m
+[32m+[m[32m        errorMessage = Object.values(errorData).flat().join("\n");[m
+[32m+[m[32m      }[m
+[32m+[m[32m    } catch {[m
+[32m+[m
+     }[m
+[32m+[m[32m    throw new Error(errorMessage);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  return response.json();[m
+[32m+[m[32m}[m
+ [m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32mexport const fetchProducts = async () => {[m
+[32m+[m[32m  try {[m
+[32m+[m[32m    const res = await fetch(`${API}/catalog/products/`);[m
+[32m+[m[32m    if (!res.ok) throw new Error("خطا در دریافت محصولات");[m
+     return await res.json();[m
+   } catch (error) {[m
+[31m-    console.error("updatePlan error:", error);[m
+[32m+[m[32m    console.error("fetchProducts error:", error);[m
+     throw error;[m
+   }[m
+ };[m
+[1mdiff --git a/js/catalog/plans/template.js b/js/catalog/plans/template.js[m
+[1mindex 248824f..b94c11d 100644[m
+[1m--- a/js/catalog/plans/template.js[m
+[1m+++ b/js/catalog/plans/template.js[m
+[36m@@ -3,6 +3,7 @@[m [mimport {[m
+   createPlan,[m
+   deletePlan,[m
+   updatePlan,[m
+[32m+[m[32m  fetchProducts,[m
+ } from "./plans.js";[m
+ [m
+ const ShowInfoTableElam = document.querySelector("#insurance-fields-table-body");[m
+[36m@@ -20,65 +21,59 @@[m [mconst createSavePlan = document.querySelector(".create-plan");[m
+ const BtnEdits = document.querySelector(".btn-edits");[m
+ [m
+ let editingPlanId = null;[m
+[32m+[m[32mlet allPlans = [];[m
+[32m+[m[32mlet productMap = new Map();[m
+ [m
+ const ShowInformationPlan = (data) => {[m
+   ShowInfoTableElam.innerHTML = "";[m
+[32m+[m[32m  allPlans = data.results?.results || data;[m
+ [m
+[31m-  const plans = data.results?.results || data;[m
+[31m-[m
+[31m-  plans.forEach((info) => {[m
+[31m-    ShowInfoTableElam.insertAdjacentHTML("beforeend", `[m
+[31m-      <tr data-id="${info.id}">[m
+[32m+[m[32m  allPlans.forEach((info) => {[m
+[32m+[m[32m    ShowInfoTableElam.insertAdjacentHTML([m
+[32m+[m[32m      "beforeend",[m
+[32m+[m[32m      `<tr data-id="${info.id}">[m
+         <td><input type="checkbox" class="row-checkbox" /></td>[m
+         <td>${info.id}</td>[m
+[31m-        <td>${info.product || ''}</td>[m
+[32m+[m[32m        <td>${productMap.get(info.product) || ""}</td>[m
+         <td>${info.name}</td>[m
+[31m-        <td><img src="${info.icon || 'icons/default.png'}" alt="آیکون" style="max-width: 32px;" /></td>[m
+[31m-        <td>${info.franchise_percent || ''}٪</td>[m
+[32m+[m[32m        <td><img src="${info.icon || "icons/default.png"}" alt="آیکون" style="max-width: 32px;" /></td>[m
+[32m+[m[32m        <td>${info.franchise_percent || ""}٪</td>[m
+         <td>[m
+[31m-          <button class="btn btn-sm edit-btn" onclick="showPlanEditModal(${info.id}, '${info.name}')">ویرایش</button>[m
+[32m+[m[32m          <button class="btn btn-sm edit-btn" onclick="showPlanEditModal(${info.id})">ویرایش</button>[m
+           <button class="btn btn-sm delete-btn" onclick="handleDelete(${info.id})">حذف</button>[m
+         </td>[m
+[31m-      </tr>[m
+[31m-    `);[m
+[32m+[m[32m      </tr>`[m
+[32m+[m[32m    );[m
+   });[m
+ };[m
+ [m
+[31m-window.showPlanEditModal = (id, name) => {[m
+[32m+[m[32mwindow.showPlanEditModal = (id) => {[m
+   editingPlanId = id;[m
+[31m-  EditPlanNameInput.value = name;[m
+[32m+[m[32m  const plan = allPlans.find((p) => p.id === id);[m
+[32m+[m[32m  if (!plan) return swal("خطا", "پلن پیدا نشد", "error");[m
+[32m+[m
+[32m+[m[32m  EditPlanNameInput.value = plan.name || "";[m
+[32m+[m[32m  EditFranchiseInput.value = plan.franchise_percent !== undefined ? plan.franchise_percent : "";[m
+[32m+[m[32m  EditProductSelect.value = plan.product || "";[m
+[32m+[m[32m  EditIconPreview.src = plan.icon || "icons/default.png";[m
+[32m+[m[32m  EditIconPreview.style.display = plan.icon ? "inline-block" : "none";[m
+[32m+[m[32m  EditIconInput.value = "";[m
+[32m+[m
+   ModalEdit.classList.add("show");[m
+ };[m
+ [m
+ window.handleDelete = async (id) => {[m
+[31m-  const result = await Swal.fire({[m
+[31m-    title: 'حذف پلن',[m
+[31m-    text: 'آیا مطمئن هستید که می‌خواهید حذف کنید؟',[m
+[31m-    icon: 'warning',[m
+[31m-    showCancelButton: true,[m
+[31m-    confirmButtonText: 'بله، حذف کن',[m
+[31m-    cancelButtonText: 'لغو'[m
+[31m-  });[m
+[31m-[m
+[31m-  if (!result.isConfirmed) return;[m
+[32m+[m[32m  swal("آیا مطمئن هستید که می‌خواهید حذف کنید؟", "", "question").then(async (willDelete) => {[m
+[32m+[m[32m    if (!willDelete) return;[m
+ [m
+[31m-  try {[m
+[31m-    await deletePlan(id);[m
+[31m-    await Swal.fire({[m
+[31m-      title: 'موفقیت',[m
+[31m-      text: 'پلن با موفقیت حذف شد',[m
+[31m-      icon: 'success',[m
+[31m-      confirmButtonText: 'تایید'[m
+[31m-    });[m
+[31m-    await FetchPlanInfo();[m
+[31m-  } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: 'خطا در حذف',[m
+[31m-      text: err.message,[m
+[31m-      icon: 'error',[m
+[31m-      confirmButtonText: 'تایید'[m
+[31m-    });[m
+[31m-  }[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      await deletePlan(id);[m
+[32m+[m[32m      swal("پلن با موفقیت حذف شد", "", "success");[m
+[32m+[m[32m      await FetchPlanInfo();[m
+[32m+[m[32m    } catch (err) {[m
+[32m+[m[32m      swal("خطا در حذف", err.message, "error");[m
+[32m+[m[32m    }[m
+[32m+[m[32m  });[m
+ };[m
+ [m
+ const FetchPlanInfo = async () => {[m
+[36m@@ -86,28 +81,18 @@[m [mconst FetchPlanInfo = async () => {[m
+     const data = await fetchPlans();[m
+     ShowInformationPlan(data);[m
+   } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: 'خطا در دریافت اطلاعات',[m
+[31m-      text: err.message,[m
+[31m-      icon: 'error',[m
+[31m-      confirmButtonText: 'تایید'[m
+[31m-    });[m
+[32m+[m[32m    swal("خطا در دریافت اطلاعات", err.message, "error");[m
+   }[m
+ };[m
+ [m
+ const handleCreatePlan = async () => {[m
+   const name = PlanNameInput.value.trim();[m
+[31m-  const franchise_percent = PlanDeductionInput.value.trim().replace('%', '');[m
+[32m+[m[32m  const franchise_percent = PlanDeductionInput.value.trim().replace("%", "");[m
+   const product = parseInt(PlanProductSelect.value);[m
+   const iconFile = document.querySelector("#plan-icon-create").files[0];[m
+ [m
+   if (!name || !franchise_percent || isNaN(product) || !iconFile) {[m
+[31m-    return Swal.fire({[m
+[31m-      title: "هشدار",[m
+[31m-      text: "لطفاً تمام فیلدها را کامل کنید",[m
+[31m-      icon: "warning",[m
+[31m-      confirmButtonText: 'تایید'[m
+[31m-    });[m
+[32m+[m[32m    return swal("هشدار", "لطفاً تمام فیلدها را کامل کنید", "warning");[m
+   }[m
+ [m
+   const formData = new FormData();[m
+[36m@@ -117,13 +102,8 @@[m [mconst handleCreatePlan = async () => {[m
+   formData.append("icon", iconFile);[m
+ [m
+   try {[m
+[31m-    const newPlan = await createPlan(formData);[m
+[31m-    await Swal.fire({[m
+[31m-      title: "موفقیت",[m
+[31m-      text: "پلن جدید با موفقیت ثبت شد",[m
+[31m-      icon: "success",[m
+[31m-      confirmButtonText: 'تایید'[m
+[31m-    });[m
+[32m+[m[32m    await createPlan(formData);[m
+[32m+[m[32m    swal("پلن جدید با موفقیت ثبت شد", "", "success");[m
+ [m
+     PlanNameInput.value = "";[m
+     PlanDeductionInput.value = "";[m
+[36m@@ -133,59 +113,37 @@[m [mconst handleCreatePlan = async () => {[m
+     ModalCreate.classList.remove("show");[m
+ [m
+     await FetchPlanInfo();[m
+[31m-[m
+   } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: "خطا",[m
+[31m-      text: err.message,[m
+[31m-      icon: "error",[m
+[31m-      confirmButtonText: 'تایید'[m
+[31m-    });[m
+[32m+[m[32m    swal("خطا", err.message, "error");[m
+   }[m
+ };[m
+ [m
+ const handleEditPlan = async () => {[m
+   const name = EditPlanNameInput.value.trim();[m
+[31m-  const franchise_percent = EditFranchiseInput.value.trim().replace('%', '');[m
+[32m+[m[32m  const franchise_percent = EditFranchiseInput.value.trim().replace("%", "");[m
+   const product = parseInt(EditProductSelect.value);[m
+   const iconFile = EditIconInput.files[0];[m
+ [m
+   if (!name || !franchise_percent || isNaN(product)) {[m
+[31m-    return Swal.fire({[m
+[31m-      title: 'هشدار',[m
+[31m-      text: 'تمام فیلدها را کامل کنید',[m
+[31m-      icon: 'warning',[m
+[31m-      confirmButtonText: 'تایید'[m
+[31m-    });[m
+[32m+[m[32m    return swal("هشدار", "لطفاً تمام فیلدها را به درستی پر کنید.", "warning");[m
+   }[m
+ [m
+   if (!editingPlanId) {[m
+[31m-    return Swal.fire({[m
+[31m-      title: 'هشدار',[m
+[31m-      text: 'شناسه‌ای برای ویرایش انتخاب نشده است.',[m
+[31m-      icon: 'warning',[m
+[31m-      confirmButtonText: 'تایید'[m
+[31m-    });[m
+[32m+[m[32m    return swal("هشدار", "شناسه پلن برای ویرایش مشخص نشده است.", "warning");[m
+   }[m
+ [m
+   const formData = new FormData();[m
+   formData.append("name", name);[m
+   formData.append("franchise_percent", franchise_percent);[m
+[31m-  formData.append("product", product);[m
+[32m+[m[32m  formData.append("product", product.toString());[m
+   if (iconFile) {[m
+     formData.append("icon", iconFile);[m
+   }[m
+ [m
+   try {[m
+     await updatePlan(editingPlanId, formData);[m
+[31m-    await Swal.fire({[m
+[31m-      title: 'موفقیت',[m
+[31m-      text: 'پلن با موفقیت ویرایش شد',[m
+[31m-      icon: 'success',[m
+[31m-      confirmButtonText: 'تایید'[m
+[31m-    });[m
+[32m+[m[32m    swal("پلن با موفقیت ویرایش شد.", "", "success");[m
+ [m
+[31m-    // پاک‌سازی و بستن مدال[m
+     EditPlanNameInput.value = "";[m
+     EditFranchiseInput.value = "";[m
+     EditProductSelect.value = "";[m
+[36m@@ -197,61 +155,63 @@[m [mconst handleEditPlan = async () => {[m
+ [m
+     await FetchPlanInfo();[m
+   } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: 'خطا',[m
+[31m-      text: err.message,[m
+[31m-      icon: 'error',[m
+[31m-      confirmButtonText: 'تایید'[m
+[32m+[m[32m    swal("خطا", err.message || "خطا در ویرایش پلن", "error");[m
+[32m+[m[32m  }[m
+[32m+[m[32m};[m
+[32m+[m
+[32m+[m[32mconst loadProductOptions = async () => {[m
+[32m+[m[32m  try {[m
+[32m+[m[32m    const data = await fetchProducts();[m
+[32m+[m[32m    const products = Array.isArray(data) ? data : Array.isArray(data.results) ? data.results : Array.isArray(data.results?.results) ? data.results.results : [];[m
+[32m+[m
+[32m+[m[32m    if (!products.length) throw new Error("محصولی یافت نشد.");[m
+[32m+[m
+[32m+[m[32m    productMap.clear();[m
+[32m+[m[32m    products.forEach((p) => productMap.set(p.id, p.name));[m
+[32m+[m
+[32m+[m[32m    PlanProductSelect.innerHTML = '<option value="">انتخاب کنید...</option>';[m
+[32m+[m[32m    EditProductSelect.innerHTML = '<option value="">انتخاب کنید...</option>';[m
+[32m+[m
+[32m+[m[32m    products.forEach((product) => {[m
+[32m+[m[32m      const option1 = document.createElement("option");[m
+[32m+[m[32m      option1.value = product.id;[m
+[32m+[m[32m      option1.textContent = product.name;[m
+[32m+[m[32m      PlanProductSelect.appendChild(option1);[m
+[32m+[m
+[32m+[m[32m      const option2 = document.createElement("option");[m
+[32m+[m[32m      option2.value = product.id;[m
+[32m+[m[32m      option2.textContent = product.name;[m
+[32m+[m[32m      EditProductSelect.appendChild(option2);[m
+     });[m
+[32m+[m[32m  } catch (error) {[m
+[32m+[m[32m    swal("خطا در بارگذاری محصولات", error.message, "error");[m
+   }[m
+ };[m
+ [m
+ window.deleteSelectedPlans = async () => {[m
+   const checkboxes = document.querySelectorAll(".row-checkbox:checked");[m
+   if (checkboxes.length === 0) {[m
+[31m-    return Swal.fire({[m
+[31m-      title: 'هشدار',[m
+[31m-      text: 'هیچ پلنی انتخاب نشده است.',[m
+[31m-      icon: 'warning',[m
+[31m-      confirmButtonText: 'تایید'[m
+[31m-    });[m
+[32m+[m[32m    return swal("هشدار", "هیچ پلنی انتخاب نشده است.", "question");[m
+   }[m
+ [m
+[31m-  const confirm = await Swal.fire({[m
+[31m-    title: 'حذف گروهی',[m
+[31m-    text: 'آیا مطمئن هستید که می‌خواهید پلن‌های انتخاب‌شده را حذف کنید؟',[m
+[31m-    icon: 'warning',[m
+[31m-    showCancelButton: true,[m
+[31m-    confirmButtonText: 'بله، حذف کن',[m
+[31m-    cancelButtonText: 'لغو'[m
+[31m-  });[m
+[31m-[m
+[31m-  if (!confirm.isConfirmed) return;[m
+[32m+[m[32m  swal("آیا مطمئن هستید که می‌خواهید پلن‌های انتخاب‌شده را حذف کنید؟", "", "question").then(async (confirm) => {[m
+[32m+[m[32m    if (!confirm) return;[m
+ [m
+[31m-  const ids = Array.from(checkboxes).map((checkbox) => {[m
+[31m-    const row = checkbox.closest("tr");[m
+[31m-    return row.dataset.id;[m
+[31m-  });[m
+[32m+[m[32m    const ids = Array.from(checkboxes).map((checkbox) => {[m
+[32m+[m[32m      const row = checkbox.closest("tr");[m
+[32m+[m[32m      return row.dataset.id;[m
+[32m+[m[32m    });[m
+ [m
+[31m-  try {[m
+[31m-    for (const id of ids) {[m
+[31m-      await deletePlan(id);[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      for (const id of ids) {[m
+[32m+[m[32m        await deletePlan(id);[m
+[32m+[m[32m      }[m
+[32m+[m[32m      swal("پلن‌ها با موفقیت حذف شدند", "", "success");[m
+[32m+[m[32m      await FetchPlanInfo();[m
+[32m+[m[32m    } catch (err) {[m
+[32m+[m[32m      swal("خطا در حذف", err.message, "error");[m
+     }[m
+[31m-    await Swal.fire({[m
+[31m-      title: 'موفقیت',[m
+[31m-      text: 'پلن‌های انتخاب‌شده با موفقیت حذف شدند.',[m
+[31m-      icon: 'success',[m
+[31m-      confirmButtonText: 'تایید'[m
+[31m-    });[m
+[31m-    await FetchPlanInfo();[m
+[31m-  } catch (err) {[m
+[31m-    Swal.fire({[m
+[31m-      title: 'خطا در حذف',[m
+[31m-      text: err.message,[m
+[31m-      icon: 'error',[m
+[31m-      confirmButtonText: 'تایید'[m
+[31m-    });[m
+[31m-  }[m
+[32m+[m[32m  });[m
+ };[m
+ [m
+ window.closePlanModals = () => {[m
+[36m@@ -259,7 +219,10 @@[m [mwindow.closePlanModals = () => {[m
+   ModalEdit.classList.remove("show");[m
+ };[m
+ [m
+[31m-window.addEventListener("DOMContentLoaded", FetchPlanInfo);[m
+[32m+[m[32mwindow.addEventListener("DOMContentLoaded", () => {[m
+[32m+[m[32m  loadProductOptions();[m
+[32m+[m[32m  FetchPlanInfo();[m
+[32m+[m[32m});[m
+ [m
+ createSavePlan.addEventListener("click", (event) => {[m
+   event.preventDefault();[m
+[36m@@ -270,4 +233,3 @@[m [mBtnEdits.addEventListener("click", (event) => {[m
+   event.preventDefault();[m
+   handleEditPlan();[m
+ });[m
+[31m- [m
+\ No newline at end of file[m

@@ -47,22 +47,7 @@
       href="assets/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css"
       rel="stylesheet"
     />
-    <!-- END PAGE CSS -->
 
-
-        <!--sweetalert2 -->
-
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-        <style>
-          div:where(.swal2-icon) .swal2-icon-content {
-              font-size: 1.75em !important;
-          } 
-
-        </style>
- 
-
-      <!-- end sweetalert2 -->
   </head>
   <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">
     <!-- BEGIN LOEADING -->
@@ -666,11 +651,10 @@
     <form onsubmit="createPlan(event)">
       <div class="form-group mb-3">
         <label for="product-plan-select">انتخاب محصول بیمه‌ای:</label>
+
         <select name="plan" id="product-plan-select" class="form-control" required>
-          <option value="">انتخاب کنید...</option>
-          <option value="1">پوشش آتش‌سوزی</option>
-          <option value="3">پوشش زلزله</option>
         </select>
+
       </div>
 
       <div class="form-group mb-3">
@@ -709,9 +693,7 @@
       <div class="form-group mb-3">
         <label for="edit-product-plan-select">انتخاب محصول:</label>
         <select name="plan" id="edit-product-plan-select" class="form-control" required>
-          <option value="">انتخاب کنید...</option>
-          <option value="101">پوشش آتش‌سوزی</option>
-          <option value="3">پوشش زلزله</option>
+          
         </select>
       </div>
 
