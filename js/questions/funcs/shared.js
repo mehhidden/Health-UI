@@ -1,8 +1,10 @@
-function showQuestionCreateModal() {
+import { fetchQuestions, insertQuestions } from "./utils.js";
+
+export function showQuestionCreateModal() {
   document.querySelector('.question-create-modal').classList.add('show');
 }
 
-function showQuestionEditModal(question) {
+export function showQuestionEditModal(question) {
   document.querySelector('.question-edit-modal').classList.add('show');
 
   
@@ -16,12 +18,18 @@ function showQuestionEditModal(question) {
 }
 
 
-function closeQuestionModals() {
-  document.querySelectorAll('.modal').forEach(modal => modal.classList.remove('show'));
+const allModals = document.querySelectorAll(".modal");
+const allModalsInputs = [...allModals].map(modal => [...modal.querySelectorAll("select, input")]);
+export function closeQuestionModals() {
+  allModals.forEach((modal) => modal.classList.remove("show"));
+  allModalsInputs.forEach(inputs => inputs.forEach(input => input.value = ""))
 }
 
 
-function createQuestion(event) {
+
+
+
+export function createQuestion(event) {
   event.preventDefault();
 
   const text = document.getElementById('question-text').value;
@@ -43,7 +51,7 @@ function createQuestion(event) {
 }
 
 
-function editQuestion(event) {
+export function editQuestion(event) {
   event.preventDefault();
 
   const id = event.target.dataset.id;
@@ -59,7 +67,7 @@ function editQuestion(event) {
 }
 
 
-function addQuestionToTable(question) {
+export function addQuestionToTable(question) {
   const tbody = document.getElementById('question-table-body');
   const tr = document.createElement('tr');
 
@@ -80,14 +88,32 @@ function addQuestionToTable(question) {
 }
 
 
-function deleteQuestion(id) {
+export function deleteQuestion(id) {
   const row = document.querySelector(`#question-table-body input[data-id="${id}"]`)?.closest('tr');
   if (row) row.remove();
 }
 
 
-function deleteSelectedQuestions() {
+export function deleteSelectedQuestions() {
   document.querySelectorAll('#question-table-body input[type="checkbox"]:checked').forEach(cb => {
     cb.closest('tr').remove();
   });
+}
+
+
+export const renderQuestions = async () => {
+  const questions = await fetchQuestions();
+  insertQuestions(questions)
+}
+
+const renderPlansSelectBox = () => {
+  // TODO
+}
+const renderCoveragesSelectBox = () => {
+  // TODO
+}
+
+export const renderSelectBoxes = () => {
+  renderPlansSelectBox();
+  renderCoveragesSelectBox();
 }
