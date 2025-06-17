@@ -107,11 +107,28 @@ export function deleteQuestion(event) {
 }
 
 export function deleteSelectedQuestions() {
-  document
-    .querySelectorAll('#question-table-body input[type="checkbox"]:checked')
-    .forEach((cb) => {
-      cb.closest("tr").remove();
-    });
+  const selected = selectAll('#question-table-body input[type="checkbox"]:checked');
+  if (!selected.length) return swal("هیچ آیتمی انتخاب نشده است", "", "warning");
+  
+  swal(
+      `آیا ${selected.length} سوال انتخاب شده حذف شوند؟`,
+      "",
+      "question"
+    ).then(async (result) => {
+      if (result) {
+        try {
+          const infos = [...selected].map(
+            (cb) => JSON.parse(cb.closest("tr").dataset.info).id
+          );
+          const promices = infos.map((id) => deleteReq(id));
+          await Promise.all(promices);
+          await renderQuestions();
+          swal("سوال ها با موفقیت حذف شدند", "", "success");
+        } catch (error) {
+          swal("خطا در حذف سوال", error.message, "error");
+        }
+      }
+    })
 }
 
 export const renderQuestions = async () => {
