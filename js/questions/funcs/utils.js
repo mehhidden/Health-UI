@@ -56,3 +56,28 @@ export const deleteReq = async (id) => {
     throw Error(response.detail || convertBackendValidationToMessage(response));
   }
 };
+
+export const editReq = async (id, data) => {
+  const req = await fetch(`${API}/questionary/questions/${id}/`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${getCookie("access")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...data,
+      plans: [data.plans],
+      coverages: [data.coverages],
+    }),
+  });
+
+  const response = await req.json();
+  
+  if (req.ok) {
+
+    return response.detail || "ویرایش سوال با موفقیت انجام شد";
+  } else {
+    
+    throw Error(convertBackendValidationToMessage(response));
+  }
+};

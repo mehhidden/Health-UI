@@ -3,25 +3,36 @@ import {
   generateSelectOptionsTemplate,
   getTrInfo,
   insertTemplateToElement,
+  select,
   selectAll,
 } from "../../../utils/elem.js";
 import { fetchCoverages } from "../../catalog/coverages/coverages.js";
 import { fetchPlans } from "../../catalog/plans/plans.js";
-import { createReq, deleteReq, fetchQuestions, insertQuestions } from "./utils.js";
+import {
+  createReq,
+  deleteReq,
+  editReq,
+  fetchQuestions,
+  insertQuestions,
+} from "./utils.js";
 
 export function showQuestionCreateModal() {
   document.querySelector(".question-create-modal").classList.add("show");
 }
 
+const editModalEl = select(".question-edit-modal");
+const editModalInputs = [...editModalEl.querySelectorAll("input, select")];
 export function showQuestionEditModal(event) {
-  document.querySelector(".question-edit-modal").classList.add("show");
+  const trInfo = getTrInfo(event);
 
-  document.getElementById("edit-question-text").value = question.text;
-  document.getElementById("edit-question-type").value = question.type;
-  document.getElementById("edit-plan-select").value = question.planId;
-  document.getElementById("edit-coverage-select").value = question.coverageId;
+  editModalEl.classList.add("show");
+  editModalEl.dataset.id = trInfo.id;
 
-  document.querySelector(".question-edit-modal form").dataset.id = question.id;
+  console.log(editModalInputs);
+
+  editModalInputs.forEach((input) => {
+    input.value = trInfo[input.name];
+  });
 }
 
 const allModals = document.querySelectorAll(".modal");
@@ -50,19 +61,20 @@ export async function createQuestion(event) {
   }
 }
 
-export function editQuestion(event) {
+export async function editQuestion(event) {
   event.preventDefault();
 
-  const id = event.target.dataset.id;
-  const text = document.getElementById("edit-question-text").value;
-  const type = document.getElementById("edit-question-type").value;
-  const planId = document.getElementById("edit-plan-select").value;
-  const coverageId = document.getElementById("edit-coverage-select").value;
-
-  const updatedQuestion = { id, text, type, planId, coverageId };
-
-  updateQuestionInTable(updatedQuestion);
-  closeQuestionModals();
+  const id = editModalEl.dataset.id;
+  const formData = new FormData(event.target);
+  const objData = convertFormDataToObj(formData);
+  try {
+    const response = await editReq(id, objData);
+    await renderQuestions();
+    swal(response, "", "success");
+    closeQuestionModals();
+  } catch (error) {
+    swal("خطا در ویرایش سوال", error.message, "error");
+  }
 }
 
 export function addQuestionToTable(question) {
@@ -107,14 +119,13 @@ export function deleteQuestion(event) {
 }
 
 export function deleteSelectedQuestions() {
-  const selected = selectAll('#question-table-body input[type="checkbox"]:checked');
+  const selected = selectAll(
+    '#question-table-body input[type="checkbox"]:checked'
+  );
   if (!selected.length) return swal("هیچ آیتمی انتخاب نشده است", "", "warning");
-  
-  swal(
-      `آیا ${selected.length} سوال انتخاب شده حذف شوند؟`,
-      "",
-      "question"
-    ).then(async (result) => {
+
+  swal(`آیا ${selected.length} سوال انتخاب شده حذف شوند؟`, "", "question").then(
+    async (result) => {
       if (result) {
         try {
           const infos = [...selected].map(
@@ -128,7 +139,8 @@ export function deleteSelectedQuestions() {
           swal("خطا در حذف سوال", error.message, "error");
         }
       }
-    })
+    }
+  );
 }
 
 export const renderQuestions = async () => {
