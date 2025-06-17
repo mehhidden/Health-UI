@@ -681,21 +681,23 @@
       <div class="form-group mb-3">
         <label for="question-type">نوع پاسخ:</label>
         <select name="type" id="question-type" class="form-control" required>
-          <option value="single">تک پاسخ</option>
-          <option value="multiple">چند گزینه‌ای</option>
+          <option value="yes_no">تک پاسخ</option>
+          <option value="multiple_choice">چند گزینه‌ای</option>
         </select>
       </div>
 
       <div class="form-group mb-3">
         <label for="plan-select">انتخاب طرح:</label>
-        <select name="plan"  id="plan-select" class="form-control plan-select" required>
+        <select name="plans"  id="plan-select" class="form-control plan-select" required>
+          <option value="" selected disabled>مشاهده طرح ها ...</option>
           <!-- گزینه‌ها با جاوااسکریپت اضافه می‌شوند -->
         </select>
       </div>
 
       <div class="form-group mb-3">
         <label for="coverage-select">انتخاب پوشش:</label>
-        <select name="coverage" id="coverage-select" class="form-control" required>
+        <select name="coverages" id="coverage-select" class="form-control coverage-select" required>
+          <option value="" selected disabled>مشاهده پوشش ها ...</option>
           <!-- گزینه‌ها با جاوااسکریپت اضافه می‌شوند -->
         </select>
       </div>
@@ -726,14 +728,17 @@
 
       <div class="form-group mb-3">
         <label for="edit-plan-select">انتخاب طرح:</label>
-        <select name="plan" id="edit-plan-select" class="form-control plan-select">
+        <select name="plans" id="edit-plan-select" class="form-control plan-select">
+          <option value="" selected disabled>مشاهده طرح ها ...</option>
           <!-- گزینه‌ها با JS -->
         </select>
       </div>
 
       <div class="form-group mb-3">
         <label for="edit-coverage-select">انتخاب پوشش:</label>
-        <select name="coverage" id="edit-coverage-select" class="form-control">
+        <select name="coverages" id="edit-coverage-select" class="form-control coverage-select">
+          <option value="" selected disabled>مشاهده پوشش ها ...</option>
+
           <!-- گزینه‌ها با JS -->
         </select>
       </div>
