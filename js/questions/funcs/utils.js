@@ -41,4 +41,18 @@ export const createReq = async (data) => {
   }
 };
 
+export const deleteReq = async (id) => {
+  const req = await fetch(`${API}/questionary/questions/${id}/`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${getCookie("access")}`,
+    },
+  });
 
+  if (req.ok) {
+    return "حذف  سوال با موفقیت انجام شد";
+  } else {
+    const response = await req.json();
+    throw Error(response.detail || convertBackendValidationToMessage(response));
+  }
+};

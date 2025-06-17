@@ -7,7 +7,7 @@ import {
 } from "../../../utils/elem.js";
 import { fetchCoverages } from "../../catalog/coverages/coverages.js";
 import { fetchPlans } from "../../catalog/plans/plans.js";
-import { createReq, fetchQuestions, insertQuestions } from "./utils.js";
+import { createReq, deleteReq, fetchQuestions, insertQuestions } from "./utils.js";
 
 export function showQuestionCreateModal() {
   document.querySelector(".question-create-modal").classList.add("show");
