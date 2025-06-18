@@ -91,3 +91,33 @@ function deleteSelectedQuestions() {
     cb.closest('tr').remove();
   });
 }
+
+
+function addPlanSelect(button) {
+  const container = button.closest('.form-group').querySelector('#plan-select-wrapper');
+  const newRow = button.closest('.plan-select-row').cloneNode(true);
+  newRow.querySelector('select').value = '';
+  container.appendChild(newRow);
+}
+
+function removePlanSelect(button) {
+  const container = button.closest('.form-group').querySelectorAll('.plan-select-row');
+  if (container.length > 1) {
+    button.closest('.plan-select-row').remove();
+  }
+}
+
+function addCoverageSelect(button) {
+  const container = button.closest('.form-group').querySelector('#coverage-select-wrapper');
+  const newRow = button.closest('.coverage-select-row').cloneNode(true);
+  newRow.querySelector('select').value = '';
+  container.appendChild(newRow);
+}
+
+function removeCoverageSelect(button) {
+  const container = button.closest('.form-group').querySelectorAll('.coverage-select-row');
+  if (container.length > 1) {
+    button.closest('.coverage-select-row').remove();
+  }
+}
+
