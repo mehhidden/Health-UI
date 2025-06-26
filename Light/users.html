@@ -1109,5 +1109,18 @@ $(document).on('ifChanged', 'input#btn-check-all-toggle', function (event) {
     <script src="assets/js/pages/datatable.js"></script>
     <script type="module" src="/js/users/index.js"></script>
     <!-- END PAGE JAVASCRIPT -->
+
+    <script>
+      function openUserInfoTab(evt, tabId) {
+        const tabContents = document.querySelectorAll(".tab-content");
+        const tabLinks = document.querySelectorAll(".tab-link");
+
+        tabContents.forEach(tc => tc.classList.remove("active-tab"));
+        tabLinks.forEach(tl => tl.classList.remove("active"));
+
+        document.getElementById(tabId).classList.add("active-tab");
+        evt.currentTarget.classList.add("active");
+      }
+    </script>
   </body>
 </html>
