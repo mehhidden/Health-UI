@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="fontiran.com:license" content="NE29X" />
     <link rel="shortcut icon" href="" />
-
+    <link rel="stylesheet" href="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.css">
     <!-- BEGIN CSS -->
     <link
       href="assets/plugins/bootstrap/bootstrap5/css/bootstrap.rtl.min.css"
@@ -40,13 +40,17 @@
     <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/colors.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/pages/questions.css" />
+    <link rel="stylesheet" href="assets/css/fontawesome/all-fonts.min.css">
+    <link rel="stylesheet" href="assets/css/pages/insuranceForm.css" />
     <!-- END CSS -->
     <!-- BEGIN PAGE CSS -->
     <link
       href="assets/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css"
       rel="stylesheet"
     />
+ 
+
+
     <!-- END PAGE CSS -->
   </head>
   <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">
@@ -577,7 +581,7 @@
               <ul>
                
                 <li>
-                  <a href="questions.html" class="current">  
+                  <a href="questions.html">  
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>سوالات</span>
                   </a>
@@ -604,7 +608,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="insuranceForm.html">
+                  <a href="insuranceForm.html" class="current">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>فرم بیمه گذار</span>
                   </a>
@@ -655,138 +659,90 @@
       <!-- /#sidebar -->
       <!-- END SIDEBAR -->
       <!-- BEGIN PAGE CONTENT -->
-      <div class="card">
+<div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">مدیریت سوالات</h5>
-    <button class="btn btn-success" onclick="showQuestionCreateModal()">
-      <i class="icon-plus"></i> افزودن سوال
+    <h5 class="mb-0">مدیریت بیمه‌گذاران</h5>
+    <button class="btn btn-success" onclick="showInsuredCreateModal()">
+      <i class="icon-plus"></i> افزودن بیمه‌گذار
     </button>
   </div>
 
-  <div class="card-body insurance-card-body">
-  <div class="table-responsive">
-    <table id="question-table" class="table table-bordered text-center">
+  <div class="card-body insurer-card-body" table-responsive>
+    <table id="insured-table" class="table table-bordered text-center">
       <thead>
         <tr>
-          <th><input type="checkbox" id="question-check-all" /></th>
-          <th>شناسه</th>
-          <th>شناسه طرح</th>
-          <th>شناسه پوشش</th>
-          <th>متن سوال</th>
-          <th>نوع پاسخ</th>
+          <th><input type="checkbox" id="insured-check-all" /></th>
+          <th>ردیف</th>
+          <th>نام</th>
+          <th>نام خانوادگی</th>
+          <th>کد ملی</th>
+          <th>شماره تلفن</th>
+          <th>بیمه‌گر پایه</th>
+          <th>ازدواج</th>
+          <th>بیمه‌شده اصلی</th>
+          <th>تاریخ تولد</th>
           <th>عملیات</th>
         </tr>
       </thead>
-      <tbody id="question-table-body">
-        <!-- سطرهای دینامیک -->
-      </tbody>
+      <tbody id="insured-body"></tbody>
     </table>
+    <button class="btn btn-danger mt-2" onclick="deleteSelectedInsured()">حذف انتخاب‌شده‌ها</button>
   </div>
-
-  <button class="btn btn-danger mt-2" onclick="deleteSelectedQuestions()">حذف انتخاب‌شده‌ها</button>
 </div>
 
-</div>
-
-
-<div class="modal question-create-modal">
+<div class="modal insured-create-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeQuestionModals()">&times;</span>
-    <h5 class="modal-title">افزودن سوال</h5>
-    <form onsubmit="createQuestion(event)">
-      <div class="form-group mb-3">
-        <label for="question-text">متن سوال:</label>
-        <input name="text" type="text" id="question-text" class="form-control" placeholder="مثلاً وضعیت سلامت شما؟" required />
+    <span class="modal-close" onclick="closeInsuredModals()">&times;</span>
+    <h5 class="modal-title">افزودن بیمه‌گذار</h5>
+    <form onsubmit="saveInsured(event)">
+      <div class="form-group mb-2">
+      <label for="insured-firstname">نام:</label>
+      <input type="text" id="insured-firstname" class="form-control" required />
+    </div>
+    <div class="form-group mb-2">
+      <label for="insured-lastname">نام خانوادگی:</label>
+      <input type="text" id="insured-lastname" class="form-control" required />
+    </div>
+      <div class="form-group mb-2">
+        <label for="insured-code">کد ملی:</label>
+        <input type="text" id="insured-code" class="form-control" required />
       </div>
-
-      <div class="form-group mb-3">
-        <label for="question-type">نوع پاسخ:</label>
-        <select name="type" id="question-type" class="form-control" required>
-          <option value="yes_no">تک پاسخ</option>
-          <option value="multiple_choice">چند گزینه‌ای</option>
+      <div class="form-group mb-2">
+        <label for="insured-phone">شماره تلفن:</label>
+        <input type="tel" id="insured-phone" class="form-control" required />
+      </div>
+      <div class="form-group mb-2">
+        <label for="insured-basic">بیمه‌گر پایه:</label>
+        <select id="insured-basic" class="form-control" required>
+          <option value="">انتخاب کنید</option>
+          <option>تأمین اجتماعی</option>
+          <option>سلامت</option>
+          <option>نیروهای مسلح</option>
         </select>
       </div>
-
-      
-<div class="form-group mb-3">
-  <label>انتخاب طرح‌ها:</label>
-  <div id="plan-select-wrapper">
-    <div class="d-flex align-items-center mb-2 plan-select-row">
-      <select name="plans[]" class="form-control me-2" required></select>
-      <button type="button" class="btn btn-sm btn-success me-1" onclick="addPlanSelect(this)">+</button>
-      <button type="button" class="btn btn-sm btn-danger" onclick="removePlanSelect(this)">-</button>
-    </div>
-  </div>
-</div>
-
-
-<div class="form-group mb-3">
-  <label>انتخاب پوشش‌ها:</label>
-  <div id="coverage-select-wrapper">
-    <div class="d-flex align-items-center mb-2 coverage-select-row">
-      <select name="coverages[]" class="form-control me-2" required></select>
-      <button type="button" class="btn btn-sm btn-success me-1" onclick="addCoverageSelect(this)">+</button>
-      <button type="button" class="btn btn-sm btn-danger" onclick="removeCoverageSelect(this)">-</button>
-    </div>
-  </div>
-</div>
-
-
+      <div class="form-group mb-2">
+        <label for="insured-married">وضعیت تأهل:</label>
+        <select id="insured-married" class="form-control" required>
+          <option value="true">متأهل</option>
+          <option value="false">مجرد</option>
+        </select>
+      </div>
+      <div class="form-group mb-2">
+        <label for="insured-primary">بیمه‌شده اصلی:</label>
+        <select id="insured-primary" class="form-control" required>
+          <option value="true">بله</option>
+          <option value="false">خیر</option>
+        </select>
+      </div>
+      <div class="form-group mb-2">
+        <label for="insured-birth">تاریخ تولد:</label>
+        <input type="text" id="insured-birth" class="form-control" required data-jdp/>
+      </div>
+      <input type="hidden" id="insured-edit-index" />
       <button class="btn btn-primary mt-3">ذخیره</button>
     </form>
   </div>
 </div>
-
-
-<div class="modal question-edit-modal">
-  <div class="modal-content">
-    <span class="modal-close" onclick="closeQuestionModals()">&times;</span>
-    <h5 class="modal-title">ویرایش سوال</h5>
-    <form onsubmit="editQuestion(event)">
-      <div class="form-group mb-3">
-        <label for="edit-question-text">متن سوال:</label>
-        <input name="text" type="text" id="edit-question-text" class="form-control" />
-      </div>
-
-      <div class="form-group mb-3">
-        <label for="edit-question-type">نوع پاسخ:</label>
-        <select name="type" id="edit-question-type" class="form-control">
-          <option value="yes_no">تک پاسخ</option>
-          <option value="multiple_choice">چند گزینه‌ای</option>
-        </select>
-      </div>
-
-      
-<div class="form-group mb-3">
-  <label>انتخاب طرح‌ها:</label>
-  <div id="plan-select-wrapper">
-    <div class="d-flex align-items-center mb-2 plan-select-row">
-      <select name="plans[]" class="form-control me-2" required></select>
-      <button type="button" class="btn btn-sm btn-success me-1" onclick="addPlanSelect(this)">+</button>
-      <button type="button" class="btn btn-sm btn-danger" onclick="removePlanSelect(this)">-</button>
-    </div>
-  </div>
-</div>
-
-
-<div class="form-group mb-3">
-  <label>انتخاب پوشش‌ها:</label>
-  <div id="coverage-select-wrapper">
-    <div class="d-flex align-items-center mb-2 coverage-select-row">
-      <select name="coverages[]" class="form-control me-2" required></select>
-      <button type="button" class="btn btn-sm btn-success me-1" onclick="addCoverageSelect(this)">+</button>
-      <button type="button" class="btn btn-sm btn-danger" onclick="removeCoverageSelect(this)">-</button>
-    </div>
-  </div>
-</div>
-
-
-      <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
-    </form>
-  </div>
-</div>
-
-
 
 
       <!-- /#page-content -->
@@ -1006,7 +962,7 @@
     </div>
     <!-- /.modal -->
     <!-- END CODE MODAL -->
-
+  
     <div class="sidebar-overlay"></div>
 
     <script type="module" src="/js/shared/shared.js"></script>
@@ -1025,11 +981,13 @@
 
     <!-- BEGIN PAGE JAVASCRIPT -->
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
-    <!-- <script src="assets/js/pages/datatable.js"></script> -->    
-    <script type="module" src="../js/questions/index.js"></script>
-    <script src="../js/questions/funcs/shared.js"></script>
+    <!-- <script src="assets/js/pages/datatable.js"></script> -->
+    <script type="text/javascript" src="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"></script>
+    <script type="module" src="/js/insuranceForm/index.js"></script>
+    <script src="../js/insuranceForm/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
 
 
+ 
   </body>
 </html>

@@ -40,13 +40,17 @@
     <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/colors.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/pages/questions.css" />
+    <link rel="stylesheet" href="assets/css/fontawesome/all-fonts.min.css">
+    <link rel="stylesheet" href="assets/css/pages/basicInsrance.css" />
     <!-- END CSS -->
     <!-- BEGIN PAGE CSS -->
     <link
       href="assets/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css"
       rel="stylesheet"
     />
+ 
+
+
     <!-- END PAGE CSS -->
   </head>
   <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">
@@ -577,7 +581,7 @@
               <ul>
                
                 <li>
-                  <a href="questions.html" class="current">  
+                  <a href="questions.html">  
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>سوالات</span>
                   </a>
@@ -598,7 +602,7 @@
               <ul>
                
                 <li>
-                  <a href="basicInsrance.html">  
+                  <a href="basicInsrance.html" class="current">  
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>بیمه‌گران پایه</span>
                   </a>
@@ -657,136 +661,58 @@
       <!-- BEGIN PAGE CONTENT -->
       <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">مدیریت سوالات</h5>
-    <button class="btn btn-success" onclick="showQuestionCreateModal()">
-      <i class="icon-plus"></i> افزودن سوال
+    <h5 class="mb-0">مدیریت بیمه‌گران پایه</h5>
+    <button class="btn btn-success" onclick="showInsurerCreateModal()">
+      <i class="icon-plus"></i> افزودن بیمه‌گر
     </button>
   </div>
 
-  <div class="card-body insurance-card-body">
-  <div class="table-responsive">
-    <table id="question-table" class="table table-bordered text-center">
+  <div class="card-body insurer-card-body">
+    <table id="insurer-table" class="table table-bordered text-center">
       <thead>
         <tr>
-          <th><input type="checkbox" id="question-check-all" /></th>
-          <th>شناسه</th>
-          <th>شناسه طرح</th>
-          <th>شناسه پوشش</th>
-          <th>متن سوال</th>
-          <th>نوع پاسخ</th>
+          <th><input type="checkbox" id="insurer-check-all" /></th>
+          <th>ردیف</th>
+          <th>نام بیمه‌گر</th>
           <th>عملیات</th>
         </tr>
       </thead>
-      <tbody id="question-table-body">
-        <!-- سطرهای دینامیک -->
+      <tbody id="render-api">
+        <!-- پر میشه از سمت سرور -->
       </tbody>
     </table>
+    <button class="btn btn-danger mt-2" onclick="deleteSelectedInsurers()">حذف انتخاب‌شده‌ها</button>
   </div>
-
-  <button class="btn btn-danger mt-2" onclick="deleteSelectedQuestions()">حذف انتخاب‌شده‌ها</button>
-</div>
-
 </div>
 
 
-<div class="modal question-create-modal">
+<div class="modal insurer-create-modal modal-staicks">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeQuestionModals()">&times;</span>
-    <h5 class="modal-title">افزودن سوال</h5>
-    <form onsubmit="createQuestion(event)">
+    <span class="modal-close" onclick="closeInsurerModals()">&times;</span>
+    <h5 class="modal-title">افزودن بیمه‌گر</h5>
+    <form>
       <div class="form-group mb-3">
-        <label for="question-text">متن سوال:</label>
-        <input name="text" type="text" id="question-text" class="form-control" placeholder="مثلاً وضعیت سلامت شما؟" required />
+        <label for="insurer-name">نام بیمه‌گر:</label>
+        <input type="text" id="insurer-name" class="form-control" placeholder="مثلاً تأمین اجتماعی" />
       </div>
-
-      <div class="form-group mb-3">
-        <label for="question-type">نوع پاسخ:</label>
-        <select name="type" id="question-type" class="form-control" required>
-          <option value="yes_no">تک پاسخ</option>
-          <option value="multiple_choice">چند گزینه‌ای</option>
-        </select>
-      </div>
-
-      
-<div class="form-group mb-3">
-  <label>انتخاب طرح‌ها:</label>
-  <div id="plan-select-wrapper">
-    <div class="d-flex align-items-center mb-2 plan-select-row">
-      <select name="plans[]" class="form-control me-2" required></select>
-      <button type="button" class="btn btn-sm btn-success me-1" onclick="addPlanSelect(this)">+</button>
-      <button type="button" class="btn btn-sm btn-danger" onclick="removePlanSelect(this)">-</button>
-    </div>
-  </div>
-</div>
-
-
-<div class="form-group mb-3">
-  <label>انتخاب پوشش‌ها:</label>
-  <div id="coverage-select-wrapper">
-    <div class="d-flex align-items-center mb-2 coverage-select-row">
-      <select name="coverages[]" class="form-control me-2" required></select>
-      <button type="button" class="btn btn-sm btn-success me-1" onclick="addCoverageSelect(this)">+</button>
-      <button type="button" class="btn btn-sm btn-danger" onclick="removeCoverageSelect(this)">-</button>
-    </div>
-  </div>
-</div>
-
-
-      <button class="btn btn-primary mt-3">ذخیره</button>
+      <button class="btn btn-primary mt-3 save-input">ذخیره</button>
     </form>
   </div>
 </div>
 
-
-<div class="modal question-edit-modal">
+<div class="modal insurer-edit-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeQuestionModals()">&times;</span>
-    <h5 class="modal-title">ویرایش سوال</h5>
-    <form onsubmit="editQuestion(event)">
-      <div class="form-group mb-3">
-        <label for="edit-question-text">متن سوال:</label>
-        <input name="text" type="text" id="edit-question-text" class="form-control" />
+    <span class="modal-close" onclick="closeInsurerModals()">&times;</span>
+    <h5 class="modal-title">ویرایش بیمه‌گر</h5>
+    <form>
+      <div class="form-group">
+        <label>نام بیمه‌گر:</label>
+        <input type="text" class="form-control input-set-save" value="تأمین اجتماعی" />
       </div>
-
-      <div class="form-group mb-3">
-        <label for="edit-question-type">نوع پاسخ:</label>
-        <select name="type" id="edit-question-type" class="form-control">
-          <option value="yes_no">تک پاسخ</option>
-          <option value="multiple_choice">چند گزینه‌ای</option>
-        </select>
-      </div>
-
-      
-<div class="form-group mb-3">
-  <label>انتخاب طرح‌ها:</label>
-  <div id="plan-select-wrapper">
-    <div class="d-flex align-items-center mb-2 plan-select-row">
-      <select name="plans[]" class="form-control me-2" required></select>
-      <button type="button" class="btn btn-sm btn-success me-1" onclick="addPlanSelect(this)">+</button>
-      <button type="button" class="btn btn-sm btn-danger" onclick="removePlanSelect(this)">-</button>
-    </div>
-  </div>
-</div>
-
-
-<div class="form-group mb-3">
-  <label>انتخاب پوشش‌ها:</label>
-  <div id="coverage-select-wrapper">
-    <div class="d-flex align-items-center mb-2 coverage-select-row">
-      <select name="coverages[]" class="form-control me-2" required></select>
-      <button type="button" class="btn btn-sm btn-success me-1" onclick="addCoverageSelect(this)">+</button>
-      <button type="button" class="btn btn-sm btn-danger" onclick="removeCoverageSelect(this)">-</button>
-    </div>
-  </div>
-</div>
-
-
-      <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
+      <button class="btn btn-primary mt-3 btn-edits">ذخیره تغییرات</button>
     </form>
   </div>
 </div>
-
-
 
 
       <!-- /#page-content -->
@@ -1006,7 +932,7 @@
     </div>
     <!-- /.modal -->
     <!-- END CODE MODAL -->
-
+  
     <div class="sidebar-overlay"></div>
 
     <script type="module" src="/js/shared/shared.js"></script>
@@ -1025,11 +951,12 @@
 
     <!-- BEGIN PAGE JAVASCRIPT -->
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
-    <!-- <script src="assets/js/pages/datatable.js"></script> -->    
-    <script type="module" src="../js/questions/index.js"></script>
-    <script src="../js/questions/funcs/shared.js"></script>
+    <!-- <script src="assets/js/pages/datatable.js"></script> -->
+    <script type="module" src="/js/basicInsrance/index.js"></script>
+    <script src="../js/basicInsrance/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
 
 
+ 
   </body>
 </html>
