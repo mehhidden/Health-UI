@@ -199,46 +199,95 @@ export const generateUserEditModalTemplate = (
   `;
 
 
+// export const generateUserInfoModalTemplate = userAllData => `
+//  <div class="user-info-modal-content">
+//     <span onclick="hideInfoModal()" class="user-info-close">&times;</span>
+//     <h2 class="modal-title">مشخصات کاربر</h2>
 
-export const generateUserInfoModalTemplate = userAllData => `
- <div class="user-info-modal-content">
+//     <div class="user-info-field"><strong>نام کاربری:</strong> ${
+//       userAllData.username
+//     }</div>
+//     <div class="user-info-field"><strong>ایمیل:</strong> ${
+//       userAllData.email
+//     }</div>
+//     <div class="user-info-field"><strong>نام:</strong> ${
+//       userAllData.first_name
+//     }</div>
+//     <div class="user-info-field"><strong>نام خانوادگی:</strong> ${
+//       userAllData.last_name
+//     }</div>
+//     <div class="user-info-field"><strong>شماره موبایل:</strong> ${
+//       userAllData.phone_number
+//     }</div>
+//     <div class="user-info-field">
+//       <strong>وضعیت تأیید موبایل:</strong> ${
+//         userAllData.is_phone_number_verified ? "تأیید شده" : "تأیید نشده"
+//       }
+//     </div>
+
+//     <div class="user-info-field">
+//       <strong>گروه‌ها:</strong>
+//       <ul class="user-info-list scrollable-list">
+        
+//         ${userAllData.groups.map((group) => `<li>${group.name}</li>`).join("")}
+//       </ul>
+//     </div>
+
+//     <div class="user-info-field">
+//       <strong>سطوح دسترسی:</strong>
+//       <ul class="user-info-list scrollable-list">
+//         ${userAllData.permissions.map((permission) => `<li>${permission.name}</li>`).join("")}
+//       </ul>
+//     </div>
+//   </div>
+// `
+
+
+export const generateUserInfoModalTemplate = userAllData => ` 
+  <div class="user-info-modal-content">
     <span onclick="hideInfoModal()" class="user-info-close">&times;</span>
     <h2 class="modal-title">مشخصات کاربر</h2>
 
-    <div class="user-info-field"><strong>نام کاربری:</strong> ${
-      userAllData.username
-    }</div>
-    <div class="user-info-field"><strong>ایمیل:</strong> ${
-      userAllData.email
-    }</div>
-    <div class="user-info-field"><strong>نام:</strong> ${
-      userAllData.first_name
-    }</div>
-    <div class="user-info-field"><strong>نام خانوادگی:</strong> ${
-      userAllData.last_name
-    }</div>
-    <div class="user-info-field"><strong>شماره موبایل:</strong> ${
-      userAllData.phone_number
-    }</div>
-    <div class="user-info-field">
-      <strong>وضعیت تأیید موبایل:</strong> ${
-        userAllData.is_phone_number_verified ? "تأیید شده" : "تأیید نشده"
-      }
+    <div class="tabs">
+      <button class="tab-link active" onclick="openUserInfoTab(event, 'basic')">مشخصات پایه</button>
+      <button class="tab-link" onclick="openUserInfoTab(event, 'extra')">اطلاعات تکمیلی</button>
     </div>
 
-    <div class="user-info-field">
-      <strong>گروه‌ها:</strong>
-      <ul class="user-info-list scrollable-list">
-        
-        ${userAllData.groups.map((group) => `<li>${group.name}</li>`).join("")}
-      </ul>
+    <div id="basic" class="tab-content active-tab">
+      <div class="user-info-field"><strong>نام کاربری:</strong> ${userAllData.username}</div>
+      <div class="user-info-field"><strong>ایمیل:</strong> ${userAllData.email}</div>
+      <div class="user-info-field"><strong>نام:</strong> ${userAllData.first_name}</div>
+      <div class="user-info-field"><strong>نام خانوادگی:</strong> ${userAllData.last_name}</div>
+      <div class="user-info-field"><strong>شماره موبایل:</strong> ${userAllData.phone_number}</div>
+      <div class="user-info-field"><strong>وضعیت تأیید موبایل:</strong> ${userAllData.is_phone_number_verified ? "تأیید شده" : "تأیید نشده"}</div>
+      <div class="user-info-field"><strong>گروه‌ها:</strong>
+        <ul class="user-info-list scrollable-list">
+          ${userAllData.groups.map(g => `<li>${g.name}</li>`).join("")}
+        </ul>
+      </div>
+      <div class="user-info-field"><strong>سطوح دسترسی:</strong>
+        <ul class="user-info-list scrollable-list">
+          ${userAllData.permissions.map(p => `<li>${p.name}</li>`).join("")}
+        </ul>
+      </div>
     </div>
 
-    <div class="user-info-field">
-      <strong>سطوح دسترسی:</strong>
-      <ul class="user-info-list scrollable-list">
-        ${userAllData.permissions.map((permission) => `<li>${permission.name}</li>`).join("")}
-      </ul>
+    <div id="extra" class="tab-content">
+      <div class="user-info-field"><strong>استان:</strong> ${userAllData.province || "-"}</div>
+      <div class="user-info-field"><strong>شهر:</strong> ${userAllData.city || "-"}</div>
+      <div class="user-info-field"><strong>آدرس‌ها:</strong>
+        <ul class="user-info-list">
+          ${(userAllData.addresses || []).map(a => `<li>${a}</li>`).join("") || "<li>-</li>"}
+        </ul>
+      </div>
+      <div class="user-info-field"><strong>آدرس پیش‌فرض:</strong> ${userAllData.default_address || "-"}</div>
+      <div class="user-info-field"><strong>بیمه‌گر پایه:</strong> ${userAllData.basic_insured || "-"}</div>
+      <div class="user-info-field"><strong>بانک‌ها:</strong>
+        <ul class="user-info-list">
+          ${(userAllData.banks || []).map(b => `<li>${b}</li>`).join("") || "<li>-</li>"}
+        </ul>
+      </div>
+      <div class="user-info-field"><strong>بانک پیش‌فرض:</strong> ${userAllData.default_bank || "-"}</div>
     </div>
   </div>
 `
