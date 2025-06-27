@@ -1,5 +1,8 @@
+import { getCookie } from "./cookie.js";
+import { API, convertBackendValidationToMessage } from "./data.js";
+
 export const createReq = async ({ data, path, name }) => {
-  const req = await fetch(`${API}/${path}`, {
+  const req = await fetch(`${API}${path}`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${getCookie("access")}`,
@@ -20,7 +23,7 @@ export const createReq = async ({ data, path, name }) => {
 };
 
 export const editReq = async ({ data, path, name, method = "PUT" }) => {
-  const req = await fetch(`${API}/${path}`, {
+  const req = await fetch(`${API}${path}`, {
     method,
     headers: {
       Authorization: `Bearer ${getCookie("access")}`,
@@ -41,7 +44,7 @@ export const editReq = async ({ data, path, name, method = "PUT" }) => {
 };
 
 export const deleteReq = async ({ path, name }) => {
-  const req = await fetch(`${API}/${path}`, {
+  const req = await fetch(`${API}${path}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${getCookie("access")}`,
@@ -61,7 +64,7 @@ export const deleteReq = async ({ path, name }) => {
 };
 
 export const getReq = async (path) => {
-  const req = await fetch(`${API}/${path}`, {
+  const req = await fetch(`${API}${path}`, {
     headers: {
       Authorization: `Bearer ${getCookie("access")}`,
     },

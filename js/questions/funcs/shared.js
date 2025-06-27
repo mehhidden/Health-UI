@@ -6,15 +6,10 @@ import {
   select,
   selectAll,
 } from "../../../utils/elem.js";
+import { createReq, deleteReq } from "../../../utils/request.js";
 import { fetchCoverages } from "../../catalog/coverages/coverages.js";
 import { fetchPlans } from "../../catalog/plans/plans.js";
-import {
-  createReq,
-  deleteReq,
-  editReq,
-  fetchQuestions,
-  insertQuestions,
-} from "./utils.js";
+import { editReq, fetchQuestions, insertQuestions } from "./utils.js";
 
 export function showQuestionCreateModal() {
   document.querySelector(".question-create-modal").classList.add("show");
@@ -50,15 +45,23 @@ export async function createQuestion(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
   const objData = convertFormDataToObj(formData);
+  const createCoverageSelects = [...selectAll(".create-coverage-select")];
+  const createPlanSelects = [...selectAll(".create-plan-select")];
+  objData.plans = createPlanSelects.map((select) => select.value);
+  objData.coverages = createCoverageSelects.map((select) => select.value);
 
   try {
-    console.log(objData)
-    // const response = await createReq(objData);
-    // await renderQuestions();
-    // swal(response, "", "success");
+    console.log(objData);
+    const response = await createReq({
+      data: objData,
+      path: "/questionary/questions/",
+      name: "سوال",
+    });
+    await renderQuestions();
+    swal(response, "", "success");
     closeQuestionModals();
   } catch (error) {
-    swal("خطا در ایجاد سوال", error.message, "error");
+    swal(error.message, "", "error");
   }
 }
 
@@ -108,11 +111,14 @@ export function deleteQuestion(event) {
     async (res) => {
       if (res) {
         try {
-          const response = await deleteReq(trInfo.id);
+          const response = await deleteReq({
+            path: `/questionary/questions/${trInfo.id}/`,
+            name: "سوال",
+          });
           await renderQuestions();
           swal(response, "", "success");
         } catch (error) {
-          swal("خطا در حذف سوال", error.message, "error");
+          swal(error.message, "", "error");
         }
       }
     }
@@ -132,7 +138,11 @@ export function deleteSelectedQuestions() {
           const infos = [...selected].map(
             (cb) => JSON.parse(cb.closest("tr").dataset.info).id
           );
-          const promices = infos.map((id) => deleteReq(id));
+          const promices = infos.map((id) =>
+            deleteReq({
+              path: `/questionary/questions/${id}/`,
+            })
+          );
           await Promise.all(promices);
           await renderQuestions();
           swal("سوال ها با موفقیت حذف شدند", "", "success");
@@ -179,32 +189,38 @@ export const renderSelectBoxes = () => {
   renderCoveragesSelectBox();
 };
 
-
 export function addPlanSelect(button) {
-  const container = button.closest('.form-group').querySelector('#plan-select-wrapper');
-  const newRow = button.closest('.plan-select-row').cloneNode(true);
-  newRow.querySelector('select').value = '';
+  const container = button
+    .closest(".form-group")
+    .querySelector("#plan-select-wrapper");
+  const newRow = button.closest(".plan-select-row").cloneNode(true);
+  newRow.querySelector("select").value = "";
   container.appendChild(newRow);
 }
 
 export function removePlanSelect(button) {
-  const container = button.closest('.form-group').querySelectorAll('.plan-select-row');
+  const container = button
+    .closest(".form-group")
+    .querySelectorAll(".plan-select-row");
   if (container.length > 1) {
-    button.closest('.plan-select-row').remove();
+    button.closest(".plan-select-row").remove();
   }
 }
 
 export function addCoverageSelect(button) {
-  const container = button.closest('.form-group').querySelector('#coverage-select-wrapper');
-  const newRow = button.closest('.coverage-select-row').cloneNode(true);
-  newRow.querySelector('select').value = '';
+  const container = button
+    .closest(".form-group")
+    .querySelector("#coverage-select-wrapper");
+  const newRow = button.closest(".coverage-select-row").cloneNode(true);
+  newRow.querySelector("select").value = "";
   container.appendChild(newRow);
 }
 
 export function removeCoverageSelect(button) {
-  const container = button.closest('.form-group').querySelectorAll('.coverage-select-row');
+  const container = button
+    .closest(".form-group")
+    .querySelectorAll(".coverage-select-row");
   if (container.length > 1) {
-    button.closest('.coverage-select-row').remove();
+    button.closest(".coverage-select-row").remove();
   }
 }
-

@@ -1,6 +1,7 @@
 import { getCookie } from "../../../utils/cookie.js";
 import { API, convertBackendValidationToMessage } from "../../../utils/data.js";
 import { insertTemplateToElement, select } from "../../../utils/elem.js";
+import { getReq } from "../../../utils/request.js";
 import { generateQuestionsTemplate } from "./template.js";
 
 const questionsWrapper = select("#question-table-body");
@@ -9,53 +10,10 @@ export const insertQuestions = (questions) => {
   insertTemplateToElement(template, questionsWrapper);
 };
 
-export const fetchQuestions = async () => {
-  const req = await fetch(`${API}/questionary/questions/`, {
-    headers: {
-      Authorization: `Bearer ${getCookie("access")}`,
-    },
-  });
-  return (await req.json()).results.results;
-};
+export const fetchQuestions = async () => 
+  (await getReq("/questionary/questions/")).results.results;
 
-export const createReq = async (data) => {
-  const req = await fetch(`${API}/questionary/questions/`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${getCookie("access")}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      ...data,
-      plans: [data.plans],
-      coverages: [data.coverages],
-    }),
-  });
 
-  const response = await req.json();
-
-  if (req.ok) {
-    return response.detail || "ساخت سوال با موفقیت انجام شد";
-  } else {
-    throw Error(convertBackendValidationToMessage(response));
-  }
-};
-
-export const deleteReq = async (id) => {
-  const req = await fetch(`${API}/questionary/questions/${id}/`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${getCookie("access")}`,
-    },
-  });
-
-  if (req.ok) {
-    return "حذف  سوال با موفقیت انجام شد";
-  } else {
-    const response = await req.json();
-    throw Error(response.detail || convertBackendValidationToMessage(response));
-  }
-};
 
 export const editReq = async (id, data) => {
   const req = await fetch(`${API}/questionary/questions/${id}/`, {
