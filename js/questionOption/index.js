@@ -3,9 +3,11 @@ import {
   createQuestionOption,
   deleteQuestionOption,
   deleteSelectedQuestionOptions,
+  editQuestionOption,
   renderOptions,
   renderSelectBoxes,
   showQuestionOptionCreateModal,
+  showQuestionOptionEditModal,
 } from "./funcs/shared.js";
 
 window.addEventListener("load", () => {
@@ -17,4 +19,6 @@ window.addEventListener("load", () => {
   window.closeQuestionOptionModals = closeQuestionOptionModals
   window.deleteQuestionOption = deleteQuestionOption
   window.deleteSelectedQuestionOptions = deleteSelectedQuestionOptions
+  window.showQuestionOptionEditModal = showQuestionOptionEditModal
+  window.editQuestionOption = editQuestionOption
 });

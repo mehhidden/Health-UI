@@ -95,29 +95,6 @@ export async function editQuestion(event) {
   }
 }
 
-export function addQuestionToTable(question) {
-  const tbody = document.getElementById("question-table-body");
-  const tr = document.createElement("tr");
-
-  tr.innerHTML = `
-    <td><input type="checkbox" data-id="${question.id}"></td>
-    <td>${question.id}</td>
-    <td>${question.planId}</td>
-    <td>${question.coverageId}</td>
-    <td>${question.text}</td>
-    <td>${question.type === "single" ? "تک پاسخ" : "چند گزینه‌ای"}</td>
-    <td>
-      <button class="edit-btn" onclick='showQuestionEditModal(${JSON.stringify(
-        question
-      )})'>ویرایش</button>
-      <button class="delete-btn" onclick='deleteQuestion(${
-        question.id
-      })'>حذف</button>
-    </td>
-  `;
-
-  tbody.appendChild(tr);
-}
 
 export function deleteQuestion(event) {
   const trInfo = getTrInfo(event);

@@ -6,7 +6,12 @@ import {
   select,
   selectAll,
 } from "../../../utils/elem.js";
-import { createReq, deleteReq, getReq } from "../../../utils/request.js";
+import {
+  createReq,
+  deleteReq,
+  editReq,
+  getReq,
+} from "../../../utils/request.js";
 import { fetchQuestions } from "../../questions/funcs/utils.js";
 import { generateOptionsTemplate } from "./template.js";
 
@@ -15,19 +20,18 @@ export function showQuestionOptionCreateModal() {
   document.querySelector(".question-option-create-modal").classList.add("show");
 }
 
-// نمایش مودال ویرایش
-export function showQuestionOptionEditModal(optionId) {
-  const modal = document.querySelector(".question-option-edit-modal");
-  modal.classList.add("show");
+const editModal = document.querySelector(".question-option-edit-modal");
+const editModalInputs = [...editModal.querySelectorAll("input, select")];
 
-  const option = questionOptions.find((q) => q.id === optionId);
-  if (!option) return;
+export function showQuestionOptionEditModal(event) {
+  editModal.classList.add("show");
 
-  modal.querySelector('[name="option_text"]').value = option.option_text;
-  modal.querySelector('[name="impact"]').value = option.impact;
-  fillQuestionSelect("edit-question-select", option.question_id);
+  const trInfo = getTrInfo(event);
+  editModal.dataset.id = trInfo.id;
 
-  modal.dataset.id = optionId;
+  editModalInputs.forEach((input) => {
+    input.value = trInfo[input.name];
+  });
 }
 
 const allModals = document.querySelectorAll(".modal");
@@ -63,24 +67,22 @@ export async function createQuestionOption(event) {
 }
 
 // ویرایش گزینه
-export function editQuestionOption(event) {
+export async function editQuestionOption(event) {
   event.preventDefault();
+  const formData = new FormData(event.target);
+  const objData = convertFormDataToObj(formData);
 
-  const form = event.target;
-  const id = Number(
-    document.querySelector(".question-option-edit-modal").dataset.id
-  );
-  const index = questionOptions.findIndex((q) => q.id === id);
-
-  if (index !== -1) {
-    questionOptions[index] = {
-      id,
-      question_id: Number(form.question_id.value),
-      option_text: form.option_text.value,
-      impact: Number(form.impact.value),
-    };
-    renderTable();
+  try {
+    const response = await editReq({
+      data: objData,
+      path: `/questionary/question-options/${editModal.dataset.id}/`,
+      name: objData.text,
+    });
+    swal(response, "", "success");
     closeQuestionOptionModals();
+    renderOptions();
+  } catch (error) {
+    swal(error.messsage, "", "error");
   }
 }
 
