@@ -40,3 +40,34 @@ export const setStyleToEl = (el, styleObj) => {
     el.style[key] = styleObj[key];
   });
 };
+
+export const generateSelectOptionsTemplate = (
+  items,
+  valueKey,
+  labelKey,
+  config = {
+    disabledValues: [""],
+    disabledLabels: [""],
+    selectedValues: [""],
+    selectedLabels: [""],
+  }
+) =>
+  items
+    .map((item) => {
+      const disabled =
+        config.disabledValues?.includes(item[valueKey]) ||
+        config.disabledLabels?.includes(item[labelKey]);
+      const selected =
+        config.selectedValues?.includes(item[valueKey]) ||
+        config.selectedLabels?.includes(item[labelKey]);
+      return `
+        <option
+          value="${item[valueKey]}"
+          ${disabled ? "disabled" : ""}
+          ${selected ? "selected" : ""}
+        >
+          ${item[labelKey]}
+        </option>
+      `;
+    })
+    .join("");

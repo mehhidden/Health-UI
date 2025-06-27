@@ -707,12 +707,29 @@
         </select>
       </div>
 
+      <!-- <div class="form-group mb-3">
+        <label for="plan-select">انتخاب طرح:</label>
+        <select name="plans"  id="plan-select" class="form-control plan-select" required>
+          <option value="" selected disabled>مشاهده طرح ها ...</option>
+          گزینه‌ها با جاوااسکریپت اضافه می‌شوند
+        </select>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="coverage-select">انتخاب پوشش:</label>
+        <select name="coverages" id="coverage-select" class="form-control coverage-select" required>
+          <option value="" selected disabled>مشاهده پوشش ها ...</option>
+          گزینه‌ها با جاوااسکریپت اضافه می‌شوند
+        </select>
+      </div> -->
       
 <div class="form-group mb-3">
   <label>انتخاب طرح‌ها:</label>
   <div id="plan-select-wrapper">
     <div class="d-flex align-items-center mb-2 plan-select-row">
-      <select name="plans[]" class="form-control me-2" required></select>
+      <select  class="form-control me-2 plan-select create-plan-select" required>
+        <option value="" selected disabled>مشاهده طرح ها ...</option>
+      </select>
       <button type="button" class="btn btn-sm btn-success me-1" onclick="addPlanSelect(this)">+</button>
       <button type="button" class="btn btn-sm btn-danger" onclick="removePlanSelect(this)">-</button>
     </div>
@@ -724,7 +741,9 @@
   <label>انتخاب پوشش‌ها:</label>
   <div id="coverage-select-wrapper">
     <div class="d-flex align-items-center mb-2 coverage-select-row">
-      <select name="coverages[]" class="form-control me-2" required></select>
+      <select  class="form-control me-2 coverage-select create-coverage-select" required>
+        <option value="" selected disabled>مشاهده پوشش ها ...</option>
+      </select>
       <button type="button" class="btn btn-sm btn-success me-1" onclick="addCoverageSelect(this)">+</button>
       <button type="button" class="btn btn-sm btn-danger" onclick="removeCoverageSelect(this)">-</button>
     </div>
@@ -742,46 +761,8 @@
   <div class="modal-content">
     <span class="modal-close" onclick="closeQuestionModals()">&times;</span>
     <h5 class="modal-title">ویرایش سوال</h5>
-    <form onsubmit="editQuestion(event)">
-      <div class="form-group mb-3">
-        <label for="edit-question-text">متن سوال:</label>
-        <input name="text" type="text" id="edit-question-text" class="form-control" />
-      </div>
-
-      <div class="form-group mb-3">
-        <label for="edit-question-type">نوع پاسخ:</label>
-        <select name="type" id="edit-question-type" class="form-control">
-          <option value="yes_no">تک پاسخ</option>
-          <option value="multiple_choice">چند گزینه‌ای</option>
-        </select>
-      </div>
-
+    <form onsubmit="editQuestion(event)" id="edit-question-form">
       
-<div class="form-group mb-3">
-  <label>انتخاب طرح‌ها:</label>
-  <div id="plan-select-wrapper">
-    <div class="d-flex align-items-center mb-2 plan-select-row">
-      <select name="plans[]" class="form-control me-2" required></select>
-      <button type="button" class="btn btn-sm btn-success me-1" onclick="addPlanSelect(this)">+</button>
-      <button type="button" class="btn btn-sm btn-danger" onclick="removePlanSelect(this)">-</button>
-    </div>
-  </div>
-</div>
-
-
-<div class="form-group mb-3">
-  <label>انتخاب پوشش‌ها:</label>
-  <div id="coverage-select-wrapper">
-    <div class="d-flex align-items-center mb-2 coverage-select-row">
-      <select name="coverages[]" class="form-control me-2" required></select>
-      <button type="button" class="btn btn-sm btn-success me-1" onclick="addCoverageSelect(this)">+</button>
-      <button type="button" class="btn btn-sm btn-danger" onclick="removeCoverageSelect(this)">-</button>
-    </div>
-  </div>
-</div>
-
-
-      <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
     </form>
   </div>
 </div>
@@ -1027,7 +1008,6 @@
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
     <!-- <script src="assets/js/pages/datatable.js"></script> -->    
     <script type="module" src="../js/questions/index.js"></script>
-    <script src="../js/questions/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
 
 
