@@ -686,11 +686,11 @@
         </select>
       </div>
 
-      <div class="form-group mb-3">
+      <!-- <div class="form-group mb-3">
         <label for="plan-select">انتخاب طرح:</label>
         <select name="plans"  id="plan-select" class="form-control plan-select" required>
           <option value="" selected disabled>مشاهده طرح ها ...</option>
-          <!-- گزینه‌ها با جاوااسکریپت اضافه می‌شوند -->
+          گزینه‌ها با جاوااسکریپت اضافه می‌شوند
         </select>
       </div>
 
@@ -698,9 +698,37 @@
         <label for="coverage-select">انتخاب پوشش:</label>
         <select name="coverages" id="coverage-select" class="form-control coverage-select" required>
           <option value="" selected disabled>مشاهده پوشش ها ...</option>
-          <!-- گزینه‌ها با جاوااسکریپت اضافه می‌شوند -->
+          گزینه‌ها با جاوااسکریپت اضافه می‌شوند
         </select>
-      </div>
+      </div> -->
+      
+<div class="form-group mb-3">
+  <label>انتخاب طرح‌ها:</label>
+  <div id="plan-select-wrapper">
+    <div class="d-flex align-items-center mb-2 plan-select-row">
+      <select name="plans" class="form-control me-2 plan-select" required>
+        <option value="" selected disabled>مشاهده طرح ها ...</option>
+      </select>
+      <button type="button" class="btn btn-sm btn-success me-1" onclick="addPlanSelect(this)">+</button>
+      <button type="button" class="btn btn-sm btn-danger" onclick="removePlanSelect(this)">-</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="form-group mb-3">
+  <label>انتخاب پوشش‌ها:</label>
+  <div id="coverage-select-wrapper">
+    <div class="d-flex align-items-center mb-2 coverage-select-row">
+      <select name="coverages" class="form-control me-2 coverage-select" required>
+        <option value="" selected disabled>مشاهده پوشش ها ...</option>
+      </select>
+      <button type="button" class="btn btn-sm btn-success me-1" onclick="addCoverageSelect(this)">+</button>
+      <button type="button" class="btn btn-sm btn-danger" onclick="removeCoverageSelect(this)">-</button>
+    </div>
+  </div>
+</div>
+
 
       <button class="btn btn-primary mt-3">ذخیره</button>
     </form>
@@ -742,6 +770,34 @@
           <!-- گزینه‌ها با JS -->
         </select>
       </div>
+      
+<div class="form-group mb-3">
+  <label>انتخاب طرح‌ها:</label>
+  <div id="plan-select-wrapper">
+    <div class="d-flex align-items-center mb-2 plan-select-row">
+      <select name="plans" class="form-control me-2 plan-select" required>
+        <option value="" selected disabled>مشاهده طرح ها ...</option>
+      </select>
+      <button type="button" class="btn btn-sm btn-success me-1" onclick="addPlanSelect(this)">+</button>
+      <button type="button" class="btn btn-sm btn-danger" onclick="removePlanSelect(this)">-</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="form-group mb-3">
+  <label>انتخاب پوشش‌ها:</label>
+  <div id="coverage-select-wrapper">
+    <div class="d-flex align-items-center mb-2 coverage-select-row">
+      <select name="coverages" class="form-control me-2 plan-select" required>
+        <option value="" selected disabled>مشاهده پوشش ها ...</option>
+      </select>
+      <button type="button" class="btn btn-sm btn-success me-1" onclick="addCoverageSelect(this)">+</button>
+      <button type="button" class="btn btn-sm btn-danger" onclick="removeCoverageSelect(this)">-</button>
+    </div>
+  </div>
+</div>
+
 
       <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
     </form>

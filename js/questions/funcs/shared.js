@@ -52,9 +52,10 @@ export async function createQuestion(event) {
   const objData = convertFormDataToObj(formData);
 
   try {
-    const response = await createReq(objData);
-    await renderQuestions();
-    swal(response, "", "success");
+    console.log(objData)
+    // const response = await createReq(objData);
+    // await renderQuestions();
+    // swal(response, "", "success");
     closeQuestionModals();
   } catch (error) {
     swal("خطا در ایجاد سوال", error.message, "error");
@@ -177,3 +178,33 @@ export const renderSelectBoxes = () => {
   renderPlansSelectBox();
   renderCoveragesSelectBox();
 };
+
+
+export function addPlanSelect(button) {
+  const container = button.closest('.form-group').querySelector('#plan-select-wrapper');
+  const newRow = button.closest('.plan-select-row').cloneNode(true);
+  newRow.querySelector('select').value = '';
+  container.appendChild(newRow);
+}
+
+export function removePlanSelect(button) {
+  const container = button.closest('.form-group').querySelectorAll('.plan-select-row');
+  if (container.length > 1) {
+    button.closest('.plan-select-row').remove();
+  }
+}
+
+export function addCoverageSelect(button) {
+  const container = button.closest('.form-group').querySelector('#coverage-select-wrapper');
+  const newRow = button.closest('.coverage-select-row').cloneNode(true);
+  newRow.querySelector('select').value = '';
+  container.appendChild(newRow);
+}
+
+export function removeCoverageSelect(button) {
+  const container = button.closest('.form-group').querySelectorAll('.coverage-select-row');
+  if (container.length > 1) {
+    button.closest('.coverage-select-row').remove();
+  }
+}
+

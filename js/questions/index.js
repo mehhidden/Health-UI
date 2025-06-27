@@ -1,10 +1,14 @@
 import {
+  addCoverageSelect,
+  addPlanSelect,
   addQuestionToTable,
   closeQuestionModals,
   createQuestion,
   deleteQuestion,
   deleteSelectedQuestions,
   editQuestion,
+  removeCoverageSelect,
+  removePlanSelect,
   renderQuestions,
   renderSelectBoxes,
   showQuestionCreateModal,
@@ -12,8 +16,8 @@ import {
 } from "./funcs/shared.js";
 
 window.addEventListener("load", () => {
-  renderQuestions()
-  renderSelectBoxes()
+  renderQuestions();
+  renderSelectBoxes();
 
   window.showQuestionCreateModal = showQuestionCreateModal;
   window.showQuestionEditModal = showQuestionEditModal;
@@ -23,4 +27,8 @@ window.addEventListener("load", () => {
   window.addQuestionToTable = addQuestionToTable;
   window.deleteQuestion = deleteQuestion;
   window.deleteSelectedQuestions = deleteSelectedQuestions;
+  window.addPlanSelect = addPlanSelect;
+  window.removePlanSelect = removePlanSelect;
+  window.addCoverageSelect = addCoverageSelect;
+  window.removeCoverageSelect = removeCoverageSelect;
 });

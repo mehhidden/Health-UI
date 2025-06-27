@@ -7,7 +7,7 @@
   margin-left: 60px;
 }
 
-/* مودال عمومی */
+
 .modal {
   display: none;
   position: fixed;
@@ -30,6 +30,8 @@
   max-width: 90%;
   position: relative;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  max-height: 90vh; 
+  overflow-y: auto; 
 }
 
 .modal-close {
@@ -45,7 +47,7 @@
   color: #000;
 }
 
-/* دکمه آپلود فایل */
+
 .file-upload-btn {
   cursor: pointer;
   padding: 8px 15px;
@@ -62,7 +64,7 @@
   color: white;
 }
 
-/* دکمه ویرایش */
+
 .edit-btn {
   background-color: #03a9f4;
   color: white;
@@ -76,7 +78,7 @@
   background-color: #36c0ff;
 }
 
-/* دکمه حذف */
+
 .delete-btn {
   background-color: #f44336;
   color: white;
@@ -90,7 +92,7 @@
   background-color: #ce0000;
 }
 
-/* استایل فرم در مودال */
+
 .modal form {
   display: flex;
   flex-direction: column;
@@ -105,7 +107,7 @@
   border-radius: 6px;
 }
 
-/* جدول */
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -125,12 +127,12 @@
   font-size: 0.95rem;
 }
 
-/* چک‌باکس */
+
 .table input[type="checkbox"] {
   transform: scale(1.2);
 }
 
-/* ریسپانسیو */
+
 @media (max-width: 991px) {
   .insurance-card-body {
     margin-right: 0;
@@ -161,7 +163,7 @@
   }
 }
 
-/* برای ساختار کارت در موبایل */
+
 @media (max-width: 767px) {
   .card-header {
     flex-direction: column;
@@ -202,10 +204,35 @@
   }
 
   .table {
-    min-width: 650px; /* اجازه اسکرول افقی */
+    min-width: 650px; 
   }
 
   .btn-danger {
     width: 100%;
+  }
+}
+
+
+
+.plan-select-row .btn,
+.coverage-select-row .btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  text-align: center;
+  line-height: 1;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@media (max-width: 767px) {
+  .plan-select-row .btn,
+  .coverage-select-row .btn {
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
   }
 }
