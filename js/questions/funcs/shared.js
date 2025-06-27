@@ -6,28 +6,34 @@ import {
   select,
   selectAll,
 } from "../../../utils/elem.js";
-import { createReq, deleteReq } from "../../../utils/request.js";
+import { createReq, deleteReq, editReq } from "../../../utils/request.js";
 import { fetchCoverages } from "../../catalog/coverages/coverages.js";
 import { fetchPlans } from "../../catalog/plans/plans.js";
-import { editReq, fetchQuestions, insertQuestions } from "./utils.js";
+import { generateQuestionEditFormTemplate } from "./template.js";
+import { fetchQuestions, insertQuestions } from "./utils.js";
 
 export function showQuestionCreateModal() {
   document.querySelector(".question-create-modal").classList.add("show");
 }
 
+let allPlans = [];
+let allCoverages = [];
+
 const editModalEl = select(".question-edit-modal");
-const editModalInputs = [...editModalEl.querySelectorAll("input, select")];
+const editModalForm = select("#edit-question-form");
 export function showQuestionEditModal(event) {
   const trInfo = getTrInfo(event);
 
   editModalEl.classList.add("show");
   editModalEl.dataset.id = trInfo.id;
 
-  console.log(editModalInputs);
+  const template = generateQuestionEditFormTemplate(
+    trInfo,
+    allPlans,
+    allCoverages
+  );
 
-  editModalInputs.forEach((input) => {
-    input.value = trInfo[input.name];
-  });
+  insertTemplateToElement(template, editModalForm);
 }
 
 const allModals = document.querySelectorAll(".modal");
@@ -51,7 +57,6 @@ export async function createQuestion(event) {
   objData.coverages = createCoverageSelects.map((select) => select.value);
 
   try {
-    console.log(objData);
     const response = await createReq({
       data: objData,
       path: "/questionary/questions/",
@@ -71,13 +76,22 @@ export async function editQuestion(event) {
   const id = editModalEl.dataset.id;
   const formData = new FormData(event.target);
   const objData = convertFormDataToObj(formData);
+  const editCoverageSelects = [...selectAll(".edit-coverage-select")];
+  const editPlanSelects = [...selectAll(".edit-plan-select")];
+  objData.plans = editPlanSelects.map((select) => select.value);
+  objData.coverages = editCoverageSelects.map((select) => select.value);
   try {
-    const response = await editReq(id, objData);
+
+    const response = await editReq({
+      data: objData,
+      path: `/questionary/questions/${id}/`,
+      name: "سوال",
+    });
     await renderQuestions();
     swal(response, "", "success");
     closeQuestionModals();
   } catch (error) {
-    swal("خطا در ویرایش سوال", error.message, "error");
+    swal(error.message, "", "error");
   }
 }
 
@@ -162,6 +176,7 @@ export const renderQuestions = async () => {
 const planSelects = selectAll(".plan-select");
 const renderPlansSelectBox = async () => {
   const plans = (await fetchPlans()).results.results;
+  allPlans = plans;
   const planOptionsTemplate = generateSelectOptionsTemplate(
     plans,
     "id",
@@ -174,6 +189,7 @@ const renderPlansSelectBox = async () => {
 const coverageSelects = selectAll(".coverage-select");
 const renderCoveragesSelectBox = async () => {
   const coverages = await fetchCoverages();
+  allCoverages = coverages;
   const planOptionsTemplate = generateSelectOptionsTemplate(
     coverages,
     "id",
