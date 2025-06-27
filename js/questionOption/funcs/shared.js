@@ -1,131 +1,173 @@
-let questionOptions = [];
-let questions = []; // این لیست از سرور یا AJAX باید پر شود
+import { convertFormDataToObj } from "../../../utils/data.js";
+import {
+  generateSelectOptionsTemplate,
+  getTrInfo,
+  insertTemplateToElement,
+  select,
+  selectAll,
+} from "../../../utils/elem.js";
+import {
+  createReq,
+  deleteReq,
+  editReq,
+  getReq,
+} from "../../../utils/request.js";
+import { fetchQuestions } from "../../questions/funcs/utils.js";
+import { generateOptionsTemplate } from "./template.js";
 
 // نمایش مودال افزودن
-function showQuestionOptionCreateModal() {
-  document.querySelector('.question-option-create-modal').classList.add('show');
-  fillQuestionSelect('question-select');
+export function showQuestionOptionCreateModal() {
+  document.querySelector(".question-option-create-modal").classList.add("show");
 }
 
-// نمایش مودال ویرایش
-function showQuestionOptionEditModal(optionId) {
-  const modal = document.querySelector('.question-option-edit-modal');
-  modal.classList.add('show');
+const editModal = document.querySelector(".question-option-edit-modal");
+const editModalInputs = [...editModal.querySelectorAll("input, select")];
 
-  const option = questionOptions.find(q => q.id === optionId);
-  if (!option) return;
+export function showQuestionOptionEditModal(event) {
+  editModal.classList.add("show");
 
-  modal.querySelector('[name="option_text"]').value = option.option_text;
-  modal.querySelector('[name="impact"]').value = option.impact;
-  fillQuestionSelect('edit-question-select', option.question_id);
+  const trInfo = getTrInfo(event);
+  editModal.dataset.id = trInfo.id;
 
-  modal.dataset.id = optionId;
+  editModalInputs.forEach((input) => {
+    input.value = trInfo[input.name];
+  });
 }
 
-// بستن هر دو مودال
-function closeQuestionOptionModals() {
-  document.querySelectorAll('.modal').forEach(m => m.classList.remove('show'));
-}
-
-// پر کردن select سوال‌ها
-function fillQuestionSelect(selectId, selectedId = null) {
-  const select = document.getElementById(selectId);
-  select.innerHTML = questions.map(q => `
-    <option value="${q.id}" ${q.id === selectedId ? 'selected' : ''}>${q.text}</option>
-  `).join('');
+const allModals = document.querySelectorAll(".modal");
+const allModalsInputs = [...allModals].map((modal) => [
+  ...modal.querySelectorAll("select, input"),
+]);
+export function closeQuestionOptionModals() {
+  allModals.forEach((modal) => modal.classList.remove("show"));
+  allModalsInputs.forEach((inputs) =>
+    inputs.forEach((input) => (input.value = ""))
+  );
 }
 
 // ایجاد گزینه جدید
-function createQuestionOption(event) {
+export async function createQuestionOption(event) {
   event.preventDefault();
+  const formData = new FormData(event.target);
+  const objData = convertFormDataToObj(formData);
 
-  const form = event.target;
-  const option = {
-    id: Date.now(),
-    question_id: Number(form.question_id.value),
-    option_text: form.option_text.value,
-    impact: Number(form.impact.value),
-  };
-
-  questionOptions.push(option);
-  appendOptionToTable(option);
-  form.reset();
-  closeQuestionOptionModals();
-}
-
-// ویرایش گزینه
-function editQuestionOption(event) {
-  event.preventDefault();
-
-  const form = event.target;
-  const id = Number(document.querySelector('.question-option-edit-modal').dataset.id);
-  const index = questionOptions.findIndex(q => q.id === id);
-
-  if (index !== -1) {
-    questionOptions[index] = {
-      id,
-      question_id: Number(form.question_id.value),
-      option_text: form.option_text.value,
-      impact: Number(form.impact.value),
-    };
-    renderTable();
+  try {
+    const response = await createReq({
+      data: objData,
+      path: "/questionary/question-options/",
+      name: objData.text,
+    });
     closeQuestionOptionModals();
+
+    swal(response, "", "success");
+    renderOptions();
+  } catch (error) {
+    swal(error.messsage, "", "error");
   }
 }
 
-// افزودن به جدول
-function appendOptionToTable(option) {
-  const tbody = document.getElementById('question-option-table-body');
-  const questionText = (questions.find(q => q.id === option.question_id) || {}).text || '---';
+// ویرایش گزینه
+export async function editQuestionOption(event) {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const objData = convertFormDataToObj(formData);
 
-  const tr = document.createElement('tr');
-  tr.innerHTML = `
-    <td><input type="checkbox" data-id="${option.id}"></td>
-    <td>${option.id}</td>
-    <td>${option.question_id}</td>
-    <td>${option.option_text}</td>
-    <td>${option.impact}%</td>
-    <td>
-      <button class="edit-btn" onclick="showQuestionOptionEditModal(${option.id})">ویرایش</button>
-      <button class="delete-btn" onclick="deleteQuestionOption(${option.id})">حذف</button>
-    </td>
-  `;
-  tbody.appendChild(tr);
+  try {
+    const response = await editReq({
+      data: objData,
+      path: `/questionary/question-options/${editModal.dataset.id}/`,
+      name: objData.text,
+    });
+    swal(response, "", "success");
+    closeQuestionOptionModals();
+    renderOptions();
+  } catch (error) {
+    swal(error.messsage, "", "error");
+  }
 }
 
-// بازسازی جدول
-function renderTable() {
-  const tbody = document.getElementById('question-option-table-body');
-  tbody.innerHTML = '';
-  questionOptions.forEach(option => appendOptionToTable(option));
+const optionsTable = select("#question-option-table-body");
+export async function renderOptions() {
+  const options = (await getReq("/questionary/question-options/")).results
+    .results;
+  const template = generateOptionsTemplate(options);
+
+  insertTemplateToElement(template, optionsTable);
 }
 
 // حذف گزینه تکی
-function deleteQuestionOption(id) {
-  questionOptions = questionOptions.filter(q => q.id !== id);
-  renderTable();
+export function deleteQuestionOption(event) {
+  const trInfo = getTrInfo(event);
+
+  swal(`آیا از حذف "${trInfo.text}" اطمینان دارید؟`, "", "question").then(
+    async (res) => {
+      if (res) {
+        try {
+          const response = await deleteReq({
+            path: `/questionary/question-options/${trInfo.id}/`,
+            name: trInfo.text,
+          });
+
+          swal(response, "", "success");
+          renderOptions();
+        } catch (error) {
+          swal(error.message, "", "error");
+        }
+      }
+    }
+  );
 }
 
 // حذف گروهی
-function deleteSelectedQuestionOptions() {
-  const selected = Array.from(document.querySelectorAll('#question-option-table-body input[type="checkbox"]:checked'))
-    .map(input => Number(input.dataset.id));
+export function deleteSelectedQuestionOptions() {
+  const selected = selectAll(
+    '#question-option-table-body input[type="checkbox"]:checked'
+  );
 
-  if (selected.length === 0) return;
+  if (!selected.length) return swal("هیچ آیتمی انتخاب نشده است", "", "warning");
 
-  questionOptions = questionOptions.filter(q => !selected.includes(q.id));
-  renderTable();
+  swal(
+    `آیا از حذف  ${selected.length} گزینه اطمینان دارید؟`,
+    "",
+    "question"
+  ).then(async (res) => {
+    if (res) {
+      try {
+        const infos = [...selected].map(
+          (cb) => JSON.parse(cb.closest("tr").dataset.info).id
+        );
+        const promises = infos.map((id) =>
+          deleteReq({
+            path: `/questionary/question-options/${id}/`,
+            name: "",
+          })
+        );
+
+        await Promise.all(promises);
+
+        swal(`حذف ${selected.length} گزینه با موفقیت انجام شد`, "", "success");
+        renderOptions();
+      } catch (error) {
+        swal(error.message, "", "error");
+      }
+    }
+  });
 }
 
 // انتخاب همه
-document.getElementById('question-option-check-all').addEventListener('change', function () {
-  const checkboxes = document.querySelectorAll('#question-option-table-body input[type="checkbox"]');
-  checkboxes.forEach(c => c.checked = this.checked);
-});
-
-// شبیه‌سازی داده سوال‌ها (موقت)
-questions = [
-  { id: 1, text: 'میزان رضایت از خدمات' },
-  { id: 2, text: 'میزان آگاهی از بیمه' },
-  { id: 3, text: 'آشنایی با نماینده' }
-];
+// document
+//   .getElementById("question-option-check-all")
+//   .addEventListener("change", function () {
+//     const checkboxes = document.querySelectorAll(
+//       '#question-option-table-body input[type="checkbox"]'
+//     );
+//     checkboxes.forEach((c) => (c.checked = this.checked));
+//   });
+const selectBoxes = selectAll(".question-select");
+export const renderSelectBoxes = async () => {
+  const questions = await fetchQuestions();
+  const template = generateSelectOptionsTemplate(questions, "id", "text");
+  selectBoxes.forEach((select) =>
+    insertTemplateToElement(template, select, true)
+  );
+};
