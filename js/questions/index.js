@@ -1,7 +1,6 @@
 import {
   addCoverageSelect,
   addPlanSelect,
-  addQuestionToTable,
   closeQuestionModals,
   createQuestion,
   deleteQuestion,
@@ -24,7 +23,6 @@ window.addEventListener("load", () => {
   window.closeQuestionModals = closeQuestionModals;
   window.createQuestion = createQuestion;
   window.editQuestion = editQuestion;
-  window.addQuestionToTable = addQuestionToTable;
   window.deleteQuestion = deleteQuestion;
   window.deleteSelectedQuestions = deleteSelectedQuestions;
   window.addPlanSelect = addPlanSelect;
