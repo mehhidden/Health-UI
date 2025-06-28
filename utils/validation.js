@@ -1,3 +1,4 @@
+import { getCookie } from "./cookie.js";
 import { convertBackendValidationToMessage, API } from "./data.js";
 
 
@@ -14,6 +15,7 @@ export const verifyOtp = async (phone, otp) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${getCookie("access")}`
     },
     body: JSON.stringify(data),
   });
