@@ -14,7 +14,6 @@ window.addEventListener("DOMContentLoaded", async () => {
   await renderInsureds();
 });
 
-
 window.showInsuredCreateModal = showInsuredCreateModal;
 window.closeInsuredModals = closeInsuredModals;
 window.showEditInsured = showEditInsured;

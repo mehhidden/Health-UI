@@ -1,3 +1,4 @@
+import * as jalaali from "https://esm.sh/jalaali-js@1.1.0";
 import {
   getTrInfo,
   insertTemplateToElement,
@@ -61,7 +62,7 @@ export const renderInsureds = async () => {
     insureds = await fetchInsureds();
     const template = generateInsuredsTemplate(insureds.slice().reverse(), basicsMap);
     insertTemplateToElement(template, insuredWrapper);
-  } catch {
+  } catch (e) {
     swal("خطا", "دریافت بیمه‌گذاران با مشکل مواجه شد", "error");
   }
 };
@@ -91,9 +92,9 @@ export const renderBasicOptions = async () => {
       { value: "false", text: "خیر" },
     ];
 
-    [formInputs.married, editFormInputs.married].forEach(el => fillSelect(el, marriedOptions));
-    [formInputs.primary, editFormInputs.primary].forEach(el => fillSelect(el, primaryOptions));
-  } catch {
+    [formInputs.married, editFormInputs.married].forEach((el) => fillSelect(el, marriedOptions));
+    [formInputs.primary, editFormInputs.primary].forEach((el) => fillSelect(el, primaryOptions));
+  } catch (e) {
     swal("خطا", "بارگذاری بیمه‌گرهای پایه با مشکل مواجه شد", "error");
   }
 };
@@ -101,20 +102,25 @@ export const renderBasicOptions = async () => {
 export const showInsuredCreateModal = () => {
   createModal.classList.add("show");
   editModal.classList.remove("show");
-
-  Object.values(formInputs).forEach(input => input && (input.value = ""));
+  Object.values(formInputs).forEach((input) => input && (input.value = ""));
+  jalaliDatepicker.startWatch();
 };
 
 export const closeInsuredModals = () => {
   createModal.classList.remove("show");
   editModal.classList.remove("show");
+  [...Object.values(formInputs), ...Object.values(editFormInputs)].forEach(
+    (input) => input && (input.value = "")
+  );
+};
 
-  [...Object.values(formInputs), ...Object.values(editFormInputs)].forEach(input => input && (input.value = ""));
+const persianToEnglishNumbers = (str) => {
+  const persianNums = "۰۱۲۳۴۵۶۷۸۹";
+  return str.replace(/[۰-۹]/g, (d) => persianNums.indexOf(d).toString());
 };
 
 export const saveInsured = async (event) => {
   event.preventDefault();
-
   const isEdit = editFormInputs.editIndex.value.trim() !== "";
   const source = isEdit ? editFormInputs : formInputs;
 
@@ -142,8 +148,15 @@ export const saveInsured = async (event) => {
     return;
   }
 
-  if (!source.birth.value.trim()) {
-    swal("خطا", "تاریخ تولد نمی‌تواند خالی باشد", "error");
+  let birthDate = "";
+  try {
+    let rawBirth = source.birth.value.trim();
+    rawBirth = persianToEnglishNumbers(rawBirth).replace(/\//g, "-");
+    const [jy, jm, jd] = rawBirth.split("-").map((x) => x.padStart(2, "0"));
+    const g = jalaali.toGregorian(+jy, +jm, +jd);
+    birthDate = `${g.gy}-${String(g.gm).padStart(2, "0")}-${String(g.gd).padStart(2, "0")}`;
+  } catch {
+    swal("خطا", "تاریخ تولد نامعتبر است", "error");
     return;
   }
 
@@ -155,7 +168,7 @@ export const saveInsured = async (event) => {
     basic_insurer: basicVal,
     is_married: source.married.value === "true",
     is_self_insured: source.primary.value === "true",
-    birth_date: source.birth.value.trim(),
+    birth_date: birthDate,
   };
 
   try {
@@ -175,33 +188,44 @@ export const showEditInsured = async (event) => {
   createModal.classList.remove("show");
 
   const trInfo = getTrInfo(event);
-  const insured = insureds.find(i => i.id === Number(trInfo.id));
-  if (!insured) return swal("خطا", "بیمه‌گذار یافت نشد", "error");
-
-  try {
-    fillSelect(editFormInputs.basic, [
-      { value: "", text: "انتخاب کنید", disabled: true },
-      ...Object.entries(basicsMap).map(([id, name]) => ({
-        value: id,
-        text: name,
-        selected: Number(id) === insured.basic_insurer,
-      })),
-    ]);
-
-    editFormInputs.editIndex.value = insured.id;
-    editFormInputs.firstname.value = insured.first_name || "";
-    editFormInputs.lastname.value = insured.last_name || "";
-    editFormInputs.code.value = insured.national_code || "";
-    editFormInputs.phone.value = insured.phone_number || "";
-    editFormInputs.birth.value = insured.birth_date || "";
-    editFormInputs.married.value = insured.is_married ? "true" : "false";
-    editFormInputs.primary.value = insured.is_self_insured ? "true" : "false";
-
-    editModal.classList.add("show");
-  } catch {
-    swal("خطا", "بارگذاری اطلاعات برای ویرایش با مشکل مواجه شد", "error");
+  const insured = insureds.find((i) => i.id === Number(trInfo.id));
+  if (!insured) {
+    swal("خطا", "بیمه‌گذار یافت نشد", "error");
+    return;
   }
+
+  fillSelect(editFormInputs.basic, [
+    { value: "", text: "انتخاب کنید", disabled: true },
+    ...Object.entries(basicsMap).map(([id, name]) => ({
+      value: id,
+      text: name,
+      selected: Number(id) === insured.basic_insurer,
+    })),
+  ]);
+
+  editFormInputs.editIndex.value = insured.id;
+  editFormInputs.firstname.value = insured.first_name || "";
+  editFormInputs.lastname.value = insured.last_name || "";
+  editFormInputs.code.value = insured.national_code || "";
+  editFormInputs.phone.value = insured.phone_number || "";
+  editFormInputs.birth.value = insured.birth_date || "";
+  editFormInputs.birth.setAttribute("data-jdp", "");
+  editFormInputs.married.value = insured.is_married ? "true" : "false";
+  editFormInputs.primary.value = insured.is_self_insured ? "true" : "false";
+
+  editModal.classList.add("show");
+
+  jalaliDatepicker.startWatch();
+
+  function onBirthFocus() {
+    editFormInputs.birth.value = "";
+    jalaliDatepicker.startWatch();
+  }
+  editFormInputs.birth.removeEventListener("focus", onBirthFocus);
+  editFormInputs.birth.addEventListener("focus", onBirthFocus, { once: true });
 };
+
+
 
 export const deleteInsured = (event) => {
   const trInfo = getTrInfo(event);
@@ -230,7 +254,7 @@ export const deleteSelectedInsureds = () => {
     async (result) => {
       if (result) {
         try {
-          const ids = [...selected].map(cb =>
+          const ids = [...selected].map((cb) =>
             Number(JSON.parse(cb.closest("tr").dataset.info).id)
           );
           await Promise.all(ids.map(deleteReq));
