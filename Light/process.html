@@ -40,7 +40,7 @@
     <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/colors.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/pages/questionOption.css" />
+    <link rel="stylesheet" href="assets/css/pages/process.css" />
     <!-- END CSS -->
     <!-- BEGIN PAGE CSS -->
     <link
@@ -583,7 +583,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="questionOption.html" class="current">
+                  <a href="questionOption.html">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>گزینه های سوالات</span>
                   </a>
@@ -617,7 +617,7 @@
               </a>
               <ul>
                 <li>
-                  <a href="process.html">  
+                  <a href="process.html" class="current">  
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>پردازش‌ ها</span>
                   </a>
@@ -670,94 +670,81 @@
       <!-- BEGIN PAGE CONTENT -->
       <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">مدیریت گزینه سوالات</h5>
-    <button class="btn btn-success" onclick="showQuestionOptionCreateModal()">
-      <i class="icon-plus"></i> افزودن گزینه
+    <h5 class="mb-0">مدیریت پردازش‌ها</h5>
+    <button class="btn btn-success" onclick="showProcessCreateModal()">
+      <i class="icon-plus"></i> افزودن پردازش
     </button>
   </div>
 
-  <div class="card-body insurance-card-body">
-    <div class="table-responsive">
-      <table id="question-option-table" class="table table-bordered text-center">
-        <thead>
-          <tr>
-            <th><input type="checkbox" id="question-option-check-all" /></th>
-            <th>شناسه</th>
-            <th>شناسه سوال</th>
-            <th>متن گزینه</th>
-            <th>درصد تأثیر</th>
-            <th>عملیات</th>
-          </tr>
-        </thead>
-        <tbody id="question-option-table-body">
-          <!-- سطرهای دینامیک -->
-        </tbody>
-      </table>
-    </div>
-    <button class="btn btn-danger mt-2" onclick="deleteSelectedQuestionOptions()">حذف انتخاب‌شده‌ها</button>
+  <div class="card-body city-card-body">
+    <table id="process-table" class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="process-check-all" /></th>
+          <th>شناسه</th>
+          <th>نام</th>
+          <th>فرایند</th>
+          <th>طرح</th>
+          <th>عملیات</th>
+        </tr>
+      </thead>
+      <tbody id="process-table-body">
+        <!-- پر میشه از سمت سرور -->
+      </tbody>
+    </table>
+    <button class="btn btn-danger mt-2" onclick="deleteSelectedProcesses()">حذف انتخاب‌شده‌ها</button>
   </div>
 </div>
 
-<!-- Modal افزودن -->
-<div class="modal question-option-create-modal">
+<div class="modal process-create-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeQuestionOptionModals()">&times;</span>
-    <h5 class="modal-title">افزودن گزینه سوال</h5>
-    <form onsubmit="createQuestionOption(event)">
+    <span class="modal-close" onclick="closeProcessModals()">&times;</span>
+    <h5 class="modal-title">افزودن پردازش</h5>
+    <form onsubmit="createProcess(event)">
       <div class="form-group mb-3">
-        <label for="question-select">انتخاب سوال:</label>
-        <select name="question" id="question-select" class="form-control question-select" required>
-          <option value="" selected>سوال را انتخاب کنید</option>
-          <!-- گزینه‌ها با JS اضافه می‌شوند -->
+        <label for="process-name">نام:</label>
+        <input type="text" id="process-name" name="name" class="form-control" placeholder="مثلاً محاسبه نرخ" />
+      </div>
+      <div class="form-group mb-3">
+        <label for="process-step">فرایند:</label>
+        <input type="text" id="process-step" name="order" class="form-control" placeholder="مثلاً مرحله دوم" />
+      </div>
+      <div class="form-group mb-3">
+        <label for="process-plan">انتخاب طرح:</label>
+        <select id="process-plan" class="form-control" name="plan">
+          <option value="" disabled selected>طرح را انتخاب کنید</option>
+          <!-- <Load By JS> -->
         </select>
       </div>
-
-      <div class="form-group mb-3">
-        <label for="option-text">متن گزینه:</label>
-        <input name="text" type="text" id="option-text" class="form-control" required />
-      </div>
-
-      <div class="form-group mb-3">
-        <label for="impact-percent">درصد تأثیر:</label>
-        <input name="impact_percent" type="number" id="impact-percent" class="form-control" required min="0" max="100" />
-      </div>
-
       <button class="btn btn-primary mt-3">ذخیره</button>
     </form>
   </div>
 </div>
 
-<!-- Modal ویرایش -->
-<div class="modal question-option-edit-modal">
+<div class="modal process-edit-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeQuestionOptionModals()">&times;</span>
-    <h5 class="modal-title">ویرایش گزینه سوال</h5>
-    <form onsubmit="editQuestionOption(event)">
+    <span class="modal-close" onclick="closeProcessModals()">&times;</span>
+    <h5 class="modal-title">ویرایش پردازش</h5>
+    <form onsubmit="editProcess(event)">
       <div class="form-group mb-3">
-        <label for="edit-question-select">انتخاب سوال:</label>
-        <select name="question" id="edit-question-select" class="form-control question-select" required>
-          <option value="" selected>سوال را انتخاب کنید</option>
-          <!-- گزینه‌ها با JS اضافه می‌شوند -->
+        <label for="edit-process-name">نام:</label>
+        <input type="text" id="edit-process-name" class="form-control" name="name"/>
+      </div>
+      <div class="form-group mb-3">
+        <label for="edit-process-step">فرایند:</label>
+        <input type="text" id="edit-process-step" class="form-control" name="order" />
+      </div>
+      <div class="form-group mb-3">
+        <label for="edit-process-plan">انتخاب طرح:</label>
+        <select id="edit-process-plan" class="form-control" name="plan">
+          <option value="" disabled selected>طرح را انتخاب کنید</option>
+          <!-- <Load By JS> -->
         </select>
       </div>
-
-      <div class="form-group mb-3">
-        <label for="edit-option-text">متن گزینه:</label>
-        <input name="text" type="text" id="edit-option-text" class="form-control" required />
-      </div>
-
-      <div class="form-group mb-3">
-        <label for="edit-impact-percent">درصد تأثیر:</label>
-        <input name="impact_percent" type="number" id="edit-impact-percent" class="form-control" required min="0" max="100" />
-      </div>
-
       <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
     </form>
   </div>
 </div>
-
-
-
 
 
       <!-- /#page-content -->
@@ -995,12 +982,16 @@
     <script src="assets/js/core.js"></script>
 
     <!-- BEGIN PAGE JAVASCRIPT -->
-    <!-- <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script> -->
-    <!-- <script src="assets/js/pages/datatable.js"></script> -->    
-    <script type="module" src="../js/questionOption/index.js"></script>
+    <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
+    <!-- <script src="assets/js/pages/datatable.js"></script> -->
+    <script type="module" src="/js/process/index.js"></script>
+    <script src="../js/process/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
 
-    
+    <script>
+  
+</script>
+
 
   </body>
 </html>
