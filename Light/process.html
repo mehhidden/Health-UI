@@ -698,10 +698,13 @@
       <div class="form-group mb-3">
         <label for="process-plan">انتخاب طرح:</label>
         <select id="process-plan" class="form-control" name="plan">
-          <option value="" disabled selected>طرح را انتخاب کنید</option>
+          
           <!-- <Load By JS> -->
         </select>
       </div>
+      <input type="hidden" name="code" id="process-code" value="auto_code_5" />
+
+
       <button class="btn btn-primary mt-3">ذخیره</button>
     </form>
   </div>
@@ -971,7 +974,7 @@
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
     <!-- <script src="assets/js/pages/datatable.js"></script> -->
     <script type="module" src="/js/process/index.js"></script>
-    <script src="../js/process/funcs/shared.js"></script>
+    <script type="module" src="../js/process/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
 
     <script>
