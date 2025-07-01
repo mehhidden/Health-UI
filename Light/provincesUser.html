@@ -4,7 +4,6 @@
     <title></title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
     <meta name="fontiran.com:license" content="NE29X" />
     <link rel="shortcut icon" href="" />
 
@@ -41,22 +40,13 @@
     <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/colors.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/fontawesome/all-fonts.min.css">
-    <link rel="stylesheet" href="assets/css/pages/accouuntType.css" />
+    <link rel="stylesheet" href="assets/css/pages/provincesUser.css" />
     <!-- END CSS -->
     <!-- BEGIN PAGE CSS -->
     <link
       href="assets/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css"
       rel="stylesheet"
     />
-
-
- 
- 
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
     <!-- END PAGE CSS -->
   </head>
   <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">
@@ -444,18 +434,11 @@
         <div class="side-menu-container">
           <ul class="metismenu" id="side-menu">
             <li class="open active conditional-bg">
-              <a href="#" class="dropdown-toggle">
-                <i class="icon-home"></i>
-                <span>پیشخوان</span>
+              <!-- <a href="#" class="dropdown-toggle"> -->
+                <!-- <i class="icon-home"></i> -->
+                <!-- <span>پیشخوان</span> -->
               </a>
               <ul>
-                <li>
-                  <a href="dashboard.html" >
-                    <!-- <i class="icon-home"></i> -->
-                    <span>داشبورد</span>
-                  </a>
-                </li>
-                
                 </li>
               </ul>
             </li>            
@@ -465,176 +448,77 @@
                 <span>تنظیمات و کنترل</span>
               </a>
               <ul>
-              
                 <li>
-                  <a href="phoneVerification.html" >
+                  <a href="phoneVerificationUser.html" >
                     <!-- <i class="icon-shield"></i> -->
                     <span>اعتبارسنجی</span>
                   </a>
                 </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="dropdown-toggle">
+                <i class="icon-layers"></i>
+                <span>صفحات کاربردی</span>
+              </a>
+              <ul>
+                
+                <li>
+                  <a href="login.html" class="">
+                    <!-- <i class="icon-login"></i> -->
+                    <span>ورود</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="otp.html" class="">
+                    <!-- <i class="icon-screen-smartphone"></i> -->
+                    <span>ورود با موبایل OTP</span>
+                  </a>
+                </li>
+                <!-- <li>
+                  <a href="register.html" class="">
+                    <i class="icon-user-follow"></i>
+                    <span>ثبت نام</span>
+                  </a>
+                </li> -->
+                
+                
+                <li>
+                  <a href="changePassword.html">
+                    <!-- <i class="icon-lock"></i> -->
+                    <span>تغییر رمز عبور</span>
+                  </a>
+                </li>
+                
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="dropdown-toggle">
+                <i class="fas fa-map-marker-alt"></i>
 
+                <span>مدیریت آدرس ها</span>
+              </a>
+              <ul>
                 <li>
-                  <a href="systemConfig.html" class="">
+                  <a href="provincesUser.html" class="current">
                     <!-- <i class="icon-shield"></i> -->
-                    <span>تنظیمات سیستم</span>
-                  </a>
-                </li>
-                
-                
-              </ul>
-            </li>
-            
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="icon-list fa-flip-horizontal"></i>
-                <span>کاربران و نقش‌ها</span>
-              </a>
-              <ul>
-               
-                <li>
-                  <a href="users.html" >
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>جدول کاربران</span>
+                    <span>استان</span>
                   </a>
                 </li>
                 <li>
-                  <a href="groups.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>جدول گروه ها</span>
+                  <a href="cityUser.html" >
+                    <!-- <i class="icon-shield"></i> -->
+                    <span>شهر</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="addresesUser.html" >
+                    <!-- <i class="icon-shield"></i> -->
+                    <span>آدرس</span>
                   </a>
                 </li>
               </ul>
             </li>
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="icon-shield fa-flip-horizontal"></i>
-                <span>اطلاعات بیشتر</span>
-              </a>
-              <ul>
-               
-                <li>
-                  <a href="provinces.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>جدول استان ها</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="city.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>جدول شهر ها</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="fa-solid fa-dollar-sign"></i>
-                <span>مدیریت بانک‌ها</span>
-              </a>
-              <ul>
-                <li>
-                  <a href="banks.html"> 
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>بانک ها</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="accountType.html" class="current">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>نوع حساب های بانکی</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="fa-solid fa-shield-halved"></i>
-                <span>طرح های بیمه‌ای</span>
-              </a>
-              <ul>
-               
-                <li>
-                  <a href="categories.html">  
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>رشته های بیمه</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="products.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>محصولات</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="plans.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>طرح‌ها</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="coverage.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>پوشش‌ها</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="fa-solid fa-question"></i>
-                <span>پرسش‌ها</span>
-              </a>
-              <ul>
-               
-                <li>
-                  <a href="questions.html">  
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>سوالات</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="questionOption.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>گزینه های سوالات</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="icon-frame"></i>
-                <span>فرم های بیمه‌ای</span>
-              </a>
-              <ul>
-                <li>
-                  <a href="basicInsrance.html">  
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>بیمه‌گران پایه</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="insuranceForm.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>فرم بیمه گذار</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span>سفارشات</span>
-              </a>
-              <ul>
-                <li>
-                  <a href="process.html">  
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>پردازش‌ ها</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-             
           </ul>
           <!-- /#side-menu -->
         </div>
@@ -643,63 +527,61 @@
       <!-- /#sidebar -->
       <!-- END SIDEBAR -->
       <!-- BEGIN PAGE CONTENT -->
-      <div class="card">
+      <div class="card user-province-card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">مدیریت نوع حساب‌ها</h5>
-    <button class="btn btn-success" onclick="showAccountTypeCreateModal()">
-      <i class="icon-plus"></i> افزودن نوع حساب
+    <h5 class="mb-0">مدیریت استان‌ها</h5>
+    <button class="btn btn-success" onclick="showProvinceCreateModal()">
+      <i class="icon-plus"></i> افزودن استان
     </button>
   </div>
 
-  <div class="card-body account-type-card-body">
-    <table id="account-type-table" class="table table-bordered text-center">
+  <div class="card-body province-card-body">
+    <table id="province-table" class="table table-bordered text-center">
       <thead>
         <tr>
-          <th><input type="checkbox" id="account-type-check-all" /></th>
-          <th>ردیف</th>
-          <th>نوع حساب</th>
+          <th><input type="checkbox" id="province-check-all" /></th>
+          <th>شناسه</th>
+          <th>نام استان</th>
           <th>عملیات</th>
         </tr>
       </thead>
-      <tbody id="render-account-types">
-        <!-- پر میشه از سمت سرور -->
-
+      <tbody id="provinces-table-body">
+        <!-- پر می‌شود با جاوااسکریپت -->
       </tbody>
     </table>
-    <button class="btn btn-danger mt-2" onclick="deleteSelectedAccountTypes()">حذف انتخاب‌شده‌ها</button>
+    <button class="btn btn-danger mt-2" onclick="deleteSelectedProvinces()">حذف انتخاب‌شده‌ها</button>
   </div>
 </div>
 
-<!-- Modal افزودن نوع حساب -->
-<div class="modal account-type-create-modal modal-staicks-open">
-  <div class="modal-content">
-    <span class="modal-close" onclick="closeAccountTypeModals()">&times;</span>
-    <h5 class="modal-title">افزودن نوع حساب</h5>
-    <form>
-      <div class="form-group mb-3">
-        <label for="account-type-name">نوع حساب:</label>
-        <input type="text" id="account-type-name" class="form-control" placeholder="مثلاً جاری" />
-      </div>
-      <button class="btn btn-primary mt-3 save-account-type">ذخیره</button>
-    </form>
-  </div>
-</div>
 
-<!-- Modal ویرایش نوع حساب -->
-<div class="modal account-type-edit-modal modal-staicks">
+<div class="modal province-create-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeAccountTypeModals()">&times;</span>
-    <h5 class="modal-title">ویرایش نوع حساب</h5>
-    <form>
+    <span class="modal-close" onclick="closeProvinceModals()">&times;</span>
+    <h5 class="modal-title">افزودن استان</h5>
+    <form onsubmit="createProvince(event)">
       <div class="form-group">
-        <label>نوع حساب:</label>
-        <input type="text" class="form-control edit-account-type" value="جاری" />
+        <label>نام استان:</label>
+        <input type="text" class="form-control" name="name" placeholder="مثلاً تهران" />
       </div>
-      <button class="btn btn-primary mt-3 sava-edit-btns">ذخیره تغییرات</button>
+      <button class="btn btn-primary mt-3">ذخیره</button>
     </form>
   </div>
 </div>
 
+
+<div class="modal province-edit-modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeProvinceModals()">&times;</span>
+    <h5 class="modal-title">ویرایش استان</h5>
+    <form onsubmit="editProvince(event)">
+      <div class="form-group">
+        <label>نام استان:</label>
+        <input name="name" type="text" class="form-control" />
+      </div>
+      <button class="btn btn-primary mt-3">ذخیره تغییرات</button>
+    </form>
+  </div>
+</div>
 
 
       <!-- /#page-content -->
@@ -939,60 +821,15 @@
     <!-- BEGIN PAGE JAVASCRIPT -->
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
     <!-- <script src="assets/js/pages/datatable.js"></script> -->
-    <script type="module" src="/js/groups/index.js"></script>
+     <script type="module" src="/js/provincesUser/index.js"></script>
+     <script src="../js/provincesUser/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
 
     <script>
-  function showAccountTypeCreateModal() {
-  document.querySelector('.account-type-create-modal').classList.add('show');
-}
-
-function showAccountTypeEditModal(id) {
   
-  document.querySelector('.account-type-edit-modal').classList.add('show');
-}
 
-function closeAccountTypeModals() {
-  document.querySelectorAll('.modal').forEach(modal => {
-    modal.classList.remove('show');
-  });
-}
-
-function deleteAccountType(id) {
-  if (confirm("آیا از حذف این نوع حساب مطمئن هستید؟")) {
-    
-    console.log("نوع حساب با شناسه " + id + " حذف شد");
-  }
-}
-
-function deleteSelectedAccountTypes() {
-  const checkboxes = document.querySelectorAll('.row-checkbox:checked');
-  if (checkboxes.length === 0) {
-    alert("لطفاً حداقل یک نوع حساب را انتخاب کنید.");
-    return;
-  }
-
-  if (confirm("آیا از حذف نوع حساب‌های انتخاب‌شده مطمئن هستید؟")) {
-    checkboxes.forEach((checkbox, index) => {
-      
-      const row = checkbox.closest('tr');
-      row.remove();
-    });
-  }
-}
-
-
-document.getElementById('account-type-check-all')?.addEventListener('change', function () {
-  const checked = this.checked;
-  document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = checked);
-});
-
-
+  
 </script>
-
-<script type="module" src="../js//bank/account type/template.js"></script>
-
-
 
   </body>
 </html>
