@@ -40,13 +40,17 @@
     <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/colors.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/pages/coverage.css" />
+    <link rel="stylesheet" href="assets/css/pages/addresesUser.css" />
     <!-- END CSS -->
     <!-- BEGIN PAGE CSS -->
     <link
       href="assets/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css"
       rel="stylesheet"
     />
+    <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
 
 
     <!-- END PAGE CSS -->
@@ -436,18 +440,11 @@
         <div class="side-menu-container">
           <ul class="metismenu" id="side-menu">
             <li class="open active conditional-bg">
-              <a href="#" class="dropdown-toggle">
-                <i class="icon-home"></i>
-                <span>پیشخوان</span>
+              <!-- <a href="#" class="dropdown-toggle"> -->
+                <!-- <i class="icon-home"></i> -->
+                <!-- <span>پیشخوان</span> -->
               </a>
               <ul>
-                <li>
-                  <a href="dashboard.html">
-                    <!-- <i class="icon-home"></i> -->
-                    <span>داشبورد</span>
-                  </a>
-                </li>
-                
                 </li>
               </ul>
             </li>            
@@ -457,197 +454,77 @@
                 <span>تنظیمات و کنترل</span>
               </a>
               <ul>
-              
                 <li>
-                  <a href="phoneVerification.html">
+                  <a href="phoneVerificationUser.html" >
                     <!-- <i class="icon-shield"></i> -->
                     <span>اعتبارسنجی</span>
                   </a>
                 </li>
-
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="dropdown-toggle">
+                <i class="icon-layers"></i>
+                <span>صفحات کاربردی</span>
+              </a>
+              <ul>
+                
                 <li>
-                  <a href="systemConfig.html">
+                  <a href="login.html" class="">
+                    <!-- <i class="icon-login"></i> -->
+                    <span>ورود</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="otp.html" class="">
+                    <!-- <i class="icon-screen-smartphone"></i> -->
+                    <span>ورود با موبایل OTP</span>
+                  </a>
+                </li>
+                <!-- <li>
+                  <a href="register.html" class="">
+                    <i class="icon-user-follow"></i>
+                    <span>ثبت نام</span>
+                  </a>
+                </li> -->
+                
+                
+                <li>
+                  <a href="changePassword.html">
+                    <!-- <i class="icon-lock"></i> -->
+                    <span>تغییر رمز عبور</span>
+                  </a>
+                </li>
+                
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="dropdown-toggle">
+                <i class="fas fa-map-marker-alt"></i>
+
+                <span>مدیریت آدرس ها</span>
+              </a>
+              <ul>
+                <li>
+                  <a href="provincesUser.html" >
                     <!-- <i class="icon-shield"></i> -->
-                    <span>تنظیمات سیستم</span>
-                  </a>
-                </li>
-                
-                
-              </ul>
-            </li>
-            
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="icon-list fa-flip-horizontal"></i>
-                <span>کاربران و نقش‌ها</span>
-              </a>
-              <ul>
-               
-                <li>
-                  <a href="users.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>جدول کاربران</span>
+                    <span>استان</span>
                   </a>
                 </li>
                 <li>
-                  <a href="groups.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>جدول گروه ها</span>
+                  <a href="cityUser.html" >
+                    <!-- <i class="icon-shield"></i> -->
+                    <span>شهر</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="addresesUser.html" class="current">
+                    <!-- <i class="icon-shield"></i> -->
+                    <span>آدرس</span>
                   </a>
                 </li>
               </ul>
             </li>
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="icon-shield fa-flip-horizontal"></i>
-                <span>اطلاعات بیشتر</span>
-              </a>
-              <ul>
-               
-                <li>
-                  <a href="provinces.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>جدول استان ها</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="city.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>جدول شهر ها</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="fa-solid fa-dollar-sign"></i>
-                <span>مدیریت بانک‌ها</span>
-              </a>
-              <ul>
-                <li>
-                  <a href="banks.html"> 
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>بانک ها</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="accountType.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>نوع حساب های بانکی</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="fa-solid fa-shield-halved"></i>
-                <span>طرح های بیمه‌ای</span>
-              </a>
-              <ul>
-               
-                <li>
-                  <a href="categories.html">  
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>رشته های بیمه</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="products.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>محصولات</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="plans.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>طرح‌ها</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="coverage.html" class="current">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>پوشش‌ها</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="fa-solid fa-question"></i>
-                <span>پرسش‌ها</span>
-              </a>
-              <ul>
-               
-                <li>
-                  <a href="questions.html">  
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>سوالات</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="questionOption.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>گزینه های سوالات</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="fas fa-notes-medical"></i>
-                <span>ارزیابی سلامت</span>
-              </a>
-              <ul>
-               
-                <li>
-                  <a href="healthAssessment.html">  
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>فرم‌های ارزیابی سلامت</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="healthAssessmentQuestion.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>سوالات ارزیابی سلامت</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="icon-frame"></i>
-                <span>فرم های بیمه‌ای</span>
-              </a>
-              <ul>
-                <li>
-                  <a href="basicInsrance.html">  
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>بیمه‌گران پایه</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="insuranceForm.html">
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>فرم بیمه گذار</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span>سفارشات</span>
-              </a>
-              <ul>
-                <li>
-                  <a href="process.html">  
-                    <!-- <i class="fas fa-grip"></i> -->
-                    <span>پردازش‌ ها</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
           </ul>
           <!-- /#side-menu -->
         </div>
@@ -656,95 +533,179 @@
       <!-- /#sidebar -->
       <!-- END SIDEBAR -->
       <!-- BEGIN PAGE CONTENT -->
-      <div class="card">
+      <div class="card user-address-card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">مدیریت پوشش‌ها</h5>
-    <button class="btn btn-success" onclick="showCoverageCreateModal()">
-      <i class="icon-plus"></i> افزودن پوشش
+    <h5 class="mb-0">مدیریت آدرس‌ها</h5>
+    <button class="btn btn-success" onclick="showAddressCreateModal()">
+      <i class="icon-plus"></i> افزودن آدرس
     </button>
   </div>
 
-  <div class="card-body insurance-card-body">
-    <table id="coverage-table" class="table table-bordered text-center">
+  <div class="card-body user-address-card-body">
+    <div class="table-responsive">
+    <table id="address-table" class="table table-bordered text-center">
       <thead>
         <tr>
-          <th><input type="checkbox" id="coverage-check-all" /></th>
+          <th><input type="checkbox" id="address-check-all" /></th>
           <th>شناسه</th>
-          <th>شناسه طرح</th>
-          <th>نام پوشش</th>
-          <th>سقف تعهدات (تومان)</th>
+          <th>عنوان آدرس</th>
+          <th>استان</th>
+          <th>شهر</th>
+          <th>آدرس کامل</th>
+          <th>پلاک</th>
+          <th>واحد</th>
+          <th>کد پستی</th>
+          <th>تلفن</th>
+          <th>موقعیت روی نقشه</th>
+          <th>آدرس پیش‌فرض</th>
           <th>عملیات</th>
         </tr>
       </thead>
-      <tbody id="coverage-table-body">
-        <!-- ردیف‌های داینامیک -->
-
+      <tbody id="addresses-table-body">
+        <!-- داده ها از سمت سرور پر می شود -->
       </tbody>
     </table>
-
-    <button class="btn btn-danger mt-2" onclick="deleteSelectedCoverages()">حذف انتخاب‌شده‌ها</button>
+    </div>
+    <button class="btn btn-danger mt-2" onclick="deleteSelectedAddresses()">حذف انتخاب‌شده‌ها</button>
   </div>
 </div>
 
 
-<div class="modal coverage-create-modal">
+<div class="modal address-create-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeCoverageModals()">&times;</span>
-    <h5 class="modal-title">افزودن پوشش</h5>
-    <form onsubmit="createCoverage(event)">
-      <div class="form-group mb-3">
-        <label for="plan-select">انتخاب طرح:</label>
-        <select name="plan" id="plan-select" class="form-control" required>
+    <span class="modal-close" onclick="closeAddressModals()">&times;</span>
+    <h5 class="modal-title">افزودن آدرس</h5>
+    <form onsubmit="createAddress(event)">
 
+      <div class="form-group mb-3">
+        <label for="address-title">عنوان آدرس:</label>
+        <input type="text" id="address-title" name="title" class="form-control" placeholder="مثلاً خانه" required />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="address-province-select">انتخاب استان:</label>
+        <select name="province" id="address-province-select" class="form-control province-select" required>
+          <option value="" disabled selected>استان را انتخاب کنید</option>
+          <!-- بارگذاری استان‌ها با جاوااسکریپت -->
         </select>
-
-
       </div>
 
       <div class="form-group mb-3">
-        <label for="coverage-name">نام پوشش:</label>
-        <input name="name" type="text" id="coverage-name" class="form-control" placeholder="مثلاً پوشش تصادف" required />
+        <label for="address-city-select">انتخاب شهر:</label>
+        <select name="city" id="address-city-select" class="form-control city-select" required>
+          <option value="" disabled selected>شهر را انتخاب کنید</option>
+          <!-- بارگذاری شهرها با جاوااسکریپت -->
+        </select>
       </div>
 
       <div class="form-group mb-3">
-        <label for="coverage-amount">سقف تعهدات (تومان):</label>
-        <input name="amount" type="number" id="coverage-amount" class="form-control" placeholder="مثلاً 200000" required />
+        <label for="address-full">آدرس کامل:</label>
+        <textarea id="address-full" name="full_address" class="form-control" rows="3" placeholder="آدرس دقیق" required></textarea>
       </div>
 
-      <button class="btn btn-primary mt-3 create-coverage-btn">ذخیره</button>
+      <div class="form-row mb-3">
+        <div class="form-group col">
+          <label for="address-number">پلاک:</label>
+          <input type="text" id="address-number" name="number" class="form-control" placeholder="مثلاً 12" required />
+        </div>
+        <div class="form-group col">
+          <label for="address-unit">واحد:</label>
+          <input type="text" id="address-unit" name="unit" class="form-control" placeholder="مثلاً 4" />
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="address-postal-code">کد پستی:</label>
+        <input type="text" id="address-postal-code" name="postal_code " class="form-control" placeholder="مثلاً 1234567890" required />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="address-phone">تلفن:</label>
+        <input type="tel" id="address-phone" name="phone" class="form-control" placeholder="مثلاً 09121234567" required />
+      </div>
+
+      <div class="form-group mb-3">
+        <label>انتخاب روی نقشه:</label>
+        <div id="map" style="height: 250px; border: 1px solid #ccc; border-radius: 8px;"></div>
+      </div>
+
+
+      <div class="form-group form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="address-default" name="is_default" />
+        <label class="form-check-label" for="address-default">آدرس پیش‌فرض</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-3">ذخیره</button>
     </form>
   </div>
 </div>
 
 
-<div class="modal coverage-edit-modal">
+<div class="modal address-edit-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeCoverageModals()">&times;</span>
-    <h5 class="modal-title">ویرایش پوشش</h5>
-    <form onsubmit="editCoverage(event)">
+    <span class="modal-close" onclick="closeAddressModals()">&times;</span>
+    <h5 class="modal-title">ویرایش آدرس</h5>
+    <form onsubmit="editAddress(event)">
       <div class="form-group mb-3">
-        <label for="edit-plan-select">انتخاب طرح:</label>
-        <select name="coverage" id="edit-plan-select" class="form-control" required>
+        <label for="edit-address-title">عنوان آدرس:</label>
+        <input type="text" id="edit-address-title" name="title" class="form-control" required />
+      </div>
 
+      <div class="form-group mb-3">
+        <label for="edit-address-province-select">انتخاب استان:</label>
+        <select name="province" id="edit-address-province-select" class="form-control province-select" required>
+          <option value="" disabled selected>استان را انتخاب کنید</option>
+          <!-- بارگذاری استان‌ها -->
         </select>
       </div>
 
       <div class="form-group mb-3">
-        <label for="edit-coverage-name">نام پوشش:</label>
-        <input name="name" type="text" id="edit-coverage-name" class="form-control" placeholder="نام پوشش..." required />
+        <label for="edit-address-city-select">انتخاب شهر:</label>
+        <select name="city" id="edit-address-city-select" class="form-control city-select" required>
+          <option value="" disabled selected>شهر را انتخاب کنید</option>
+          <!-- بارگذاری شهرها -->
+        </select>
       </div>
 
       <div class="form-group mb-3">
-        <label for="edit-coverage-amount">سقف تعهدات (تومان):</label>
-        <input name="amount" type="number" id="edit-coverage-amount" class="form-control" placeholder="مبلغ..." required />
+        <label for="edit-address-full">آدرس کامل:</label>
+        <textarea id="edit-address-full" name="full_address" class="form-control" rows="3" required></textarea>
       </div>
 
-      <button class="btn btn-primary mt-3 edit-coverage-btn">ذخیره تغییرات</button>
+      <div class="form-row mb-3">
+        <div class="form-group col">
+          <label for="edit-address-number">پلاک:</label>
+          <input type="text" id="edit-address-number" name="number" class="form-control" required />
+        </div>
+        <div class="form-group col">
+          <label for="edit-address-unit">واحد:</label>
+          <input type="text" id="edit-address-unit" name="unit" class="form-control" />
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="edit-address-postal-code">کد پستی:</label>
+        <input type="text" id="edit-address-postal-code" name="postal_code" class="form-control" required />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="edit-address-phone">تلفن:</label>
+        <input type="tel" id="edit-address-phone" name="phone" class="form-control" required />
+      </div>
+
+      <div class="form-group mb-3">
+        <button type="button" class="btn btn-info" onclick="openMapPicker()">انتخاب روی نقشه</button>
+      </div>
+
+      <div class="form-group form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="edit-address-default" name="is_default" />
+        <label class="form-check-label" for="edit-address-default">آدرس پیش‌فرض</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-3">ذخیره تغییرات</button>
     </form>
   </div>
 </div>
-
-
 
 
 
@@ -985,15 +946,16 @@
 
     <!-- BEGIN PAGE JAVASCRIPT -->
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
-    <!-- <script src="assets/js/pages/datatable.js"></script> -->    
-    <script type="module" src="../js/coverage/index.js"></script>
-    <script src="../js/coverage/funcs/shared.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- <script src="assets/js/pages/datatable.js"></script> -->
+    <script type="module" src="/js/addresesUser/index.js"></script>
+    <script src="../js/addresesUser/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
 
-    
+    <script>
+  
+</script>
 
-    <script type="module" src="../js/catalog/coverages/template.js"></script>
-   
 
   </body>
 </html>
