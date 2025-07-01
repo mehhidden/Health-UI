@@ -1,0 +1,124 @@
+.user-address-card {
+  margin-right: 215px; 
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  transition: margin-right 0.3s ease;
+  position: relative;
+  z-index: 1; 
+}
+
+.user-address-card thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #ffffff; 
+}
+
+.card-header {
+    padding-left: 80px;
+}
+
+.card-header .btn-success {
+  white-space: nowrap;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; 
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000; 
+  background: rgba(0, 0, 0, 0.45);
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;
+  padding: 40px 10px;
+  box-sizing: border-box;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px; 
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
+  margin: auto;
+  box-sizing: border-box;
+}
+
+.modal-close {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #444;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.form-row .form-group {
+  flex: 1 1 100%;
+}
+
+@media (max-width: 991px) {
+  .user-address-card {
+    margin-right: 0; 
+  }
+  .card-header {
+    padding-right: 80px;
+  }
+}
+
+@media (min-width: 576px) {
+  .form-row .form-group {
+    flex: 1 1 calc(50% - 12px);
+  }
+
+  .card-header {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal-content {
+    padding: 20px 15px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-row .form-group {
+    flex: 1 1 100%;
+  }
+
+  .user-address-card thead th,
+  .user-address-card tbody td {
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  table th, table td {
+    font-size: 13px;
+    white-space: nowrap;
+  }
+}
