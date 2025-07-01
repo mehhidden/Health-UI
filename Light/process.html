@@ -655,7 +655,7 @@
       <!-- END SIDEBAR -->
       <!-- BEGIN PAGE CONTENT -->
       <div class="card">
-  <div class="card-header d-flex justify-content-between align-items-center">
+  <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
     <h5 class="mb-0">مدیریت پردازش‌ها</h5>
     <button class="btn btn-success" onclick="showProcessCreateModal()">
       <i class="icon-plus"></i> افزودن پردازش
@@ -663,24 +663,27 @@
   </div>
 
   <div class="card-body city-card-body">
-    <table id="process-table" class="table table-bordered text-center">
-      <thead>
-        <tr>
-          <th><input type="checkbox" id="process-check-all" /></th>
-          <th>شناسه</th>
-          <th>نام</th>
-          <th>فرایند</th>
-          <th>طرح</th>
-          <th>عملیات</th>
-        </tr>
-      </thead>
-      <tbody id="process-table-body">
-        <!-- پر میشه از سمت سرور -->
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table id="process-table" class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="process-check-all" /></th>
+            <th>شناسه</th>
+            <th>نام</th>
+            <th>فرایند</th>
+            <th>طرح</th>
+            <th>عملیات</th>
+          </tr>
+        </thead>
+        <tbody id="process-table-body">
+          <!-- پر میشه از سمت سرور -->
+        </tbody>
+      </table>
+    </div>
     <button class="btn btn-danger mt-2" onclick="deleteSelectedProcesses()">حذف انتخاب‌شده‌ها</button>
   </div>
 </div>
+
 
 <div class="modal process-create-modal">
   <div class="modal-content">
