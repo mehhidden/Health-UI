@@ -40,15 +40,13 @@
     <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/colors.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/pages/coverage.css" />
+    <link rel="stylesheet" href="assets/css/pages/healthAssessmentQuestion.css" />
     <!-- END CSS -->
     <!-- BEGIN PAGE CSS -->
     <link
       href="assets/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css"
       rel="stylesheet"
     />
-
-
     <!-- END PAGE CSS -->
   </head>
   <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">
@@ -564,7 +562,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="coverage.html" class="current">
+                  <a href="coverage.html">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>پوشش‌ها</span>
                   </a>
@@ -606,7 +604,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="healthAssessmentQuestion.html">
+                  <a href="healthAssessmentQuestion.html" class="current">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>سوالات ارزیابی سلامت</span>
                   </a>
@@ -658,88 +656,90 @@
       <!-- BEGIN PAGE CONTENT -->
       <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">مدیریت پوشش‌ها</h5>
-    <button class="btn btn-success" onclick="showCoverageCreateModal()">
-      <i class="icon-plus"></i> افزودن پوشش
+    <h5 class="mb-0">مدیریت سوالات ارزیابی سلامت</h5>
+    <button class="btn btn-success" onclick="showEvaluationQuestionCreateModal()">
+      <i class="icon-plus"></i> افزودن سوال
     </button>
   </div>
 
   <div class="card-body insurance-card-body">
-    <table id="coverage-table" class="table table-bordered text-center">
-      <thead>
-        <tr>
-          <th><input type="checkbox" id="coverage-check-all" /></th>
-          <th>شناسه</th>
-          <th>شناسه طرح</th>
-          <th>نام پوشش</th>
-          <th>سقف تعهدات (تومان)</th>
-          <th>عملیات</th>
-        </tr>
-      </thead>
-      <tbody id="coverage-table-body">
-        <!-- ردیف‌های داینامیک -->
-
-      </tbody>
-    </table>
-
-    <button class="btn btn-danger mt-2" onclick="deleteSelectedCoverages()">حذف انتخاب‌شده‌ها</button>
+    <div class="table-responsive">
+      <table id="evaluation-question-table" class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="evaluation-question-check-all" /></th>
+            <th>شناسه</th>
+            <th>فرم سلامت</th>
+            <th>متن سوال</th>
+            <th>نوع سوال</th>
+            <th>متن گزینه</th>
+            <th>عملیات</th>
+          </tr>
+        </thead>
+        <tbody id="evaluation-question-table-body">
+          <!-- سطرهای دینامیک -->
+        </tbody>
+      </table>
+    </div>
+    <button class="btn btn-danger mt-2" onclick="deleteSelectedEvaluationQuestions()">حذف انتخاب‌شده‌ها</button>
   </div>
 </div>
 
-
-<div class="modal coverage-create-modal">
+<!-- Modal Create -->
+<div class="modal evaluation-question-create-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeCoverageModals()">&times;</span>
-    <h5 class="modal-title">افزودن پوشش</h5>
-    <form onsubmit="createCoverage(event)">
+    <span class="modal-close" onclick="closeEvaluationQuestionModals()">&times;</span>
+    <h5 class="modal-title">افزودن سوال ارزیابی سلامت</h5>
+    <form onsubmit="createEvaluationQuestion(event)">
       <div class="form-group mb-3">
-        <label for="plan-select">انتخاب طرح:</label>
-        <select name="plan" id="plan-select" class="form-control" required>
-
+        <label for="evaluation-form-select">انتخاب فرم ارزیابی سلامت:</label>
+        <select id="evaluation-form-select" class="form-control" name="form" required>
+          <option value="" selected disabled>انتخاب فرم ...</option>
         </select>
-
-
       </div>
 
       <div class="form-group mb-3">
-        <label for="coverage-name">نام پوشش:</label>
-        <input name="name" type="text" id="coverage-name" class="form-control" placeholder="مثلاً پوشش تصادف" required />
-      </div>
+    <label for="question-title">متن سوال:</label>
+    <input type="text" class="form-control" id="question-title" name="title" placeholder="مثلاً آیا شما ورزش می‌کنید؟" required />
+  </div>
 
       <div class="form-group mb-3">
-        <label for="coverage-amount">سقف تعهدات (تومان):</label>
-        <input name="amount" type="number" id="coverage-amount" class="form-control" placeholder="مثلاً 200000" required />
+        <label for="question-type">نوع سوال:</label>
+        <select id="question-type" name="type" class="form-control" required>
+          <option value="yes_no">تک پاسخ</option>
+          <option value="multiple_choice">چند گزینه‌ای</option>
+        </select>
       </div>
 
-      <button class="btn btn-primary mt-3 create-coverage-btn">ذخیره</button>
+       
+
+      <div class="form-group mb-3">
+        <label>متن گزینه</label>
+        <div id="question-text-wrapper">
+          <div class="d-flex align-items-center mb-2 question-text-row">
+            <input type="text" class="form-control me-2" name="text" placeholder="مثلاً وضعیت سلامت شما؟" required />
+            <button type="button" class="btn btn-sm btn-success me-1" onclick="addQuestionTextInput(this)">
+              <i class="fas fa-plus"></i>
+            </button>
+            <button type="button" class="btn btn-sm btn-danger" onclick="removeQuestionTextInput(this)">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary mt-3">ذخیره</button>
     </form>
   </div>
 </div>
 
-
-<div class="modal coverage-edit-modal">
+<!-- Modal Edit -->
+<div class="modal evaluation-question-edit-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeCoverageModals()">&times;</span>
-    <h5 class="modal-title">ویرایش پوشش</h5>
-    <form onsubmit="editCoverage(event)">
-      <div class="form-group mb-3">
-        <label for="edit-plan-select">انتخاب طرح:</label>
-        <select name="coverage" id="edit-plan-select" class="form-control" required>
-
-        </select>
-      </div>
-
-      <div class="form-group mb-3">
-        <label for="edit-coverage-name">نام پوشش:</label>
-        <input name="name" type="text" id="edit-coverage-name" class="form-control" placeholder="نام پوشش..." required />
-      </div>
-
-      <div class="form-group mb-3">
-        <label for="edit-coverage-amount">سقف تعهدات (تومان):</label>
-        <input name="amount" type="number" id="edit-coverage-amount" class="form-control" placeholder="مبلغ..." required />
-      </div>
-
-      <button class="btn btn-primary mt-3 edit-coverage-btn">ذخیره تغییرات</button>
+    <span class="modal-close" onclick="closeEvaluationQuestionModals()">&times;</span>
+    <h5 class="modal-title">ویرایش سوال ارزیابی سلامت</h5>
+    <form onsubmit="editEvaluationQuestion(event)" id="edit-evaluation-question-form">
+      <!-- محتوا داینامیک پر می‌شود -->
     </form>
   </div>
 </div>
@@ -986,14 +986,9 @@
     <!-- BEGIN PAGE JAVASCRIPT -->
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
     <!-- <script src="assets/js/pages/datatable.js"></script> -->    
-    <script type="module" src="../js/coverage/index.js"></script>
-    <script src="../js/coverage/funcs/shared.js"></script>
+    <script type="module" src="../js/healthAssessmentQuestion/index.js"></script>
+    <script src="../js/healthAssessmentQuestion/funcs/shered.js"></script>
     <!-- END PAGE JAVASCRIPT -->
-
-    
-
-    <script type="module" src="../js/catalog/coverages/template.js"></script>
-   
 
   </body>
 </html>

@@ -40,15 +40,13 @@
     <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/colors.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/pages/coverage.css" />
+    <link rel="stylesheet" href="assets/css/pages/healthAssessment.css" />
     <!-- END CSS -->
     <!-- BEGIN PAGE CSS -->
     <link
       href="assets/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css"
       rel="stylesheet"
     />
-
-
     <!-- END PAGE CSS -->
   </head>
   <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">
@@ -442,7 +440,7 @@
               </a>
               <ul>
                 <li>
-                  <a href="dashboard.html">
+                  <a href="dashboard.html" >
                     <!-- <i class="icon-home"></i> -->
                     <span>داشبورد</span>
                   </a>
@@ -459,14 +457,14 @@
               <ul>
               
                 <li>
-                  <a href="phoneVerification.html">
+                  <a href="phoneVerification.html" >
                     <!-- <i class="icon-shield"></i> -->
                     <span>اعتبارسنجی</span>
                   </a>
                 </li>
 
                 <li>
-                  <a href="systemConfig.html">
+                  <a href="systemConfig.html" class="">
                     <!-- <i class="icon-shield"></i> -->
                     <span>تنظیمات سیستم</span>
                   </a>
@@ -484,7 +482,7 @@
               <ul>
                
                 <li>
-                  <a href="users.html">
+                  <a href="users.html" >
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>جدول کاربران</span>
                   </a>
@@ -564,7 +562,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="coverage.html" class="current">
+                  <a href="coverage.html">
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>پوشش‌ها</span>
                   </a>
@@ -600,7 +598,7 @@
               <ul>
                
                 <li>
-                  <a href="healthAssessment.html">  
+                  <a href="healthAssessment.html" class="current">  
                     <!-- <i class="fas fa-grip"></i> -->
                     <span>فرم‌های ارزیابی سلامت</span>
                   </a>
@@ -647,7 +645,7 @@
                 </li>
               </ul>
             </li>
-
+             
           </ul>
           <!-- /#side-menu -->
         </div>
@@ -658,92 +656,72 @@
       <!-- BEGIN PAGE CONTENT -->
       <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">مدیریت پوشش‌ها</h5>
-    <button class="btn btn-success" onclick="showCoverageCreateModal()">
-      <i class="icon-plus"></i> افزودن پوشش
+    <h5 class="mb-0">مدیریت ارزیابی سلامت</h5>
+    <button class="btn btn-success" onclick="showHealthFormCreateModal()">
+      <i class="icon-plus"></i> افزودن ارزیابی
     </button>
   </div>
 
   <div class="card-body insurance-card-body">
-    <table id="coverage-table" class="table table-bordered text-center">
-      <thead>
-        <tr>
-          <th><input type="checkbox" id="coverage-check-all" /></th>
-          <th>شناسه</th>
-          <th>شناسه طرح</th>
-          <th>نام پوشش</th>
-          <th>سقف تعهدات (تومان)</th>
-          <th>عملیات</th>
-        </tr>
-      </thead>
-      <tbody id="coverage-table-body">
-        <!-- ردیف‌های داینامیک -->
-
-      </tbody>
-    </table>
-
-    <button class="btn btn-danger mt-2" onclick="deleteSelectedCoverages()">حذف انتخاب‌شده‌ها</button>
+    <div class="table-responsive">
+      <table id="health-form-table" class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="health-form-check-all" /></th>
+            <th>شناسه</th>
+            <th>نام فرم</th>
+            <th>محصولات</th>
+            <th>عملیات</th>
+          </tr>
+        </thead>
+        <tbody id="health-form-table-body">
+          <!-- سطرهای داینامیک -->
+        </tbody>
+      </table>
+    </div>
+    <button class="btn btn-danger mt-2" onclick="deleteSelectedHealthForms()">حذف انتخاب‌شده‌ها</button>
   </div>
 </div>
 
-
-<div class="modal coverage-create-modal">
+<div class="modal health-form-create-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeCoverageModals()">&times;</span>
-    <h5 class="modal-title">افزودن پوشش</h5>
-    <form onsubmit="createCoverage(event)">
+    <span class="modal-close" onclick="closeHealthFormModals()">&times;</span>
+    <h5 class="modal-title">افزودن ارزیابی سلامت</h5>
+    <form onsubmit="createHealthForm(event)">
       <div class="form-group mb-3">
-        <label for="plan-select">انتخاب طرح:</label>
-        <select name="plan" id="plan-select" class="form-control" required>
-
-        </select>
-
-
+        <label for="health-form-name">نام فرم سلامت:</label>
+        <input type="text" id="health-form-name" class="form-control" name="name" placeholder="مثلاً فرم غربالگری دیابت" required />
       </div>
 
       <div class="form-group mb-3">
-        <label for="coverage-name">نام پوشش:</label>
-        <input name="name" type="text" id="coverage-name" class="form-control" placeholder="مثلاً پوشش تصادف" required />
+        <label>انتخاب محصولات:</label>
+        <div id="product-select-wrapper">
+          <div class="d-flex align-items-center mb-2 product-select-row">
+            <select class="form-control me-2 product-select" name="product" required>
+              <option value="" disabled selected>مشاهده محصولات ...</option>
+              <!-- آپشن‌ها به‌صورت داینامیک پر می‌شن -->
+            </select>
+            <button type="button" class="btn btn-sm btn-success me-1" onclick="addProductSelect(this)">+</button>
+            <button type="button" class="btn btn-sm btn-danger" onclick="removeProductSelect(this)">-</button>
+          </div>
+        </div>
       </div>
 
-      <div class="form-group mb-3">
-        <label for="coverage-amount">سقف تعهدات (تومان):</label>
-        <input name="amount" type="number" id="coverage-amount" class="form-control" placeholder="مثلاً 200000" required />
-      </div>
-
-      <button class="btn btn-primary mt-3 create-coverage-btn">ذخیره</button>
+      <button class="btn btn-primary mt-3">ذخیره</button>
     </form>
   </div>
 </div>
 
 
-<div class="modal coverage-edit-modal">
+<div class="modal health-form-edit-modal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeCoverageModals()">&times;</span>
-    <h5 class="modal-title">ویرایش پوشش</h5>
-    <form onsubmit="editCoverage(event)">
-      <div class="form-group mb-3">
-        <label for="edit-plan-select">انتخاب طرح:</label>
-        <select name="coverage" id="edit-plan-select" class="form-control" required>
-
-        </select>
-      </div>
-
-      <div class="form-group mb-3">
-        <label for="edit-coverage-name">نام پوشش:</label>
-        <input name="name" type="text" id="edit-coverage-name" class="form-control" placeholder="نام پوشش..." required />
-      </div>
-
-      <div class="form-group mb-3">
-        <label for="edit-coverage-amount">سقف تعهدات (تومان):</label>
-        <input name="amount" type="number" id="edit-coverage-amount" class="form-control" placeholder="مبلغ..." required />
-      </div>
-
-      <button class="btn btn-primary mt-3 edit-coverage-btn">ذخیره تغییرات</button>
+    <span class="modal-close" onclick="closeHealthFormModals()">&times;</span>
+    <h5 class="modal-title">ویرایش ارزیابی سلامت</h5>
+    <form onsubmit="editHealthForm(event)" id="edit-health-form">
+      <!-- محتوا به‌صورت داینامیک پر می‌شود -->
     </form>
   </div>
 </div>
-
 
 
 
@@ -986,14 +964,9 @@
     <!-- BEGIN PAGE JAVASCRIPT -->
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
     <!-- <script src="assets/js/pages/datatable.js"></script> -->    
-    <script type="module" src="../js/coverage/index.js"></script>
-    <script src="../js/coverage/funcs/shared.js"></script>
+    <script type="module" src="../js/healthAssessment/index.js"></script>
+    <script src="../js/healthAssessment/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
-
-    
-
-    <script type="module" src="../js/catalog/coverages/template.js"></script>
-   
 
   </body>
 </html>
