@@ -697,8 +697,9 @@
         <label>انتخاب محصولات:</label>
         <div id="product-select-wrapper">
           <div class="d-flex align-items-center mb-2 product-select-row">
-            <select class="form-control me-2 product-select" name="product" required>
-              <option value="" disabled selected>مشاهده محصولات ...</option>
+            <select class="form-control me-2 product-select"  name="products[]" required>
+
+              
               <!-- آپشن‌ها به‌صورت داینامیک پر می‌شن -->
             </select>
             <button type="button" class="btn btn-sm btn-success me-1" onclick="addProductSelect(this)">+</button>
@@ -718,7 +719,16 @@
     <span class="modal-close" onclick="closeHealthFormModals()">&times;</span>
     <h5 class="modal-title">ویرایش ارزیابی سلامت</h5>
     <form onsubmit="editHealthForm(event)" id="edit-health-form">
-      <!-- محتوا به‌صورت داینامیک پر می‌شود -->
+      <input type="hidden" name="id" />
+
+      <div class="mb-2">
+        <label>نام</label>
+        <input type="text" class="form-control" name="name" required />
+      </div>
+
+      <div id="product-select-edit-wrapper"></div>
+
+      <button type="submit" class="btn btn-primary">ذخیره</button>
     </form>
   </div>
 </div>
@@ -964,8 +974,8 @@
     <!-- BEGIN PAGE JAVASCRIPT -->
     <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
     <!-- <script src="assets/js/pages/datatable.js"></script> -->    
+    <script type="module" src="../js/healthAssessment/funcs/shared.js"></script>
     <script type="module" src="../js/healthAssessment/index.js"></script>
-    <script src="../js/healthAssessment/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
 
   </body>
