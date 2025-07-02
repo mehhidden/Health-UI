@@ -40,7 +40,20 @@
     <link href="assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/colors.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/pages/bankAccountUser.css" />
     <!-- END CSS -->
+    <!-- BEGIN PAGE CSS -->
+    <link
+      href="assets/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css"
+      rel="stylesheet"
+    />
+    <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+
+    <!-- END PAGE CSS -->
   </head>
   <body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">
     <!-- BEGIN LOEADING -->
@@ -477,7 +490,7 @@
                 
                 
                 <li>
-                  <a href="changePassword.html" class="current">
+                  <a href="changePassword.html">
                     <!-- <i class="icon-lock"></i> -->
                     <span>تغییر رمز عبور</span>
                   </a>
@@ -507,7 +520,7 @@
               </a>
               <ul>
                 <li>
-                  <a href="bankAccountUser.html">
+                  <a href="bankAccountUser.html" class="current">
                     <!-- <i class="icon-shield"></i> -->
                     <span>مدیریت حساب ها</span>
                   </a>
@@ -522,217 +535,125 @@
       <!-- /#sidebar -->
       <!-- END SIDEBAR -->
       <!-- BEGIN PAGE CONTENT -->
-      <div id="page-content">
-        <div id="inner-content">
-          <div class="row">
-            <!-- BEGIN BREADCRUMB -->
-            
-            <!-- /.col-md-12 -->
-            <!-- END BREADCRUMB -->
+      <div class="card user-bank-card">
+  <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <h5 class="mb-0">مدیریت حساب‌های بانکی</h5>
+    <button class="btn btn-success" onclick="showBankCreateModal()">
+      <i class="icon-plus"></i> افزودن حساب
+    </button>
+  </div>
 
-            <div class="col-12">
-              <div class="portlet box shadow">
-                <div class="portlet-heading">
-                  <div class="portlet-title">
-                    <h3 class="title">
-                      <i class="icon-lock"></i>
-                      تغییر رمز عبور
-                    </h3>
-                  </div>
-                  <!-- /.portlet-title -->
-                  <div class="buttons-box">
-                    <div class="code-modal hide">
-                      <!--
-<div class="row">
-    <div class="col-lg-4 offset-lg-4 col-md-8 offset-md-2 shadow p-b-30">
-        <p class="text-center m-t-40 m-b-40">
-            <i class="icon-lock border img-circle text-primary font-xxxlg p-20"></i>
-        </p>
-        <hr>
-        <form id="form" role="form" method="POST">
-            <div class="form-body">
-                <div class="form-group">
-                    <label for="oldPassword">رمز عبور پیشین</label>
-                    <div class="input-group has-btn-toggle-pass">
-                        <span class="input-group-addon">
-                            <i class="icon-lock"></i>
-                        </span>
-                        <input type="password" id="oldPassword" name="old_password" minlength="5" class="form-control ltr text-left" required>
-                        <span class="btn-toggle-pass">
-                            <i class="icon-eye"></i>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password">رمز عبور جدید</label>
-                    <div class="input-group has-btn-toggle-pass">
-                        <span class="input-group-addon">
-                            <i class="icon-key"></i>
-                        </span>
-                        <input type="password" id="password" name="password" minlength="5" class="form-control ltr text-left" required>
-                        <span class="btn-toggle-pass">
-                            <i class="icon-eye"></i>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword">رمز عبور</label>
-                    <div class="input-group has-btn-toggle-pass">
-                        <span class="input-group-addon">
-                            <i class="icon-key"></i>
-                        </span>
-                        <input type="password" id="confirmPassword" name="confirm_password" minlength="5" class="form-control ltr text-left" required>
-                        <span class="btn-toggle-pass">
-                            <i class="icon-eye"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-actions">
-                <button type="submit" class="btn btn-success btn-round">
-                    <i class="icon-check"></i>
-                    ذخیره
-                </button>
-                <a href="#" class="btn btn-warning btn-round float-end">
-                    <i class="icon-close"></i>
-                    بازگشت
-                </a>
-            </div>
-        </form>
+  <div class="card-body user-bank-card-body">
+    <div class="table-responsive">
+      <table id="bank-table" class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="bank-check-all" /></th>
+            <th>شناسه</th>
+            <th>بانک</th>
+            <th>نوع حساب</th>
+            <th>شماره حساب</th>
+            <th>شماره شبا</th>
+            <th>حساب پیش‌فرض</th>
+            <th>عملیات</th>
+          </tr>
+        </thead>
+        <tbody id="bank-table-body">
+          <!-- داده‌ها از سمت سرور پر می‌شود -->
+        </tbody>
+      </table>
     </div>
+    <button class="btn btn-danger mt-2" onclick="deleteSelectedBanks()">حذف انتخاب‌شده‌ها</button>
+  </div>
 </div>
--->
-                    </div>
-                    <a
-                      class="btn btn-sm btn-default btn-round btn-collapse"
-                      rel="tooltip"
-                      title="کوچک کردن"
-                      href="#"
-                    >
-                      <i class="icon-arrow-up"></i>
-                    </a>
-                  </div>
-                  <!-- /.buttons-box -->
-                </div>
-                <!-- /.portlet-heading -->
-                <div class="portlet-body">
-                  <div class="alert alert-info">
-                    <i class="icon-bell"></i>
-                    استفاده از کاراکترهای خاص جهت حفظ موارد امنیتی توصیه می
-                    گردد. همچنین رمز ورودی باید دست کم 5 کاراکتر باشد.
-                  </div>
-                  <!-- /.alert -->
-                  <div class="row">
-                    <div
-                      class="col-lg-4 offset-lg-4 col-md-8 offset-md-2 shadow p-b-30"
-                    >
-                      <p class="text-center m-t-40 m-b-40">
-                        <i
-                          class="icon-lock border img-circle text-primary font-xxxlg p-20"
-                        ></i>
-                      </p>
-                      <hr />
-                      <form id="form" role="form" method="POST">
-                        <div class="form-body">
-                          <div class="form-group">
-                            <label for="oldPassword">رمز عبور پیشین</label>
-                            <div class="input-group has-btn-toggle-pass">
-                              <span class="input-group-addon">
-                                <i class="icon-lock"></i>
-                              </span>
-                              <input
-                                type="password"
-                                id="oldPassword"
-                                name="old_password"
-                                minlength="5"
-                                class="form-control ltr text-left"
-                                required
-                              />
-                              <span class="btn-toggle-pass">
-                                <i class="icon-eye"></i>
-                              </span>
-                            </div>
-                            <!-- /.input-group -->
-                          </div>
-                          <!-- /.form-group -->
-                          <div class="form-group">
-                            <label for="password">رمز عبور جدید</label>
-                            <div class="input-group has-btn-toggle-pass">
-                              <span class="input-group-addon">
-                                <i class="icon-key"></i>
-                              </span>
-                              <input
-                                type="password"
-                                id="password"
-                                name="new_password"
-                                minlength="5"
-                                class="form-control ltr text-left"
-                                required
-                              />
-                              <span class="btn-toggle-pass">
-                                <i class="icon-eye"></i>
-                              </span>
-                            </div>
-                            <!-- /.input-group -->
-                          </div>
-                          <!-- /.form-group -->
-                          <div class="form-group">
-                            <label for="confirmPassword">رمز عبور</label>
-                            <div class="input-group has-btn-toggle-pass">
-                              <span class="input-group-addon">
-                                <i class="icon-key"></i>
-                              </span>
-                              <input
-                                type="password"
-                                id="confirmPassword"
-                                name="new_password_confirm"
-                                minlength="5"
-                                class="form-control ltr text-left"
-                                required
-                              />
-                              <span class="btn-toggle-pass">
-                                <i class="icon-eye"></i>
-                              </span>
-                            </div>
-                            <!-- /.input-group -->
-                          </div>
-                          <!-- /.form-group -->
-                        </div>
-                        <!-- /.form-body -->
-                        <div class="form-actions">
-                          <button
-                            type="submit"
-                            class="btn btn-success btn-round"
-                            id="submit-btn"
-                          >
-                            <i class="icon-check"></i>
-                            ذخیره
-                          </button>
-                          <a
-                            href="#"
-                            class="btn btn-warning btn-round float-end"
-                          >
-                            <i class="icon-close"></i>
-                            بازگشت
-                          </a>
-                        </div>
-                        <!-- /.form-actions -->
-                      </form>
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-                <!-- /.portlet-body -->
-              </div>
-              <!-- /.portlet -->
-            </div>
-            <!-- /.col-12 -->
-          </div>
-          <!-- /.row -->
-        </div>
-        <!-- /#inner-content -->
+
+
+<div class="modal bank-create-modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeBankModals()">&times;</span>
+    <h5 class="modal-title">افزودن حساب بانکی</h5>
+    <form onsubmit="createBank(event)">
+      <div class="form-group mb-3">
+        <label for="bank-select">بانک:</label>
+        <select id="bank-select" name="bank" class="form-control" required>
+          <option value="" disabled selected>انتخاب بانک</option>
+          <!-- بارگذاری بانک‌ها -->
+        </select>
       </div>
+
+      <div class="form-group mb-3">
+        <label for="account-type-select">نوع حساب:</label>
+        <select id="account-type-select" name="account_type" class="form-control" required>
+          <option value="" disabled selected>نوع حساب را انتخاب کنید</option>
+          <!-- بارگذاری نوع حساب ها -->
+        </select>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="account-number">شماره حساب:</label>
+        <input type="text" id="account-number" name="account_number" class="form-control" required />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="iban-number">شماره شبا:</label>
+        <input type="text" id="iban-number" name="iban" class="form-control" required />
+      </div>
+
+      <div class="form-group form-check mb-3">
+        <input type="checkbox" id="is-default-bank" name="is_default" class="form-check-input" />
+        <label for="is-default-bank" class="form-check-label">حساب پیش‌فرض</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-3">ذخیره</button>
+    </form>
+  </div>
+</div>
+
+
+<div class="modal bank-edit-modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeBankModals()">&times;</span>
+    <h5 class="modal-title">ویرایش حساب بانکی</h5>
+    <form onsubmit="editBank(event)">
+      <div class="form-group mb-3">
+        <label for="edit-bank-select">بانک:</label>
+        <select id="edit-bank-select" name="bank" class="form-control" required>
+          <option value="" disabled selected>انتخاب بانک</option>
+        </select>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="edit-account-type-select">نوع حساب:</label>
+        <select id="edit-account-type-select" name="account_type" class="form-control" required>
+          <option value="" disabled selected>نوع حساب را انتخاب کنید</option>
+          
+        </select>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="edit-account-number">شماره حساب:</label>
+        <input type="text" id="edit-account-number" name="account_number" class="form-control" required />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="edit-iban-number">شماره شبا:</label>
+        <input type="text" id="edit-iban-number" name="iban" class="form-control" required />
+      </div>
+
+      <div class="form-group form-check mb-3">
+        <input type="checkbox" id="edit-is-default-bank" name="is_default" class="form-check-input" />
+        <label for="edit-is-default-bank" class="form-check-label">حساب پیش‌فرض</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-3">ذخیره تغییرات</button>
+    </form>
+  </div>
+</div>
+
+
+
+
+
       <!-- /#page-content -->
       <!-- END PAGE CONTENT -->
     </div>
@@ -910,6 +831,17 @@
     <!-- END SETTING -->
 
     <!-- BEGIN CODE MODAL -->
+
+    <div id="userCreateModal" class="user-create-modal">
+      <!-- Load From JS -->
+    </div>
+
+    <div id="userEditModal" class="user-edit-modal">
+      <!-- Load From JS -->
+    </div>
+
+    
+
     <div class="modal fade" id="code-modal" role="dialog" tabindex="-1">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -957,9 +889,19 @@
     <script src="assets/js/core.js"></script>
 
     <!-- BEGIN PAGE JAVASCRIPT -->
-    <script src="assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="assets/plugins/jquery-validation/src/localization/messages_fa.js"></script>
-    <script src="assets/js/pages/change-password.js" type="module"></script>
+
+    
+    <script src="assets/plugins/data-table/js/jquery.dataTables.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- <script src="assets/js/pages/datatable.js"></script> -->
+    <script type="module" src="/js/bankAccontUser/index.js"></script>
+    <script src="../js/bankAccontUser/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
+
+    <script>
+  
+</script>
+
+
   </body>
 </html>
