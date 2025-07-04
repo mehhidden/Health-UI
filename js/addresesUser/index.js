@@ -3,15 +3,14 @@ import {
   createAddress,
   deleteAddress,
   deleteSelectedAddresses,
+  editAddress,
   renderAddress,
-  renderProvincesSelectBox,
   showAddressCreateModal,
   showAddressEditModal,
 } from "./funcs/shared.js";
 
 window.addEventListener("load", () => {
   renderAddress();
-  renderProvincesSelectBox();
 
   const addBtn = document.querySelector(
     '.btn-success[onclick="showAddressCreateModal()"]'
@@ -30,4 +29,5 @@ window.addEventListener("load", () => {
   window.createAddress = createAddress;
   window.deleteAddress = deleteAddress
   window.deleteSelectedAddresses = deleteSelectedAddresses
+  window.editAddress = editAddress
 });

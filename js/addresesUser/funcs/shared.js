@@ -3,43 +3,62 @@ import {
   generateSelectOptionsTemplate,
   getTrInfo,
   insertTemplateToElement,
+  select,
   selectAll,
 } from "../../../utils/elem.js";
-import { createReq, deleteReq, getReq } from "../../../utils/request.js";
+import {
+  createReq,
+  deleteReq,
+  editReq,
+  getReq,
+} from "../../../utils/request.js";
 import { fetchCities } from "../../cities/funcs/utils.js";
 import { fetchProvinces } from "../../peovinces/funcs/utils.js";
-import { generateAddressesTemplate } from "./template.js";
+import {
+  generateAddressesTemplate,
+  generateEditAddressModalTemplate,
+} from "./template.js";
 
 let map, marker;
 
-let latitude = 0
-let longitude = 0
+let latitude = 0;
+let longitude = 0;
 
+let allProvinces = [];
 let allCities = [];
 let selectedProvinceCities = [];
 
-function initMap() {
-  if (map) return;
+function initMap(mapId, lat, long) {
+  console.log(lat, long);
+  if (map && !mapId) return;
+  if (mapId) {
+    map = undefined;
+  }
 
-  map = L.map("map").setView([35.6892, 51.389], 13);
+  map = L.map(`${mapId || "map"}`).setView(
+    [long || 35.6892, lat || 51.389],
+    13
+  );
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors",
   }).addTo(map);
 
-  marker = L.marker([35.6892, 51.389], { draggable: true }).addTo(map);
+  marker = L.marker([long || 35.6892, lat || 51.389], {
+    draggable: true,
+  }).addTo(map);
 
   marker.on("dragend", function (e) {
     const pos = marker.getLatLng();
-    latitude = pos.lat
-    longitude = pos.lng
+    latitude = pos.lat;
+    longitude = pos.lng;
     console.log("مختصات انتخاب شده:", pos.lat, pos.lng);
   });
 
   map.on("click", function (e) {
     marker.setLatLng(e.latlng);
-    latitude = e.latlng.lat
-    longitude = e.latlng.lng
+    latitude = e.latlng.lat;
+    longitude = e.latlng.lng;
     console.log("مختصات انتخاب شده:", e.latlng.lat, e.latlng.lng);
   });
 }
@@ -50,11 +69,38 @@ export function showAddressCreateModal() {
   setTimeout(() => {
     initMap();
   }, 300);
+  renderProvincesSelectBox();
 }
 
-export function showAddressEditModal() {
-  document.querySelector(".address-edit-modal").classList.add("show");
+export const editAddressModalForm = select("#edit-address-form");
+export const insertEditAddressModalContent = (address) => {
+  const template = generateEditAddressModalTemplate(
+    address,
+    allProvinces,
+    allCities,
+    {
+      latitude,
+      longitude,
+    }
+  );
+
+  insertTemplateToElement(template, editAddressModalForm);
+};
+
+const addressEditModal = document.querySelector(".address-edit-modal");
+
+export function showAddressEditModal(event) {
+  addressEditModal.classList.add("show");
   document.body.classList.add("modal-open");
+
+  const trInfo = getTrInfo(event);
+  addressEditModal.dataset.id = trInfo.id;
+  latitude = trInfo["latitude"];
+  longitude = trInfo["longitude"];
+
+  insertEditAddressModalContent(trInfo);
+  renderProvincesSelectBox(trInfo.province, trInfo.city);
+  initMap(trInfo.id, trInfo.longitude, trInfo.latitude);
 }
 const allModals = document.querySelectorAll(".modal");
 const allModalsInputs = [...allModals].map((modal) => [
@@ -75,13 +121,15 @@ export const renderAddress = async () => {
   insertTemplateToElement(template, addressesWrapper);
 };
 
-const citiesSelectBoxes = selectAll(".city-select");
-export const renderCitiesSelectBox = async () => {
+export const renderCitiesSelectBox = async (defaultC) => {
+  const citiesSelectBoxes = selectAll(".city-select");
+
   const template = generateSelectOptionsTemplate(
     selectedProvinceCities,
     "id",
     "name",
     {
+      selectedValues: [defaultC],
       defaultItem: {
         includes: true,
         label: "شهر را انتخاب کنید ...",
@@ -92,26 +140,32 @@ export const renderCitiesSelectBox = async () => {
     insertTemplateToElement(template, select);
   });
 };
-const provincesSelectBoxes = selectAll(".province-select");
-export const renderProvincesSelectBox = async () => {
-  const cities = await fetchCities();
-  allCities = cities;
-  selectedProvinceCities = cities;
-  const provinces = await fetchProvinces();
-  const template = generateSelectOptionsTemplate(provinces, "id", "name");
+export const renderProvincesSelectBox = async (defaultP, defaultC) => {
+  const provincesSelectBoxes = selectAll(".province-select");
+
+  allCities = allCities?.length ? allCities : await fetchCities();
+  selectedProvinceCities = allCities;
+  allProvinces = allProvinces?.length ? allProvinces : await fetchProvinces();
+  const template = generateSelectOptionsTemplate(allProvinces, "id", "name", {
+    selectedValues: [defaultP],
+    defaultItem: {
+      includes: true,
+      label: "استان را انتخاب کنید ...",
+    },
+  });
   provincesSelectBoxes.forEach((select) => {
-    insertTemplateToElement(template, select, true);
+    insertTemplateToElement(template, select);
     select.onchange = (event) => {
       const provinceId = event.target.value;
-      const provinceCities = cities.filter(
+      const provinceCities = allCities.filter(
         (city) => city.province == provinceId
       );
       selectedProvinceCities = provinceCities;
-      console.log(cities, selectedProvinceCities);
-      renderCitiesSelectBox();
+      console.log(allCities, selectedProvinceCities);
+      renderCitiesSelectBox(defaultC);
     };
   });
-  renderCitiesSelectBox();
+  renderCitiesSelectBox(defaultC);
 };
 
 export const createAddress = async (event) => {
@@ -119,25 +173,24 @@ export const createAddress = async (event) => {
   let objData = extractObjFromFormEvent(event);
   objData = {
     ...objData,
-    is_default : objData.is_default ? true : false,
+    is_default: objData.is_default ? true : false,
     latitude: Number(`${latitude}`.slice(0, 10)),
-    longitude: Number(`${longitude}`.slice(0, 10))
-  }
+    longitude: Number(`${longitude}`.slice(0, 10)),
+  };
 
   try {
     const response = await createReq({
       data: objData,
       path: "/location/addresses/",
-      name: "آدرس"
+      name: "آدرس",
     });
     await renderAddress();
     swal(response, "", "success");
     closeAddressModals();
   } catch (error) {
-    swal( error.message, "",  "error");
+    swal(error.message, "", "error");
   }
 };
-
 
 export function deleteAddress(event) {
   const trInfo = getTrInfo(event);
@@ -147,13 +200,13 @@ export function deleteAddress(event) {
         try {
           const response = await deleteReq({
             path: `/location/addresses/${trInfo.id}/`,
-            name: "آدرس"
+            name: "آدرس",
           });
           await renderAddress();
           console.log(response);
           swal(response, "", "success");
         } catch (error) {
-          swal( error.message, "", "error");
+          swal(error.message, "", "error");
         }
       }
     }
@@ -163,26 +216,55 @@ export function deleteAddress(event) {
 export function deleteSelectedAddresses() {
   const selected = selectAll(".row-checkbox:checked");
   if (!selected.length) return swal("هیچ آیتمی انتخاب نشده است", "", "warning");
-  swal(
-    `آیا ${selected.length} آدرس انتخاب شده حذف شوند؟`,
-    "",
-    "question"
-  ).then(async (result) => {
-    if (result) {
-      try {
-        const infos = [...selected].map(
-          (cb) => JSON.parse(cb.closest("tr").dataset.info).id
-        );
-        const promices = infos.map((id) => deleteReq({
-            path: `/location/addresses/${id}/`,
-            name: "آدرس"
-          }));
-        await Promise.all(promices);
-        await renderAddress();
-        swal("آدرسها با موفقیت حذف شدند", "", "success");
-      } catch (error) {
-        swal("خطا در حذف آدرس", error.message, "error");
+  swal(`آیا ${selected.length} آدرس انتخاب شده حذف شوند؟`, "", "question").then(
+    async (result) => {
+      if (result) {
+        try {
+          const infos = [...selected].map(
+            (cb) => JSON.parse(cb.closest("tr").dataset.info).id
+          );
+          const promices = infos.map((id) =>
+            deleteReq({
+              path: `/location/addresses/${id}/`,
+              name: "آدرس",
+            })
+          );
+          await Promise.all(promices);
+          await renderAddress();
+          swal("آدرسها با موفقیت حذف شدند", "", "success");
+        } catch (error) {
+          swal("خطا در حذف آدرس", error.message, "error");
+        }
       }
     }
-  });
+  );
 }
+
+export const editAddress = async (event) => {
+  event.preventDefault();
+  const objData = extractObjFromFormEvent(event);
+  const data = {
+    ...objData,
+    is_default: objData.is_default ? true : false,
+    latitude: Number(`${latitude}`.slice(0, 10)),
+    longitude: Number(`${longitude}`.slice(0, 10)),
+  };
+
+  console.log("edit payload ->", data);
+
+  const id = addressEditModal.dataset.id;
+
+  try {
+    const response = await editReq({
+      data,
+      path: `/location/addresses/${id}/`,
+      name: "آدرس",
+      method: "PATCH",
+    });
+    await renderAddress();
+    swal(response, "", "success");
+    closeAddressModals();
+  } catch (error) {
+    swal("خطا در ویرایش آدرس", error.message, "error");
+  }
+};

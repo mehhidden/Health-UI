@@ -647,65 +647,8 @@
   <div class="modal-content">
     <span class="modal-close" onclick="closeAddressModals()">&times;</span>
     <h5 class="modal-title">ویرایش آدرس</h5>
-    <form onsubmit="editAddress(event)">
-      <div class="form-group mb-3">
-        <label for="edit-address-title">عنوان آدرس:</label>
-        <input type="text" id="edit-address-title" name="title" class="form-control" required />
-      </div>
-
-      <div class="form-group mb-3">
-        <label for="edit-address-province-select">انتخاب استان:</label>
-        <select name="province" id="edit-address-province-select" class="form-control province-select" required>
-          <option value="" disabled selected>استان را انتخاب کنید</option>
-          <!-- بارگذاری استان‌ها -->
-        </select>
-      </div>
-
-      <div class="form-group mb-3">
-        <label for="edit-address-city-select">انتخاب شهر:</label>
-        <select name="city" id="edit-address-city-select" class="form-control city-select" required>
-          <option value="" disabled selected>شهر را انتخاب کنید</option>
-          <!-- بارگذاری شهرها -->
-        </select>
-      </div>
-
-      <div class="form-group mb-3">
-        <label for="edit-address-full">آدرس کامل:</label>
-        <textarea id="edit-address-full" name="full_address" class="form-control" rows="3" required></textarea>
-      </div>
-
-      <div class="form-row mb-3">
-        <div class="form-group col">
-          <label for="edit-address-number">پلاک:</label>
-          <input type="text" id="edit-address-number" name="number" class="form-control" required />
-        </div>
-        <div class="form-group col">
-          <label for="edit-address-unit">واحد:</label>
-          <input type="text" id="edit-address-unit" name="unit" class="form-control" />
-        </div>
-      </div>
-
-      <div class="form-group mb-3">
-        <label for="edit-address-postal-code">کد پستی:</label>
-        <input type="text" id="edit-address-postal-code" name="postal_code" class="form-control" required />
-      </div>
-
-      <div class="form-group mb-3">
-        <label for="edit-address-phone">تلفن:</label>
-        <input type="tel" id="edit-address-phone" name="phone" class="form-control" required />
-      </div>
-
-      <div class="form-group mb-3">
-        <label>انتخاب روی نقشه:</label>
-        <div id="map" style="height: 250px; border: 1px solid #ccc; border-radius: 8px;"></div>
-      </div>
-
-      <div class="form-group form-check mb-3">
-        <input type="checkbox" class="form-check-input" id="edit-address-default" name="is_default" />
-        <label class="form-check-label" for="edit-address-default">آدرس پیش‌فرض</label>
-      </div>
-
-      <button type="submit" class="btn btn-primary mt-3">ذخیره تغییرات</button>
+    <form onsubmit="editAddress(event)" id="edit-address-form">
+      
     </form>
   </div>
 </div>
