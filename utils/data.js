@@ -9,5 +9,10 @@ export const convertFormDataToObj = (data) => {
   return obj
 }
 
+export const extractObjFromFormEvent = (event) => {
+  const formData = new FormData(event.target)
+  return convertFormDataToObj(formData)
+}
+
 export const convertBackendValidationToMessage = (backValidation) =>
   Object.entries(backValidation).flat(Infinity)[1]

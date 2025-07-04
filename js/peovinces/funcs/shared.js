@@ -1,4 +1,4 @@
-import { convertFormDataToObj } from "../../../utils/data.js";
+import { convertFormDataToObj, extractObjFromFormEvent } from "../../../utils/data.js";
 import { getTrInfo, select, selectAll } from "../../../utils/elem.js";
 import {
   createReq,
