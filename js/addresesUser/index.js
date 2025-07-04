@@ -1,5 +1,8 @@
 import {
   closeAddressModals,
+  createAddress,
+  deleteAddress,
+  deleteSelectedAddresses,
   renderAddress,
   renderProvincesSelectBox,
   showAddressCreateModal,
@@ -17,10 +20,6 @@ window.addEventListener("load", () => {
     addBtn.addEventListener("click", showAddressCreateModal);
   }
 
-  document.querySelectorAll(".edit-address-btn").forEach((btn) => {
-    btn.addEventListener("click", showAddressEditModal);
-  });
-
   document.querySelectorAll(".modal-close").forEach((span) => {
     span.addEventListener("click", closeAddressModals);
   });
@@ -28,4 +27,7 @@ window.addEventListener("load", () => {
   window.showAddressCreateModal = showAddressCreateModal;
   window.showAddressEditModal = showAddressEditModal;
   window.closeAddressModals = closeAddressModals;
+  window.createAddress = createAddress;
+  window.deleteAddress = deleteAddress
+  window.deleteSelectedAddresses = deleteSelectedAddresses
 });

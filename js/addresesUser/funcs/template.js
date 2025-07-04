@@ -3,6 +3,7 @@ export const generateAddressesTemplate = (addresses) =>
     .map(
       (address) => `
         <tr data-info='${JSON.stringify(address)}'>
+          <td><input type="checkbox" class="row-checkbox" /></td>
           <td>${address.id}</td>
           <td>${address.title}</td>
           <td>${address.province}</td>
