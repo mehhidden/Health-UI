@@ -50,9 +50,25 @@ export const generateSelectOptionsTemplate = (
     disabledLabels: [""],
     selectedValues: [""],
     selectedLabels: [""],
+    defaultItem: {
+      value: "",
+      includes: false,
+      selectable: false,
+      label: "انتخاب کنید ...",
+    },
   }
 ) =>
-  items
+  (config?.defaultItem?.includes
+    ? [
+        {
+          [valueKey]: config?.defaultItem?.value || "",
+          [labelKey]: config?.defaultItem?.label || "انتخاب کنید ...",
+          disabled: !config?.defaultItem?.selectable,
+        },
+        ...items,
+      ]
+    : items
+  )
     .map((item) => {
       const disabled =
         config.disabledValues?.includes(item[valueKey]) ||
