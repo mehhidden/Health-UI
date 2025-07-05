@@ -71,9 +71,11 @@ export const generateSelectOptionsTemplate = (
   )
     .map((item) => {
       const disabled =
+        item.disabled ||
         config.disabledValues?.includes(item[valueKey]) ||
         config.disabledLabels?.includes(item[labelKey]);
       const selected =
+        (item.disabled && (!config?.selectedValues?.length && !config?.selectedLabels?.length)) ||
         config.selectedValues?.includes(item[valueKey]) ||
         config.selectedLabels?.includes(item[labelKey]);
       return `
