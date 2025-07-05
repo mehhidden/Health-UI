@@ -1,12 +1,15 @@
 import { extractObjFromFormEvent } from "../../../utils/data.js";
 import {
   generateSelectOptionsTemplate,
+  getTrInfo,
   insertTemplateToElement,
+  select,
   selectAll,
 } from "../../../utils/elem.js";
-import { createReq } from "../../../utils/request.js";
+import { createReq, deleteReq, getReq } from "../../../utils/request.js";
 import { fetchAccountTypes } from "../../bank/account type/account type.js";
 import { fetchBanks } from "../../bank/bankinfo/bankserver.js";
+import { generateBankAccountsTemplate } from "./temaplte.js";
 
 let allBanks = [];
 let allAccounts = [];
@@ -88,3 +91,59 @@ export const renderAccountSelectBoxes = async () => {
     insertTemplateToElement(template, select);
   });
 };
+
+const bankAccountsWrapper = select("#bank-table-body");
+export const renderBankAccounts = async () => {
+  const bankAccounts = (await getReq("/bank_info/bank-accounts/")).results.results;
+  const template = generateBankAccountsTemplate(bankAccounts);
+  insertTemplateToElement(template, bankAccountsWrapper);
+}
+
+
+export function deleteBankAccount(event) {
+  const trInfo = getTrInfo(event);
+  swal(`آیا حساب بانک "${trInfo.id}" حذف شود؟`, "", "question").then(
+    async (result) => {
+      if (result) {
+        try {
+          const response = await deleteReq({
+            path: `/bank_info/bank-accounts/${trInfo.id}/`,
+            name: "حساب بانک",
+          });
+          await renderBankAccounts();
+          console.log(response);
+          swal(response, "", "success");
+        } catch (error) {
+          swal(error.message, "", "error");
+        }
+      }
+    }
+  );
+}
+
+export function deleteSelectedBankAccounts() {
+  const selected = selectAll(".row-checkbox:checked");
+  if (!selected.length) return swal("هیچ آیتمی انتخاب نشده است", "", "warning");
+  swal(`آیا ${selected.length} حساب بانک انتخاب شده حذف شوند؟`, "", "question").then(
+    async (result) => {
+      if (result) {
+        try {
+          const infos = [...selected].map(
+            (cb) => JSON.parse(cb.closest("tr").dataset.info).id
+          );
+          const promices = infos.map((id) =>
+            deleteReq({
+              path: `/bank_info/bank-accounts/${id}/`,
+              name: "حساب بانک",
+            })
+          );
+          await Promise.all(promices);
+          await renderBankAccounts();
+          swal("حساب بانکها با موفقیت حذف شدند", "", "success");
+        } catch (error) {
+          swal("خطا در حذف حساب بانک", error.message, "error");
+        }
+      }
+    }
+  );
+}
