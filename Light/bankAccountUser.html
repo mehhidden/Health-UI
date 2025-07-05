@@ -575,7 +575,7 @@
     <form onsubmit="createBank(event)">
       <div class="form-group mb-3">
         <label for="bank-select">بانک:</label>
-        <select id="bank-select" name="bank" class="form-control" required>
+        <select id="bank-select" name="bank" class="form-control bank-select" required>
           <option value="" disabled selected>انتخاب بانک</option>
           <!-- بارگذاری بانک‌ها -->
         </select>
@@ -583,7 +583,7 @@
 
       <div class="form-group mb-3">
         <label for="account-type-select">نوع حساب:</label>
-        <select id="account-type-select" name="account_type" class="form-control" required>
+        <select id="account-type-select" name="account_type" class="form-control account-select" required>
           <option value="" disabled selected>نوع حساب را انتخاب کنید</option>
           <!-- بارگذاری نوع حساب ها -->
         </select>
@@ -596,7 +596,7 @@
 
       <div class="form-group mb-3">
         <label for="iban-number">شماره شبا:</label>
-        <input type="text" id="iban-number" name="iban" class="form-control" required />
+        <input type="text" id="iban-number" name="sheba_number" class="form-control" required />
       </div>
 
       <div class="form-group form-check mb-3">
@@ -617,14 +617,14 @@
     <form onsubmit="editBank(event)">
       <div class="form-group mb-3">
         <label for="edit-bank-select">بانک:</label>
-        <select id="edit-bank-select" name="bank" class="form-control" required>
+        <select id="edit-bank-select" name="bank" class="form-control bank-select" required>
           <option value="" disabled selected>انتخاب بانک</option>
         </select>
       </div>
 
       <div class="form-group mb-3">
         <label for="edit-account-type-select">نوع حساب:</label>
-        <select id="edit-account-type-select" name="account_type" class="form-control" required>
+        <select id="edit-account-type-select" name="account_type" class="form-control account-select" required>
           <option value="" disabled selected>نوع حساب را انتخاب کنید</option>
           
         </select>
@@ -637,7 +637,7 @@
 
       <div class="form-group mb-3">
         <label for="edit-iban-number">شماره شبا:</label>
-        <input type="text" id="edit-iban-number" name="iban" class="form-control" required />
+        <input type="text" id="edit-iban-number" name="sheba_number" class="form-control" required />
       </div>
 
       <div class="form-group form-check mb-3">
@@ -895,7 +895,6 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <!-- <script src="assets/js/pages/datatable.js"></script> -->
     <script type="module" src="/js/bankAccontUser/index.js"></script>
-    <script src="../js/bankAccontUser/funcs/shared.js"></script>
     <!-- END PAGE JAVASCRIPT -->
 
     <script>
